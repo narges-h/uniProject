@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Answer;
 use App\File;
 use App\Message;
-use App\Product;
 use App\Ticket;
 use App\UserIdentityInformation;
 use App\Wallet;
@@ -30,51 +29,28 @@ class User extends \TCG\Voyager\Models\User
         'email',
         'password',
         'mobile',
-        'otp',
+        'is_verifide',
         'family',
         'birthdate',
         'nationalCode',
-        'auth_status',
         'address',
         'province',
         'city',
-        'componyCode',
-        'inviteCode',
-        'remember_token'
+        'user_type',
+        'remember_token',
+        'avatar'
 
     ];
 
 
-    public function identityInformation()
-    {
-        return $this->belongsTo(UserIdentityInformation::class, 'user_id', 'id');
-    }
 
-    public function answer()
-    {
-        return $this->hasMany(Answer::class, 'user_id', 'id');
-    }
-
-
-    public function message()
-    {
-        return $this->hasMany(Message::class, 'user_id', 'id');
-    }
 
     public function product()
     {
         return $this->hasMany(Product::class, 'user_id', 'id');
     }
 
-    public function ticket()
-    {
-        return $this->hasMany(Ticket::class, 'user_id', 'id');
-    }
 
-    public function wallet()
-    {
-        return $this->hasOne(Wallet::class, 'user_id', 'id');
-    }
 
 
 
