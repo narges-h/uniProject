@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\fileUploadController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,22 +28,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 
 
-Route::post('/auth', [AuthController::class, 'checkPhone']);
-Route::post('/auth/login', [AuthController::class, 'loginUser']);
-Route::post('/auth/sendOtp', [AuthController::class, 'sendOtp']);
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 
-Route::post('/auth/generateOtp', [AuthController::class, 'generateRandomOTP']);
-Route::post('/auth/upadteOtp', [AuthController::class, 'updateOtp']);
+Route::post('/auth', [AuthController::class, 'sendOtp']);
+Route::post('/auth/VerifyOtp', [AuthController::class, 'VerifyOtp']);
 
 
-Route::post('/auth/register', [AuthController::class, 'createUser']);
-
-Route::post('/userPanel/changePassword', [UserController::class, 'chengePassword']);
-Route::get('/userPanel/userInfo', [UserController::class, 'getUserInfo']);
-Route::post('/userPanel/userInfo', [UserController::class, 'userUpdate']);
-
-Route::post('/userPanel/auth', [FileUploadController::class, 'UploadFiles']);
 
 
 
