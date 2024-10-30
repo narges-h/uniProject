@@ -110,6 +110,7 @@ body {
     margin-top: 30px;
 }
 
+#pass,
 #phoneNumbers {
     border: 1px solid #badd72;
     border-radius: 10px;
@@ -122,14 +123,15 @@ body {
 
 }
 
-#pass {
+/* #pass {
     border: 1px solid #badd72;
     border-radius: 20px;
     background-color: #badd72;
     padding: 15px;
     width: 470px;
-}
+} */
 
+#pass:hover,
 #phoneNumbers:hover {
     border: 1px solid rgb(245 245 245 / 83%);
     background-color: rgb(245 245 245 / 83%);
@@ -190,3 +192,17 @@ img {
     font-size: 12px;
     margin-top: 5px;
 }
+
+/* استایل برای پیام‌های خطا */
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+
+
+

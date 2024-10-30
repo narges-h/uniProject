@@ -6,46 +6,49 @@ use App\Models\Otp;
 use App\Models\User;
 use GuzzleHttp\Client;
 
-use Illuminate\Support\Facades\Validator;
-
-
 use Illuminate\Http\Request;
+
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
 
 
-    public function login()
+    public function sendOtpPage()
     {
         return view('login');
     }
 
+    public function signup()
+    {
+        return view('signup');
+    }
+
     public function sendOtp(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'phone' => 'required|numeric|digits:11',
+            'phoneNumbers' => 'required|numeric|digits:11',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors(),
-            ], 400);
+            return back()->withErrors($validator)->withInput();
         }
 
         $otp = rand(100000, 999999);
         Otp::create([
-            'phone' => $request->phone,
+            'phone' => $request->phoneNumbers,
             'otp' => $otp,
         ]);
 
-             // ارسال کد OTP به کاربر با استفاده از API کاوه‌نگار
         try {
             $client = new Client();
             $response = $client->request('GET', 'https://api.kavenegar.com/v1/704865776F4C376665393662587063636D7630524B4132574C59586D783155455450495757556D715649553D/verify/lookup.json', [
                 'query' => [
-                    'receptor' => $request->phone,
+                    'receptor' => $request->phoneNumbers,
                     'token' => $otp,
                     'token2' => 'homeenger',
                     'template' => 'homeengerverify'
@@ -55,85 +58,96 @@ class AuthController extends Controller
             $responseBody = json_decode($response->getBody(), true);
 
             if ($responseBody['return']['status'] == 200) {
-                return response()->json([
-                    'status' => true,
-                    'message' => 'ثبت‌نام موفقیت‌آمیز بود. لطفاً کد تایید را وارد کنید.',
-                    'phone' => $request->phone,
-                ]);
+                // انتقال به صفحه OTP با استفاده از redirect
+                return redirect()->to('/api/otp')->with('phone', $request->phoneNumbers);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'خطا در ارسال کد تایید.',
-                ], 500);
+
+                return back()->with('error', 'خطا در ارسال کد تایید.');
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'خطا در ارسال کد تایید.',
-                'error' => $e->getMessage(),
-            ], 500);
+            return back()->with('error', 'خطا در ارسال کد تایید: ' . $e->getMessage());
         }
     }
 
-    public function signup()
-    {
-        return view('signup');
-    }
+    // public function userSignup(Request $request)
+    // {
 
-    public function verifyOtp(Request $request)
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'nullable|string|max:255',
+    //         'family' => 'nullable|string|max:255',
+    //         'phone' => 'required|numeric|digits:11',
+    //         'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+    //         'educationLevel' => 'nullable|string|in:دیپلم,لیسانس,فوق لیسانس,دکترا',
+    //         'gender' => 'nullable|string|in:زن,مرد',
+    //     ]);
+
+    //     // dd($request->all());
+    //     if ($validator->fails()) {
+    //         return back()->withErrors($validator)->withInput();
+    //     }
+
+    //     $user = User::where('mobile', $request->phone)->first();
+
+    //     if(!$user){
+    //         User::create([
+    //             'name' => $request->name,
+    //             'family' => $request->family,
+    //             'mobile' => $request->phone,
+    //             'password' => bcrypt($request->password),
+    //             'educationLevel' => $request->educationLevel,
+    //             'gender' => $request->gender,
+
+    //         ]);
+
+    //         return response()->json([
+    //             'status' => true,
+    //             'message' => 'User Updated Successfully',
+    //             'phone' => $request->phone,
+    //             'user' => $user,
+    //         ], 200);
+
+    //     }
+    //     else
+    //     {
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => 'User not found',
+    //             'phone' => $request->phone,
+    //         ], 404);
+    //     }
+    // }
+
+
+
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone' => 'required|numeric|digits:11',
-            'otp' => 'required|numeric|digits:6',
+            'phoneNumbers' => 'required|numeric|digits:11',
+       //     'password' => 'required|string',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors(),
-            ], 400);
+            return back()->withErrors($validator)->withInput();
         }
 
-        $otpRecord = Otp::where('phone', $request->phone)->where('otp', $request->otp)->first();
-        if (!$otpRecord) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid OTP code.',
-            ], 400);
+        $user = User::where('mobile', $request->phoneNumbers)->first();
+        if (!$user){
+            return back()->withErrors(['This is a custom error message.'])->withInput();
+
+        }
+        // چک کردن رمز عبور
+        if (!Hash::check($request->password, $user->password)) {
+             return back()->withErrors(['رمز عبور نادرست است.'])->withInput();
         }
 
-        $user = User::where('mobile', $request->phone)->first();
-        $userExisted = true;
+        Auth::login($user);
 
-        if (!$user) {
-            $user = User::create([
-                'mobile' => $request->phone,
-                'is_verified' => true, // فرض بر این است که کاربر پس از تایید OTP تایید شده است.
-            ]);
-            $userExisted = false; // کاربر جدید ایجاد شد
-        } else {
-            $user->is_verified = true;
-            $user->save();
-        }
-
-        // حذف رکورد OTP پس از استفاده
-        $otpRecord->delete();
-
-        $token = $user->createToken('API Token')->plainTextToken;
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Verification successful.',
-            'phone' => $request->phone,
-            'token' => $token,  // بازگرداندن توکن
-            'userExisted' => $userExisted, // نشان دهنده اینکه کاربر قبلاً وجود داشته است یا خیر
-        ]);
+        return redirect()->route('main');
     }
+
 
     public function userSignup(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|string|max:255',
             'family' => 'nullable|string|max:255',
@@ -143,43 +157,30 @@ class AuthController extends Controller
             'gender' => 'nullable|string|in:زن,مرد',
         ]);
 
-        // dd($request->all());
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors(),
-            ], 400);
+            return back()->withErrors($validator)->withInput();
         }
 
-        $user = User::where('phone', $request->phone)->first();
+        $user = User::where('mobile', $request->phone)->first();
 
-        if($user){
-            $user->update([
+        if (!$user) {
+            User::create([
                 'name' => $request->name,
                 'family' => $request->family,
-                'phone' => $request->phone,
+                'mobile' => $request->phone,
                 'password' => bcrypt($request->password),
                 'educationLevel' => $request->educationLevel,
                 'gender' => $request->gender,
-
             ]);
 
-            return response()->json([
-                'status' => true,
-                'message' => 'User Updated Successfully',
-                'phone' => $request->phone,
-                'user' => $user,
-            ], 200);
-
-        }
-        else
-        {
+            // ارسال OTP
+            return $this->sendOtp($request);
+        } else {
             return response()->json([
                 'status' => false,
-                'message' => 'User not found',
+                'message' => 'User already exists',
                 'phone' => $request->phone,
-            ], 404);
+            ], 409);
         }
     }
 }

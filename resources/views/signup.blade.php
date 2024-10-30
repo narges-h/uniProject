@@ -11,7 +11,7 @@
 
 <body dir="rtl">
     <div class="main">
-        <form id="form-register" method="post" action="{{ url('/register') }}">
+        <form id="form-register" method="post" action="{{ url('api/auth') }}">
             @csrf
 
             <img

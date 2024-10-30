@@ -1,4 +1,3 @@
-
 var inputFields = document.querySelectorAll("#form-sign input");
 inputFields.forEach(function (field) {
     field.addEventListener('input', function () {
@@ -14,15 +13,19 @@ function findErrorMessage(fieldId) {
     switch (fieldId) {
         case 'phoneNumbers':
             return document.getElementById('phoneNumbersError');
+        case 'password':
+          return document.getElementById('passwordError');
         default:
             return null;
     }
+
+
+
 }
 
 function validateLoginForm(event) {
-    event.preventDefault();
-
     var phone = document.getElementById('phoneNumbers');
+    var password = document.getElementById('password');
     var isValid = true;
 
     var inputFields = document.querySelectorAll("#form-sign input");
@@ -45,8 +48,29 @@ function validateLoginForm(event) {
         }
     }
 
+    if (password) {
+        var passwordValue = password.value.trim();
+        var passwordPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}/;
+        if (!passwordPattern.test(passwordValue)) {
+          password.classList.add("invalid");
+          var existingErrorMessage = findErrorMessage(password);
+          if (!existingErrorMessage) {
+            var errorMessage = document.createElement('span');
+            errorMessage.textContent = 'لطفا یک رمز عبور معتبر وارد کنید';
+            errorMessage.style.color = "red";
+            errorMessage.classList.add('error-message');
+            password.parentElement.appendChild(errorMessage);
+          }
+          isValid = false;
+        }
+      }
+
     if (isValid) {
-       window.location.href = "password.html";
+        event.target.submit();
+    }else{
+
+        event.preventDefault();
+
     }
 
     return isValid;

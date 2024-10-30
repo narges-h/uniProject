@@ -47,7 +47,6 @@ var isValid = true;
 
 
 function validateRegisterForm(event) {
-  event.preventDefault();
 
   var fullname = document.getElementById('fullname');
   var password = document.getElementById('pass');
@@ -141,10 +140,16 @@ function validateRegisterForm(event) {
   }
 
 
-  if (isValid) {
-    window.location.href = "login.html";
-  }
+//   if (isValid) {
+//     window.location.href = "login.html";
+//   }
 
+
+  if (isValid) {
+    event.target.submit();
+  }else{
+        event.preventDefault();
+    }
 
 
   return isValid;
