@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه اینترنتی پوشاک بانوان و آقایان | آی‌بولک</title>
+    <title>معرفی و خرید کتاب | برگستان</title>
 
-    <link rel="stylesheet" type="text/css" href="signup.css" />
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/signup.css') }}" />
 </head>
 
 <body dir="rtl">
     <div class="main">
+        <form id="form-register" method="post" action="{{ url('/register') }}">
+            @csrf
 
-
-        <form id="form-register" method="post">
             <img
-                src="../images/1718807353-TCMlDRbPFbA1CHFG.svg"
+                src="{{ asset('img/originalImage.png') }}"
                 width="240"
                 class="img-fluid"
             />
@@ -28,23 +27,21 @@
             <div id="fullnames">
                 <label style="display: none;" for="fullname">نام و نام خانوادگی</label>
                 <input type="text" id="fullname" name="fullname" placeholder="نام و نام خانوادگی" title="فقط حروف مجاز است">
-                <span  id="fullnameError" class="error-massage"></span>
+                <span id="fullnameError" class="error-message"></span>
             </div>
 
             <div id="password-forget">
-                <label style="display: none;" for="password-reapet">شماره تلفن</label>
-                <input type="tel" id="phoneNumbers" placeholder="شماره تلفن"
+                <label style="display: none;" for="phoneNumbers">شماره تلفن</label>
+                <input type="tel" id="phoneNumbers" name="phoneNumbers" placeholder="شماره تلفن"
                     title="لطفاً یک شماره تلفن معتبر (11 رقم که با 0 شروع می شود) وارد کنید">
-                <span  id="phoneNumbersError" class="error-massage"></span>
+                <span id="phoneNumbersError" class="error-message"></span>
             </div>
 
-
             <div id="password">
-                <label style="display: none;" for="passwordd">رمز عبور</label>
-                <input type="password" id="pass" placeholder="رمز عبور"
+                <label style="display: none;" for="pass">رمز عبور</label>
+                <input type="password" id="pass" name="password" placeholder="رمز عبور"
                     title="لطفا یک رمز عبور معتبر وارد کنید.(شامل حرف بزرگ،کوچک،عدد و عبارات خاص(@#&) و از 8 یا بیشتر کرکتر باشد)">
-                <span  id="passwordError" class="error-massage"></span>
-
+                <span id="passwordError" class="error-message"></span>
             </div>
 
             <select id="educationLevel" name="educationLevel">
@@ -73,9 +70,7 @@
 
         </form>
     </div>
-    <script src="SignUp.js"></script>
-
-
+    <script src="{{ asset('js/SignUp.js') }}"></script>
 </body>
 
 </html>
