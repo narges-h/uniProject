@@ -82,7 +82,6 @@ body {
     justify-content: center;
     background-color: #ffff;
     font-family: "IranSans";
-
 }
 
 
@@ -92,7 +91,7 @@ body {
     display: flex;
     flex-direction: row;
     padding: 50px;
-    border: 1px solid #e6ebee;
+    border: 1px solid #badd72;
     border-radius: 30px;
     margin-top: 8%;
 }
@@ -112,7 +111,7 @@ body {
 }
 
 #phoneNumbers {
-    border: 1px solid rgb(232, 240, 254);
+    border: 1px solid #badd72;
     border-radius: 10px;
     background-color: rgb(245 245 245 / 83%);
     padding: 15px;
@@ -124,9 +123,9 @@ body {
 }
 
 #pass {
-    border: 1px solid rgb(232, 240, 254);
+    border: 1px solid #badd72;
     border-radius: 20px;
-    background-color: rgb(232, 240, 254);
+    background-color: #badd72;
     padding: 15px;
     width: 470px;
 }
@@ -157,13 +156,13 @@ body {
 }
 
 #sabtnam {
-    color: #009ef7;
+    color: #badd72;
     text-decoration: none;
 }
 
 #open {
-    background-color: #009ef7;
-    border: 1px solid #009ef7;
+    background-color: #badd72;
+    border: 1px solid #badd72;
     border-radius: 10px;
     color: white;
     height: 55px;

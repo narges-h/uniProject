@@ -2,21 +2,25 @@
 <html lang="en">
 
 <head>
-    <title>فروشگاه اینترنتی پوشاک بانوان و آقایان | آی‌بولک</title>
+    <title>معرفی و خرید کتاب | برگستان</title>
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
 </head>
 
 <body dir="rtl">
     <div class="main">
 
-        <form id="otp-form" onsubmit="validateLoginForm(event);" method="POST" action="{{ url('/auth') }}">
+        <form id="form-sign" onsubmit="validateLoginForm(event);" method="POST" action="{{ url('/auth') }}">
             @csrf
 
-            <img
-                src="{{ asset('images/1718807353-TCMlDRbPFbA1CHFG.svg') }}"
+            <div>
+                <img
+                src="{{ asset('img/originalImage.png') }}"
                 width="240"
                 class="img-fluid"
-            />
+                />
+
+            </div>
+
 
             <div id="titr">
                 <h1 id="titrpp">ورود یا ثبت نام</h1>
@@ -30,7 +34,7 @@
 
             <button type="submit" name="submit" id="open">ورود</button>
 
-            {{-- <p id="sabt">حساب کاربری ندارید؟<a href="{{ route('signup') }}" id="sabtnam">ثبت نام</a></p> --}}
+            <p id="sabt">حساب کاربری ندارید؟<a href="{{ route('signup') }}" id="sabtnam">ثبت نام</a></p>
 
         </form>
     </div>

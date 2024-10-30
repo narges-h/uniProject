@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
 
-     
+
     public function login()
     {
         return view('login');
@@ -75,6 +75,11 @@ class AuthController extends Controller
         }
     }
 
+    public function signup()
+    {
+        return view('signup');
+    }
+
     public function verifyOtp(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -124,5 +129,71 @@ class AuthController extends Controller
             'token' => $token,  // بازگرداندن توکن
             'userExisted' => $userExisted, // نشان دهنده اینکه کاربر قبلاً وجود داشته است یا خیر
         ]);
+    }
+
+    public function userSignup(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|numeric|digits:11',
+            'name' => 'nullable|string|max:255',
+            'family' => 'nullable|string|max:255',
+            'birthdate' => 'nullable|date',
+            'city' => 'nullable|string|max:255',
+            'gender' => 'nullable|string|max:255',
+            'province' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // dd($request->all());
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $avatarPath = null;
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarName = time() . '_' . $avatar->getClientOriginalName();
+            $avatar->move(public_path('storage/avatars'), $avatarName);
+
+            // برای پاسخ دادن مسیر مناسب را ایجاد کنید
+            $avatarPath = 'storage/avatars/' . $avatarName;
+        }
+
+        $user = User::where('phone', $request->phone)->first();
+
+        if($user){
+            $user->update([
+                'name' => $request->name ?? $user->name,
+                'family' => $request->family ?? $user->family,
+                'birthdate' => $request->birthdate ?? $user->birthdate,
+                'city' => $request->city ?? $user->city,
+                'gender' => $request->gender ?? $user->gender,
+                'profile' => $avatarPath ?? $user->profile,
+                'province' => $request->province ?? $user->province,
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Updated Successfully',
+                'phone' => $request->phone,
+                'user' => $user,
+
+
+            ], 200);
+
+        }
+        else
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found',
+                'phone' => $request->phone,
+            ], 404);
+        }
     }
 }
