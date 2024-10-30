@@ -24,10 +24,18 @@
                 <h1 id="titrpp">مشخصات خود را کامل کنید:</h1>
             </div>
 
+            <!-- نام و نام خانوادگی -->
+
             <div id="fullnames">
-                <label style="display: none;" for="fullname">نام و نام خانوادگی</label>
-                <input type="text" id="fullname" name="fullname" placeholder="نام و نام خانوادگی" title="فقط حروف مجاز است">
-                <span id="fullnameError" class="error-message"></span>
+                <label style="display: none;" for="name">نام </label>
+                <input type="text" id="name" name="name" placeholder="نام " title="فقط حروف مجاز است">
+                <span id="nameError" class="error-message"></span>
+            </div>
+
+            <div id="fullnames">
+                <label style="display: none;" for="family">  نام خانوادگی</label>
+                <input type="text" id="family" name="family" placeholder=" نام خانوادگی" title="فقط حروف مجاز است">
+                <span id="nameError" class="error-message"></span>
             </div>
 
             <div id="password-forget">

@@ -165,7 +165,8 @@ body {
 }
 
 
-#fullname,
+#name,
+#family,
 #emailuser,
 #pass,
 #phoneNumbers {
@@ -181,7 +182,8 @@ body {
 }
 
 
-#fullname:hover,
+#name:hover,
+#family:hover,
 #phoneNumbers:hover,
 #pass:hover {
     border: 1px solid #badd72;
