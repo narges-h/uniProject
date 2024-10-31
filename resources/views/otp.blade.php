@@ -9,7 +9,7 @@
 <body dir="rtl">
     <div class="main">
 
-        <form id="form-otp" method="POST"  action="{{ url('/api/verifyOtp') }}">
+        <form id="form-otp" method="POST"  action="{{ url('/verifyOtp') }}">
             @csrf
 
             <img src="{{ asset('img/originalImage.png') }}" width="240" class="img-fluid" />

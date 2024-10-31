@@ -28,23 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 
 
-Route::get('/login', [AuthController::class, 'sendOtpPage']);
-Route::post('/main', [AuthController::class, 'login']);
+
 // Route::post('/auth', [AuthController::class, 'sendOtp']);
-
-Route::get('/signup', [AuthController::class, 'signup']);
-Route::post('/userSignup', [AuthController::class, 'userSignup']);
-
-Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
-
-
-Route::get('/otp', function () {
-    return view('otp');
-})->name('otp');
-
-
-
-
 
 
 

@@ -9,7 +9,7 @@
 <body dir="rtl">
     <div class="main">
 
-        <form id="form-sign" onsubmit="validateLoginForm(event);" method="POST" action="{{ url('/api/main') }}">
+        <form id="form-sign" onsubmit="validateLoginForm(event);" method="POST" action="{{ url('/main') }}">
             @csrf
 
             <img
@@ -23,7 +23,7 @@
             </div>
 
 
-            {{-- @if (isset($errors) && $errors->any())
+            @if ($errors->any())
              <div class="alert alert-danger" style="color: red; margin-bottom: 15px;">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -31,7 +31,7 @@
                     @endforeach
                 </ul>
             </div>
-            @endif --}}
+            @endif
 
 
             <div>
@@ -49,7 +49,7 @@
 
             <button type="submit" name="submit" id="open">ورود</button>
 
-            <p id="sabt">حساب کاربری ندارید؟<a href="{{ route('signup') }}" id="sabtnam">ثبت نام</a></p>
+            <p id="sabt">حساب کاربری ندارید؟<a href="{{ url('signup') }}" id="sabtnam">ثبت نام</a></p>
 
         </form>
     </div>

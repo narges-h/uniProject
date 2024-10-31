@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/signup', [AuthController::class, 'signup']);
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+Route::get('/otp', function () {
+    return view('otp');
+})->name('otp');
+
+
+
+Route::post('/userSignup', [AuthController::class, 'userSignup']);
+
+
+Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
+
+Route::get('/login', [AuthController::class, 'sendOtpPage']);
+Route::post('/main', [AuthController::class, 'login']);
+
+Route::get('/landing', function () {
+    return view('main');
+})->name('landing');
+
+

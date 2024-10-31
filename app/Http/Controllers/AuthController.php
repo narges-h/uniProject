@@ -27,30 +27,21 @@ class AuthController extends Controller
         return view('signup');
     }
 
-    public function sendOtp(Request $request)
+    public function sendOtp($phoneNumbers)
     {
-
-        $validator = Validator::make($request->all(), [
-            'phoneNumbers' => 'required|numeric|digits:11',
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
         $otp = rand(100000, 999999);
+
         Otp::create([
-            'phone' => $request->phoneNumbers,
+            'phone' => $phoneNumbers,
             'otp' => $otp,
         ]);
-        
-        session(['phoneNumbers' => $request->phoneNumbers]);
+
 
         try {
             $client = new Client();
             $response = $client->request('GET', 'https://api.kavenegar.com/v1/704865776F4C376665393662587063636D7630524B4132574C59586D783155455450495757556D715649553D/verify/lookup.json', [
                 'query' => [
-                    'receptor' => $request->phoneNumbers,
+                    'receptor' => $phoneNumbers,
                     'token' => $otp,
                     'token2' => 'homeenger',
                     'template' => 'homeengerverify'
@@ -61,7 +52,7 @@ class AuthController extends Controller
 
             if ($responseBody['return']['status'] == 200) {
                 // انتقال به صفحه OTP با استفاده از redirect
-                return redirect()->to('/api/otp')->with('phoneNumbers', $request->phoneNumbers);
+                return redirect()->to('/otp')->with('phoneNumbers', $phoneNumbers);
             } else {
 
                 return back()->with('error', 'خطا در ارسال کد تایید.');
@@ -75,7 +66,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'phoneNumbers' => 'required|numeric|digits:11',
-       //     'password' => 'required|string',
+            'password' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -84,8 +75,7 @@ class AuthController extends Controller
 
         $user = User::where('mobile', $request->phoneNumbers)->first();
         if (!$user){
-            return back()->withErrors(['This is a custom error message.'])->withInput();
-
+            return back()->withErrors(['کاربر با این شماره یافت نشد.'])->withInput();
         }
         // چک کردن رمز عبور
         if (!Hash::check($request->password, $user->password)) {
@@ -125,7 +115,7 @@ class AuthController extends Controller
         // ارسال OTP و ذخیره اطلاعات اولیه کاربر در سشن
         session(['user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender'])]);
 
-        return $this->sendOtp($request);
+        return $this->sendOtp($request->phoneNumbers);
     }
 
 
@@ -138,8 +128,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
-            return redirect()->to('/api/otp')
+            return redirect()->to('/otp')
                             ->withErrors($validator)
                             ->withInput();
         }
@@ -149,7 +138,7 @@ class AuthController extends Controller
                         ->first();
 
         if (!$otpRecord) {
-            return redirect()->to('/api/otp')
+            return redirect()->to('/otp')
                             ->with('error', 'کد تایید وارد شده نادرست است.')
                             ->withInput();
         }
@@ -174,11 +163,11 @@ class AuthController extends Controller
 
             // $token = $user->createToken('API Token')->plainTextToken;
 
-            return redirect()->route('api/main')->with([
+            return redirect()->to('/landing')->with([
                 'message' => 'تایید موفقیت‌آمیز بود.'
             ]);
         } else {
-            return redirect()->to('/api/otp')
+            return redirect()->to('/otp')
                             ->with('error', 'اطلاعات ثبت‌نام موجود نیست.')
                             ->withInput();
         }
