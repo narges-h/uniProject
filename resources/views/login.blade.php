@@ -23,7 +23,7 @@
             </div>
 
 
-            @if (isset($errors) && $errors->any())
+            {{-- @if (isset($errors) && $errors->any())
              <div class="alert alert-danger" style="color: red; margin-bottom: 15px;">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -31,8 +31,7 @@
                     @endforeach
                 </ul>
             </div>
-
-@endif
+            @endif --}}
 
 
             <div>

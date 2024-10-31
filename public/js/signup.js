@@ -31,7 +31,9 @@ function isValidNationalCode(nationalCode) {
 
 function findErrorMessage(fieldId) {
   switch (fieldId) {
-    case 'fullname':
+    case 'name':
+      return document.getElementById('fullnameError');
+    case 'family':
       return document.getElementById('fullnameError');
     case 'pass':
       return document.getElementById('passwordError');
@@ -48,7 +50,8 @@ var isValid = true;
 
 function validateRegisterForm(event) {
 
-  var fullname = document.getElementById('fullname');
+  var name = document.getElementById('name');
+  var family = document.getElementById('family');
   var password = document.getElementById('pass');
   var phone = document.getElementById('phoneNumbers');
   var isValid = true;
@@ -61,18 +64,35 @@ function validateRegisterForm(event) {
   errorMessages.forEach(function (message) {
     message.textContent = "";
   });
-  if (fullname) {
-    var fullnameValue = fullname.value.trim();
+  if (name) {
+    var fullnameValue = name.value.trim();
     var fullnamePattern = /^(?![0-9])[a-zA-Z0-9\u0600-\u06FF\s]{3,}$/;
     if (!fullnamePattern.test(fullnameValue)) {
-      fullname.classList.add("invalid");
-      var existingErrorMessage = findErrorMessage(fullname);
+        name.classList.add("invalid");
+      var existingErrorMessage = findErrorMessage(name);
       if (!existingErrorMessage) {
         var errorMessage = document.createElement('span');
         errorMessage.textContent = 'لطفا یک نام مناسب وارد کنید';
         errorMessage.style.color = "red";
         errorMessage.classList.add('error-message');
-        fullname.parentElement.appendChild(errorMessage);
+        name.parentElement.appendChild(errorMessage);
+      }
+      isValid = false;
+    }
+  }
+
+  if (family) {
+    var fullnameValue = family.value.trim();
+    var fullnamePattern = /^(?![0-9])[a-zA-Z0-9\u0600-\u06FF\s]{3,}$/;
+    if (!fullnamePattern.test(fullnameValue)) {
+        family.classList.add("invalid");
+      var existingErrorMessage = findErrorMessage(family);
+      if (!existingErrorMessage) {
+        var errorMessage = document.createElement('span');
+        errorMessage.textContent = 'لطفا یک نام خانوادگی مناسب وارد کنید';
+        errorMessage.style.color = "red";
+        errorMessage.classList.add('error-message');
+        family.parentElement.appendChild(errorMessage);
       }
       isValid = false;
     }

@@ -18,9 +18,6 @@ function findErrorMessage(fieldId) {
         default:
             return null;
     }
-
-
-
 }
 
 function validateLoginForm(event) {

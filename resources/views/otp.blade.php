@@ -8,9 +8,8 @@
 
 <body dir="rtl">
     <div class="main">
-        <p>{{ session('phone') }}</p>
 
-        <form id="form-otp" method="POST"  action="{{ route('verify-otp') }}">
+        <form id="form-otp" method="POST"  action="{{ url('/api/verifyOtp') }}">
             @csrf
 
             <img src="{{ asset('img/originalImage.png') }}" width="240" class="img-fluid" />
@@ -21,8 +20,12 @@
 
             <div>
 
-                <input type="hidden" name="phone" value="{{ session('phone') }}">
+                <input type="hidden" name="phoneNumbers" value="{{ session('phoneNumbers') }}">
+                <p>{{ session('phoneNumbers') }}</p>
+
                 <label style="display: none;" for="otp">کد تایید</label>
+
+
                 <input type="text" id="otp" name="otp" placeholder="کد تایید را وارد کنید" required maxlength="6">
                 <span id="otpError" class="error-message"></span>
             </div>

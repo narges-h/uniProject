@@ -11,7 +11,7 @@
 
 <body dir="rtl">
     <div class="main">
-        <form id="form-register" method="post" action="{{ url('api/auth') }}">
+        <form id="form-register" method="post" action="{{ url('/api/userSignup') }}">
             @csrf
 
             <img
@@ -54,18 +54,18 @@
 
             <select id="educationLevel" name="educationLevel">
                 <option value="" disabled selected>مدرک تحصیلی</option>
-                <option value="highschool">دیپلم</option>
-                <option value="lisans">لیسانس</option>
-                <option value="foghlisans">فوق لیسانس</option>
-                <option value="doctor">دکترا</option>
+                <option value="دیپلم">دیپلم</option>
+                <option value="لیسانس">لیسانس</option>
+                <option value="فوق لیسانس">فوق لیسانس</option>
+                <option value="دکترا">دکترا</option>
             </select>
             <span id="educationLevelError" class="error-message"></span>
 
             <div id="Gender">
                 <label>جنسیت:</label>
-                <input type="radio" id="maleGender" name="gender" value="Male">
+                <input type="radio" id="maleGender" name="gender" value="مرد">
                 <label for="maleGender">مرد</label>
-                <input type="radio" id="fameleGender" name="gender" value="Famele">
+                <input type="radio" id="fameleGender" name="gender" value="زن">
                 <label for="fameleGender">زن</label>
                 <p id="genderError"></p>
             </div>

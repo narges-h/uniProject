@@ -28,16 +28,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 
 
-Route::get('/login', [AuthController::class, 'sendOtpPage'])->name('sendOtpPage');
+Route::get('/login', [AuthController::class, 'sendOtpPage']);
 Route::post('/main', [AuthController::class, 'login']);
-Route::post('/auth', [AuthController::class, 'sendOtp']);
+// Route::post('/auth', [AuthController::class, 'sendOtp']);
 
-Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
-Route::post('/signup', [AuthController::class, 'userSignup']);
+Route::get('/signup', [AuthController::class, 'signup']);
+Route::post('/userSignup', [AuthController::class, 'userSignup']);
 
-Route::post('/auth/VerifyOtp', [AuthController::class, 'VerifyOtp']);
+Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
 
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
+
 Route::get('/otp', function () {
     return view('otp');
 })->name('otp');
