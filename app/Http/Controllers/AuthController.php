@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -74,51 +76,52 @@ class AuthController extends Controller
         }
 
         $user = User::where('mobile', $request->phoneNumbers)->first();
-        if (!$user){
+        if (!$user) {
             return back()->withErrors(['کاربر با این شماره یافت نشد.'])->withInput();
         }
         // چک کردن رمز عبور
         if (!Hash::check($request->password, $user->password)) {
-             return back()->withErrors(['رمز عبور نادرست است.'])->withInput();
+            return back()->withErrors(['رمز عبور نادرست است.'])->withInput();
         }
 
         Auth::login($user);
 
-        return redirect()->route('main');
+        // ذخیره نام و نام خانوادگی در سشن
+        session(['user_name' => $user->name . ' ' . $user->family]);
+        return redirect()->to('/landing');
     }
 
     public function userSignup(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|string|max:255',
-            'family' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
+            'family' => 'required|string|max:255',
             'phoneNumbers' => 'required|numeric|digits:11',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-            'educationLevel' => 'nullable|string|in:دیپلم,لیسانس,فوق لیسانس,دکترا',
-            'gender' => 'nullable|string|in:زن,مرد',
+            'educationLevel' => 'required|string|in:دیپلم,لیسانس,فوق لیسانس,دکترا',
+            'gender' => 'required|string|in:زن,مرد',
         ]);
 
         if ($validator->fails()) {
+
             return back()->withErrors($validator)->withInput();
         }
-
         $userExists = User::where('mobile', $request->phoneNumbers)->exists();
 
         if ($userExists) {
-            return response()->json([
-                'status' => false,
-                'message' => 'User already exists',
-                'phoneNumbers' => $request->phoneNumbers,
-            ], 409);
+            return back()->withErrors(['کاربر با این شماره ثبت نام کرده است.'])->withInput();
         }
 
         // ارسال OTP و ذخیره اطلاعات اولیه کاربر در سشن
-        session(['user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender'])]);
+        // session(['user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender'])]);
 
+        session([
+            'user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender']),
+            'user_name' => $request->name . ' ' . $request->family
+        ]);
         return $this->sendOtp($request->phoneNumbers);
     }
-
-
 
     public function verifyOtp(Request $request)
     {
@@ -129,18 +132,18 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             return redirect()->to('/otp')
-                            ->withErrors($validator)
-                            ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $otpRecord = Otp::where('phone', $request->phoneNumbers)
-                        ->where('otp', $request->otp)
-                        ->first();
+            ->where('otp', $request->otp)
+            ->first();
 
         if (!$otpRecord) {
             return redirect()->to('/otp')
-                            ->with('error', 'کد تایید وارد شده نادرست است.')
-                            ->withInput();
+                ->with('error', 'کد تایید وارد شده نادرست است.')
+                ->withInput();
         }
 
         $userData = session('user_signup_data');
@@ -168,9 +171,39 @@ class AuthController extends Controller
             ]);
         } else {
             return redirect()->to('/otp')
-                            ->with('error', 'اطلاعات ثبت‌نام موجود نیست.')
-                            ->withInput();
+                ->with('error', 'اطلاعات ثبت‌نام موجود نیست.')
+                ->withInput();
         }
     }
 
+    public function logout(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|numeric|digits:11',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $user = User::where('phone', $request->phone)->first();
+        if ($user) {
+            Auth::logout();
+
+            // پاک کردن سشن
+            $request->session()->flush();
+
+            return response()->json([
+                'message' => 'کاربر با موفقیت خارج شد.'
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'کاربر یافت نشد.'
+            ], 404);
+        }
+    }
 }

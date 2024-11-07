@@ -36,12 +36,37 @@
         </div>
 
 
-        <div style="margin-top: 1rem; padding: 9px; " class="btn btn-primary btn-with-icon me-2 ps-4 fs-7">
-          <a href="./auth/login.html" class="btn btn-primary btn-with-icon me-2 ps-4 fs-7">
-            <img src="images/user.svg" alt="User icon" />
-            حساب کاربری
-          </a>
+        <div style="margin-top: 1rem; padding: 9px;" class="btn btn-primary btn-with-icon me-2 ps-4 fs-7">
+            <a href="/login" class="btn btn-primary btn-with-icon me-2 ps-4 fs-7">
+                <img src="images/user.svg" alt="User icon" />
+                {{ session('user_name', 'حساب کاربری') }}
+            </a>
+            <button id="logout-button" class="btn btn-danger me-2">خروج</button>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#logout-button').click(function() {
+                if (confirm('آیا مطمئن هستید که می‌خواهید خارج شوید؟')) {
+                    $.ajax({
+                        url: '/logout', // آدرس روت برای خروج
+                        type: 'POST',
+                        data: {
+                            phone: '{{ session("user_signup_data.phoneNumbers") }}', // ارسال شماره تلفن کاربر در درخواست
+                            _token: '{{ csrf_token() }}' // توکن CSRF به درخواست اضافه می‌شود
+                        },
+                        success: function(response) {
+                            alert(response.message);
+                            window.location.href = '/login'; // هدایت به صفحه ورود
+                        },
+                        error: function(xhr) {
+                            alert(xhr.responseJSON.message);
+                        }
+                    });
+                }
+            });
+        });
+        </script>
         <form
           method="get"
           action="https://ibolak.com/products"
@@ -791,6 +816,7 @@
       </div>
     </div>
   </footer>
+
 
 
 

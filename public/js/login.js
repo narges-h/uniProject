@@ -1,3 +1,5 @@
+
+
 var inputFields = document.querySelectorAll("#form-sign input");
 inputFields.forEach(function (field) {
     field.addEventListener('input', function () {
@@ -13,7 +15,7 @@ function findErrorMessage(fieldId) {
     switch (fieldId) {
         case 'phoneNumbers':
             return document.getElementById('phoneNumbersError');
-        case 'password':
+        case 'pass':
           return document.getElementById('passwordError');
         default:
             return null;
@@ -22,7 +24,7 @@ function findErrorMessage(fieldId) {
 
 function validateLoginForm(event) {
     var phone = document.getElementById('phoneNumbers');
-    var password = document.getElementById('password');
+    var password = document.getElementById('pass');
     var isValid = true;
 
     var inputFields = document.querySelectorAll("#form-sign input");
@@ -65,9 +67,7 @@ function validateLoginForm(event) {
     if (isValid) {
         event.target.submit();
     }else{
-
         event.preventDefault();
-
     }
 
     return isValid;

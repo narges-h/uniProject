@@ -38,4 +38,4 @@ Route::get('/landing', function () {
     return view('main');
 })->name('landing');
 
-
+Route::post('/logout', [AuthController::class, 'logout']);

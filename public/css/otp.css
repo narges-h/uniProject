@@ -1,4 +1,3 @@
-/* POPPINS FONT */
 @font-face {
     font-family: IranSans;
     font-style: normal;
@@ -95,7 +94,7 @@ body {
     margin-top: 8%;
 }
 
-#form-sign {
+#form-otp {
     display: flex;
     flex-direction: column;
 }
@@ -105,12 +104,7 @@ body {
     font-size: large;
 }
 
-#phone {
-    margin-top: 30px;
-}
-
-#pass,
-#phoneNumbers {
+#otp {
     border: 1px solid #badd72;
     border-radius: 10px;
     background-color: rgb(245 245 245 / 83%);
@@ -120,47 +114,21 @@ body {
     margin-bottom: 10px;
     text-align: right;
 }
-
-/* #pass {
-    border: 1px solid #badd72;
-    border-radius: 20px;
-    background-color: #badd72;
-    padding: 15px;
-    width: 470px;
-} */
-
-#pass:hover,
-#phoneNumbers:hover {
+#pass:hover {
     border: 1px solid rgb(245 245 245 / 83%);
     background-color: rgb(245 245 245 / 83%);
 }
-
-#google {
-    border: 2px solid rgb(238, 238, 238);
-    background-color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 50px;
-    color: black;
-    font-size: larger;
-    border-radius: 10px;
+.invalid {
+    border: 2px solid red !important;
 }
 
-#google:hover {
-    cursor: pointer;
-    opacity: 0.7;
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
 }
 
-#sabt {
-    text-align: center;
-}
-
-#sabtnam {
-    color: #badd72;
-    text-decoration: none;
-}
-
-#open {
+#verify-otp {
     background-color: #badd72;
     border: 1px solid #badd72;
     border-radius: 10px;
@@ -172,30 +140,6 @@ body {
     font-size: larger;
 }
 
-#open:hover {
+#verify-otp:hover {
     cursor: pointer;
 }
-
-img {
-    margin: 0% auto;
-}
-
-.invalid {
-    border: 2px solid red !important;
-}
-
-.error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* استایل برای پیام‌های خطا */
-/* .alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-} */
