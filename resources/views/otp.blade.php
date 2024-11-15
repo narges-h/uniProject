@@ -12,17 +12,23 @@
         <form id="form-otp" onsubmit="validateLoginForm(event);" method="POST"  action="{{ url('/verifyOtp') }}">
             @csrf
 
-            <img src="{{ asset('img/originalImage.png') }}" width="240" class="img-fluid" />
+
+            <img
+                src="{{ asset('img/logoGreen.svg') }}"
+                width="40%"
+                class="img-fluid"
+            />
+            
             <div id="titr">
                 <h1 id="titrpp">ورود کد تأیید</h1>
             </div>
 
             <div>
-                <input type="hidden" name="phoneNumbers" value="{{ session('phoneNumbers') }}">
-                <p>{{ session('phoneNumbers') }}</p>
+                <input type="hidden"  name="phoneNumbers" value="{{ session('user_signup_data')['phoneNumbers'] }}">
+                <p>{{ session('user_signup_data')['phoneNumbers'] }}</p>
 
                 <label style="display: none;" for="otp">کد تایید</label>
-                <input type="text" id="otp" name="otp" placeholder="کد تایید را وارد کنید" required maxlength="6">
+                <input type="text" id="otp" name="otp" placeholder="کد تایید را وارد کنید">
                 <span id="otpError" class="error-message"></span>
             </div>
 

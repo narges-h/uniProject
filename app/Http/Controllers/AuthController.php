@@ -29,6 +29,40 @@ class AuthController extends Controller
         return view('signup');
     }
 
+    // public function sendOtp($phoneNumbers)
+    // {
+    //     $otp = rand(100000, 999999);
+
+    //     Otp::create([
+    //         'phone' => $phoneNumbers,
+    //         'otp' => $otp,
+    //     ]);
+
+    //     try {
+    //         $client = new Client();
+    //         $response = $client->request('GET', 'https://api.kavenegar.com/v1/704865776F4C376665393662587063636D7630524B4132574C59586D783155455450495757556D715649553D/verify/lookup.json', [
+    //             'query' => [
+    //                 'receptor' => $phoneNumbers,
+    //                 'token' => $otp,
+    //                 'token2' => 'homeenger',
+    //                 'template' => 'homeengerverify'
+    //             ]
+    //         ]);
+
+    //         $responseBody = json_decode($response->getBody(), true);
+
+    //         if ($responseBody['return']['status'] == 200) {
+    //             // انتقال به صفحه OTP با استفاده از redirect
+    //             return redirect()->to('/otp')->with('phoneNumbers', $phoneNumbers);
+    //         } else {
+
+    //             return back()->with('error', 'خطا در ارسال کد تایید.');
+    //         }
+    //     } catch (\Exception $e) {
+    //         return back()->with('error', 'خطا در ارسال کد تایید: ' . $e->getMessage());
+    //     }
+    // }
+
     public function sendOtp($phoneNumbers)
     {
         $otp = rand(100000, 999999);
@@ -37,31 +71,8 @@ class AuthController extends Controller
             'phone' => $phoneNumbers,
             'otp' => $otp,
         ]);
-
-
-        try {
-            $client = new Client();
-            $response = $client->request('GET', 'https://api.kavenegar.com/v1/704865776F4C376665393662587063636D7630524B4132574C59586D783155455450495757556D715649553D/verify/lookup.json', [
-                'query' => [
-                    'receptor' => $phoneNumbers,
-                    'token' => $otp,
-                    'token2' => 'homeenger',
-                    'template' => 'homeengerverify'
-                ]
-            ]);
-
-            $responseBody = json_decode($response->getBody(), true);
-
-            if ($responseBody['return']['status'] == 200) {
-                // انتقال به صفحه OTP با استفاده از redirect
-                return redirect()->to('/otp')->with('phoneNumbers', $phoneNumbers);
-            } else {
-
-                return back()->with('error', 'خطا در ارسال کد تایید.');
-            }
-        } catch (\Exception $e) {
-            return back()->with('error', 'خطا در ارسال کد تایید: ' . $e->getMessage());
-        }
+        Log::info($otp);
+        return redirect()->to('/otp')->with('phoneNumbers', $phoneNumbers);
     }
 
     public function login(Request $request)
@@ -118,7 +129,8 @@ class AuthController extends Controller
 
         session([
             'user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender']),
-            'user_name' => $request->name . ' ' . $request->family
+            'user_name' => $request->name . ' ' . $request->family,
+            'phoneNumbers' => $request->phoneNumbers
         ]);
         return $this->sendOtp($request->phoneNumbers);
     }
@@ -131,7 +143,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->to('/otp')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -140,10 +152,10 @@ class AuthController extends Controller
             ->where('otp', $request->otp)
             ->first();
 
+
         if (!$otpRecord) {
-            return redirect()->to('/otp')
-                ->with('error', 'کد تایید وارد شده نادرست است.')
-                ->withInput();
+
+            return back()->withErrors(['کد تایید وارد شده نادرست است.'])->withInput();
         }
 
         $userData = session('user_signup_data');
@@ -170,9 +182,7 @@ class AuthController extends Controller
                 'message' => 'تایید موفقیت‌آمیز بود.'
             ]);
         } else {
-            return redirect()->to('/otp')
-                ->with('error', 'اطلاعات ثبت‌نام موجود نیست.')
-                ->withInput();
+            return back()->withErrors(['اطلاعات ثبت‌نام موجود نیست.'])->withInput();
         }
     }
 

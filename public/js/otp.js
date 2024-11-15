@@ -33,11 +33,28 @@ function validateLoginForm(event) {
         message.textContent = "";
     });
 
+    // if (otp) {
+    //     var otpValue = otp.value.trim();
+    //     var otpPattern = /^\d{6}$/; // Pattern for 6-digit numeric OTP
+
+    //     if (!otpPattern.test(otpValue)) {
+    //         otp.classList.add("invalid");
+    //         var otpErrorMessageElement = findErrorMessage('otp');
+    //         otpErrorMessageElement.textContent = 'لطفا OTP معتبر (6 رقمی) وارد کنید';
+    //         isValid = false;
+    //     }
+    // }
+
     if (otp) {
         var otpValue = otp.value.trim();
         var otpPattern = /^\d{6}$/; // Pattern for 6-digit numeric OTP
 
-        if (!otpPattern.test(otpValue)) {
+        if (otpValue === '') { // Check if the input is empty
+            otp.classList.add("invalid");
+            var otpErrorMessageElement = findErrorMessage('otp');
+            otpErrorMessageElement.textContent = 'لطفا کد OTP را وارد کنید';
+            isValid = false;
+        } else if (!otpPattern.test(otpValue)) { // Check if OTP is a 6-digit number
             otp.classList.add("invalid");
             var otpErrorMessageElement = findErrorMessage('otp');
             otpErrorMessageElement.textContent = 'لطفا OTP معتبر (6 رقمی) وارد کنید';

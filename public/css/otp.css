@@ -78,25 +78,37 @@
 
 body {
     display: flex;
+    height: 100vh;
     justify-content: center;
-    background-color: #ffff;
+    align-content: center;
     font-family: "IranSans";
+    background-color: #badd72;
 }
 
 .main {
     background-color: white;
-    width: 465px;
+    width: 30%;
+    align-self: center;
+    height: min-content;
     display: flex;
     flex-direction: row;
-    padding: 50px;
+    padding: 3% 3% 0% 3% ;
     border: 1px solid #badd72;
     border-radius: 30px;
-    margin-top: 8%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 #form-otp {
     display: flex;
     flex-direction: column;
+}
+
+.img-fluid {
+    
+    align-self: center;
+    padding: 5%;
 }
 
 #titrpp {
@@ -105,13 +117,13 @@ body {
 }
 
 #otp {
+    
     border: 1px solid #badd72;
     border-radius: 10px;
     background-color: rgb(245 245 245 / 83%);
-    padding: 15px;
-    width: 365px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 4%;
+    margin-top: 5%;
     text-align: right;
 }
 #pass:hover {
@@ -133,11 +145,12 @@ body {
     border: 1px solid #badd72;
     border-radius: 10px;
     color: white;
-    height: 55px;
-    padding: 10px;
+    height: 15%;
+    padding: 3%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10%;
     font-size: larger;
+    margin-bottom: 10%;
 }
 
 #verify-otp:hover {

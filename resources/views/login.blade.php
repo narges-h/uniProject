@@ -12,10 +12,11 @@
         <form id="form-sign" onsubmit="validateLoginForm(event);" method="POST" action="{{ url('/main') }}">
             @csrf
 
-            <img src="{{ asset('img/originalImage.png') }}" width="240" class="img-fluid" />
+            
+            <img src="{{ asset('img/logoGreen.svg') }}" width="40%" class="img-fluid" />
 
             <div id="titr">
-                <h1 id="titrpp">ورود یا ثبت نام</h1>
+                <h1 id="titrpp">ورود</h1>
             </div>
 
             <div>

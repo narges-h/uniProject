@@ -15,15 +15,13 @@
             @csrf
 
             <img
-                src="{{ asset('img/originalImage.png') }}"
-                width="240"
+                src="{{ asset('img/logoGreen.svg') }}"
+                width="40%"
                 class="img-fluid"
             />
 
-            <div id="titr">
-                <h1 id="titrpp">مشخصات خود را کامل کنید:</h1>
-            </div>
-
+                <h1 id="titrpp">ثبت نام</h1>
+            
             <!-- نام و نام خانوادگی -->
 
             <div id="fullnames">
@@ -82,7 +80,7 @@
             @endif
 
             <div id="rememberMes">
-                مرا به خاطر بسپار:
+                مرا به خاطر بسپار
                 <input type="checkbox" id="rememberMe" name="rememberMe" value="remembered">
             </div>
             <button name="button" id="sabtnam" type="submit">ثبت نام</button>
