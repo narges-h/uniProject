@@ -21,12 +21,19 @@ class AuthController extends Controller
 
     public function sendOtpPage()
     {
-        return view('login');
+        if(Auth::check()){
+            return redirect()->to('/landing');
+        }
+        return redirect()->to('/login');
     }
 
     public function signup()
     {
-        return view('signup');
+        if(Auth::check()){
+            return redirect()->to('/landing');
+        }
+        return redirect()->to('/signup');
+
     }
 
     // public function sendOtp($phoneNumbers)
@@ -90,16 +97,16 @@ class AuthController extends Controller
         if (!$user) {
             return back()->withErrors(['کاربر با این شماره یافت نشد.'])->withInput();
         }
-        // چک کردن رمز عبور
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->withErrors(['رمز عبور نادرست است.'])->withInput();
+
+        $data = ['mobile' => $request->phoneNumbers , 'password' => $request->password];
+        if(Auth::attempt($data)){
+            $request->session()->regenerate();
+            session(['user_name' => Auth::user()->name . ' ' . Auth::user()->family]);
+            return redirect()->to('/landing');
+        } else{
+            return back()->withErrors(['اطلاعات نادرست است.'])->withInput();
         }
 
-        Auth::login($user);
-
-        // ذخیره نام و نام خانوادگی در سشن
-        session(['user_name' => $user->name . ' ' . $user->family]);
-        return redirect()->to('/landing');
     }
 
     public function userSignup(Request $request)
@@ -176,6 +183,10 @@ class AuthController extends Controller
             $otpRecord->delete();
             session()->forget('user_signup_data');
 
+            $request->session()->regenerate();
+            $request->session()->regenerateToken();
+            Auth::login($user);
+
             // $token = $user->createToken('API Token')->plainTextToken;
 
             return redirect()->to('/landing')->with([
@@ -188,32 +199,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'phone' => 'required|numeric|digits:11',
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json([
+            'message' => 'کاربر با موفقیت خارج شد.'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors(),
-            ], 400);
-        }
-
-        $user = User::where('phone', $request->phone)->first();
-        if ($user) {
-            Auth::logout();
-
-            // پاک کردن سشن
-            $request->session()->flush();
-
-            return response()->json([
-                'message' => 'کاربر با موفقیت خارج شد.'
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'کاربر یافت نشد.'
-            ], 404);
-        }
     }
 }
