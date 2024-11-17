@@ -19,23 +19,20 @@ Route::get('/', function () {
 });
 
 Route::get('/signup', [AuthController::class, 'signup']);
-
 Route::get('/otp', function () {
     return view('otp');
 })->name('otp');
 
-
-
 Route::post('/userSignup', [AuthController::class, 'userSignup']);
-
-
 Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
-
-Route::get('/login', [AuthController::class, 'sendOtpPage']);
+Route::get('/login', [AuthController::class, 'sendOtpPage'])->name('login');
 Route::post('/main', [AuthController::class, 'login']);
 
-Route::get('/landing', function () {
-    return view('main');
-})->name('landing');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/landing', function () {
+        return view('main');
+    })->name('landing');
+});
+
 
 Route::post('/logout', [AuthController::class, 'logout']);

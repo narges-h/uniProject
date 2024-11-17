@@ -24,7 +24,7 @@ class AuthController extends Controller
         if(Auth::check()){
             return redirect()->to('/landing');
         }
-        return redirect()->to('/login');
+        return view('login');
     }
 
     public function signup()
@@ -32,7 +32,7 @@ class AuthController extends Controller
         if(Auth::check()){
             return redirect()->to('/landing');
         }
-        return redirect()->to('/signup');
+        return view('signup');
 
     }
 
