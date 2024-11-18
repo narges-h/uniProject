@@ -1,0 +1,43 @@
+
+
+.container {
+    text-align: right; /* تراز متن‌های داخل کانتینر به سمت راست */
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'IRANSans', sans-serif;
+    direction: rtl; /* متن را راست‌چین می‌کند */
+    text-align: right; /* متن را به سمت راست تراز می‌کند */
+    font-family: 'IRANSans', sans-serif; /* فونت فارسی مناسب */
+}
+
+h1, h2 {
+    color: #555;
+}
+
+p {
+    margin-bottom: 10px;
+    color: #777;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button {
+    background-color: #badd72;
+    border: none;
+    padding: 10px 20px;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a9cc68;
+    color: white;
+}

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +38,13 @@ Route::middleware(['auth'])->group(function(){
 
 
 Route::post('/logout', [AuthController::class, 'logout']);
+
+
+Route::get('/books/category/{id}', [MainController::class, 'showBooksByCategory'])->name('books.byCategory');
+Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
+Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+
+
+
+

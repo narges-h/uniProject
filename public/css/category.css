@@ -1,0 +1,98 @@
+/* فایل CSS برای صفحه اصلی */
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'IRANSans', sans-serif;
+    direction: rtl; /* متن را راست‌چین می‌کند */
+    text-align: right; /* متن را به سمت راست تراز می‌کند */
+    font-family: 'IRANSans', sans-serif; /* فونت فارسی مناسب */
+}
+
+.category-title {
+    color: #333;
+    background-color: #badd72;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* گرید کارت‌ها */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* شش ستون مساوی */
+    gap: 20px; /* فاصله بین کارت‌ها */
+}
+
+.book-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-card img {
+    height: 150px;
+    object-fit: cover;
+    width: 100%; /* عرض تصویر باید تمام کارت را بپوشاند */
+    border-bottom: 1px solid #ddd;
+}
+
+.book-card .card-body {
+    padding: 15px;
+}
+
+.book-card .card-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.book-card .card-text {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.book-card .btn {
+    background-color: #badd72;
+    border: none;
+    color: #333;
+}
+
+.book-card .btn:hover {
+    background-color: #a9cc68;
+    color: white;
+}
+
+/* ریسپانسیو */
+@media (max-width: 1200px) {
+    .book-grid {
+        grid-template-columns: repeat(4, 1fr); /* چهار کارت در هر ردیف */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-grid {
+        grid-template-columns: repeat(2, 1fr); /* دو کارت در هر ردیف */
+    }
+
+    .category-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-grid {
+        grid-template-columns: 1fr; /* یک کارت در هر ردیف */
+    }
+}
