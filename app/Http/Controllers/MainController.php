@@ -10,7 +10,7 @@ class MainController extends Controller
 {
     public function showBooksByCategory($id)
     {
-        $categoryName = Category::find($id)->category_Name;
+        $categoryName = Category::find($id)->category_name;
         $books = Book::where('category_id', $id)->get();
 
         return view('category', compact('categoryName', 'books'));
@@ -18,9 +18,7 @@ class MainController extends Controller
 
     public function showCategoriesWithBooks()
     {
-        $categories = Category::with(['books' => function ($query) {
-            $query->limit(6); // محدودیت به ۶ کتاب
-        }])->get();
+        $categories = Category::has('books')->with(['books'])->get();
 
         return view('main', compact('categories'));
     }

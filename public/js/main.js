@@ -19,3 +19,7 @@ $(document).ready(function() {
         }
     });
 });
+$(document).on('click', '#book-card', function() {
+    var bookId = $(this).data('book-id');
+    window.location.href = '/books/' + bookId;
+});
