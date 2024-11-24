@@ -1,0 +1,9 @@
+header {
+    background-color: #badd72;
+    padding: 20px;
+    text-align: right; /* دکمه‌ها را به راست هم‌راستا می‌کند */
+}
+
+header .btn {
+    margin-left: 10px; /* فاصله بین دکمه‌ها */
+}

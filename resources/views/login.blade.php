@@ -33,6 +33,16 @@
                 <span id="passwordError" class="error-massage"></span>
 
             </div>
+{{--
+            <div id="password" style="position: relative;">
+                <label style="display: none;" for="password">رمز عبور</label>
+                <input type="password" id="pass" name="password" placeholder="لطفاً رمز عبور خود را وارد نمایید">
+                <span id="togglePassword">
+                    👁️
+                </span>
+                <span id="passwordError" class="error-message"></span>
+            </div> --}}
+
 
 
 

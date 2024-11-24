@@ -205,6 +205,14 @@ img {
     font-weight: 600;
 }
 
+#togglePassword{
+    position: absolute;
+    top: 63%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    left: 3%;
+}
+
 /* استایل برای پیام‌های خطا */
 /* .alert {
     background-color: #f8d7da;

@@ -20,7 +20,7 @@ class Book extends Model
         'number_of_page',
         'coveruri',
         'translator_name',
-        'lagn'
+        'lang'
     ];
 
 

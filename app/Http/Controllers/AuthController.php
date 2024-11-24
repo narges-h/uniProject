@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\Component;
 
 class AuthController extends Controller
 {
@@ -22,7 +23,7 @@ class AuthController extends Controller
     public function sendOtpPage()
     {
         if(Auth::check()){
-            return redirect()->to('/landing');
+            return redirect()->to('/categories');
         }
         return view('login');
     }
@@ -30,7 +31,7 @@ class AuthController extends Controller
     public function signup()
     {
         if(Auth::check()){
-            return redirect()->to('/landing');
+            return redirect()->to('/categories');
         }
         return view('signup');
 
@@ -101,12 +102,12 @@ class AuthController extends Controller
         $data = ['mobile' => $request->phoneNumbers , 'password' => $request->password];
         if(Auth::attempt($data)){
             $request->session()->regenerate();
+            $userType = Auth::user()->user_type;
             session(['user_name' => Auth::user()->name . ' ' . Auth::user()->family]);
-            return redirect()->to('/landing');
+            return redirect()->to('/categories')->with('userType', $userType);
         } else{
             return back()->withErrors(['اطلاعات نادرست است.'])->withInput();
         }
-
     }
 
     public function userSignup(Request $request)
@@ -189,7 +190,7 @@ class AuthController extends Controller
 
             // $token = $user->createToken('API Token')->plainTextToken;
 
-            return redirect()->to('/landing')->with([
+            return redirect()->to('/categories')->with([
                 'message' => 'تایید موفقیت‌آمیز بود.'
             ]);
         } else {
@@ -205,7 +206,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json([
+        return redirect()->to('/login')->with([
             'message' => 'کاربر با موفقیت خارج شد.'
         ]);
 

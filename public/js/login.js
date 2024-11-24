@@ -11,6 +11,18 @@ inputFields.forEach(function (field) {
     });
 });
 
+
+document.getElementById('togglePassword').addEventListener('click', function () {
+    var passwordField = document.getElementById('pass');
+    var type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+
+    // تغییر آیکون برای نشان دادن حالت فعلی
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+});
+
+
+
 function findErrorMessage(fieldId) {
     switch (fieldId) {
         case 'phoneNumbers':

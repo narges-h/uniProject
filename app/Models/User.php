@@ -45,10 +45,10 @@ class User extends \TCG\Voyager\Models\User
 
 
 
-    public function product()
-    {
-        return $this->hasMany(Product::class, 'user_id', 'id');
-    }
+    // public function product()
+    // {
+    //     return $this->hasMany(Product::class, 'user_id', 'id');
+    // }
 
 
 

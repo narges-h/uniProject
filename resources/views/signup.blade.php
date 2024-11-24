@@ -21,7 +21,7 @@
             />
 
                 <h1 id="titrpp">ثبت نام</h1>
-            
+
             <!-- نام و نام خانوادگی -->
 
             <div id="fullnames">
@@ -43,12 +43,22 @@
                 <span id="phoneNumbersError" class="error-message"></span>
             </div>
 
-            <div id="password">
+           <div id="password">
                 <label style="display: none;" for="pass">رمز عبور</label>
                 <input type="password" id="pass" name="password" placeholder="رمز عبور"
                     title="لطفا یک رمز عبور معتبر وارد کنید.(شامل حرف بزرگ،کوچک،عدد و عبارات خاص(@#&) و از 8 یا بیشتر کرکتر باشد)">
                 <span id="passwordError" class="error-message"></span>
             </div>
+
+            {{-- <div id="password">
+                <label style="display: none;" for="pass">رمز عبور</label>
+                <input type="password" id="pass" name="password" placeholder=" رمز عبور "
+                    title="لطفا یک رمز عبور معتبر وارد کنید.(شامل حرف بزرگ،کوچک،عدد و عبارات خاص(@#&) و از 8 یا بیشتر کرکتر باشد)">
+                <span id="togglePassword">
+                    👁️
+                </span>
+                <span id="passwordError" class="error-message"></span>
+            </div> --}}
 
             <select id="educationLevel" name="educationLevel">
                 <option value="" disabled selected>مدرک تحصیلی</option>
