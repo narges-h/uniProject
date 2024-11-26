@@ -1,7 +1,12 @@
+@extends('layouts.app')
+
+@section('content')
 <link rel="stylesheet" href="{{ asset('css/add-book.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<h1>افزودن کتاب جدید</h1>
 
+<div class="pageTitle">
+    <h1>{{$title}}</h1>
+</div>
 
 <form action="{{ route('insert') }}" method="POST" class="container">
     @csrf
@@ -18,7 +23,7 @@
             <label for="category_id" class="form-label">دسته بندی:</label>
             <select class="form-select" id="category_id" name="category_id" required>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -36,30 +41,35 @@
         </div>
         <div class="col-md-6">
             <label for="stock" class="form-label">موجودی:</label>
-            <input type="number" class="form-control" id="stock" name="stock" min="0">
+            <input type="number" class="form-control" id="stock" name="stock" min="0" required>
         </div>
         <div class="col-md-6">
             <label for="publishDate" class="form-label">تاریخ انتشار:</label>
-            <input type="date" class="form-control" id="publishDate" name="publishDate">
+            <input type="date" class="form-control" id="publishDate" name="publishDate" required>
         </div>
         <div class="col-md-6">
             <label for="number_of_page" class="form-label">تعداد صفحات:</label>
-            <input type="number" class="form-control" id="number_of_page" name="number_of_page" min="1">
+            <input type="number" class="form-control" id="number_of_page" name="number_of_page" min="1" required>
         </div>
         <div class="col-12">
             <label for="coveruri" class="form-label">آدرس تصویر جلد:</label>
-            <input type="url" class="form-control" id="coveruri" name="coveruri">
+            <input type="url" class="form-control" id="coveruri" name="coveruri" required>
         </div>
-        <div class="col-12">
+        <div class="col-md-6">
             <label for="translator_name" class="form-label">نام مترجم:</label>
-            <input type="text" class="form-control" id="translator_name" name="translator_name">
+            <input type="text" class="form-control" id="translator_name" name="translator_name" required>
         </div>
-        <div class="col-12">
+        <div class="col-md-6">
             <label for="lang" class="form-label">زبان:</label>
-            <input type="text" class="form-control" id="lagn" name="lagn" required>
+            <select class="form-select" id="lang" name="lang">
+                @foreach (['Fa' , 'En'] as $lang)
+                    <option value="{{ $lang }}">{{ $lang }}</option>
+                @endforeach
+            </select>
         </div>
-        <div class="col-12">
+        <div class="save">
             <button type="submit" class="btn btn-primary mt-3">ذخیره</button>
         </div>
     </div>
 </form>
+@endsection

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class MainController extends Controller
 {
@@ -19,8 +20,9 @@ class MainController extends Controller
     public function showCategoriesWithBooks()
     {
         $categories = Category::has('books')->with(['books'])->get();
+        $userType = Auth::user()->user_type;
 
-        return view('main', compact('categories'));
+        return view('main', compact('categories'))->with('userType' , $userType) ;;
     }
 
 

@@ -1,7 +1,24 @@
-
-form {
+.container {
     background-color: #f8f9fa;
     padding: 20px;
+    margin: 2%;
     border-radius: 5px;
     direction: rtl;
+    justify-items : center;
   }
+.pageTitle{
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  align-content: center;
+}
+
+.save,
+.pageTitle  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+  text-align: center;
+  width: 100%;
+}

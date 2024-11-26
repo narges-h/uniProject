@@ -1,9 +1,134 @@
-header {
-    background-color: #badd72;
-    padding: 20px;
-    text-align: right; /* دکمه‌ها را به راست هم‌راستا می‌کند */
+/* POPPINS FONT */
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: 200;
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot");
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot?#iefix")
+            format("embedded-opentype"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2")
+            format("woff2"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff")
+            format("woff"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf")
+            format("ttf");
+}
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Light.eot");
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Light.eot?#iefix")
+            format("embedded-opentype"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff2/IRANSansWeb(FaNum)_Light.woff2")
+            format("woff2"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff/IRANSansWeb(FaNum)_Light.woff")
+            format("woff"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf")
+            format("ttf");
+}
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum).eot");
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum).eot?#iefix")
+            format("embedded-opentype"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff2/IRANSansWeb(FaNum).woff2")
+            format("woff2"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff/IRANSansWeb(FaNum).woff")
+            format("woff"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum).ttf")
+            format("ttf");
+}
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Medium.eot");
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix")
+            format("embedded-opentype"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2")
+            format("woff2"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff/IRANSansWeb(FaNum)_Medium.woff")
+            format("woff"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf")
+            format("ttf");
+}
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: 700;
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Bold.eot");
+    src: url("../Assets/Font/IRANSans/WebFonts/fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix")
+            format("embedded-opentype"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2")
+            format("woff2"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/woff/IRANSansWeb(FaNum)_Bold.woff")
+            format("woff"),
+        url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf")
+            format("ttf");
 }
 
-header .btn {
-    margin-left: 10px; /* فاصله بین دکمه‌ها */
+* {
+    font-family: "IranSans" !important;
+}
+
+header {
+    padding: 10px 20px;
+    border-bottom: 2px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    direction: rtl;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-danger {
+    background-color: #e63946;
+    color: #fff;
+    border-color: #e63946;
+}
+
+.btn-danger:hover {
+    background-color: #d62839;
+    border-color: #d62839;
+}
+
+
+.btn-primary {
+    background-color: #457b9d;
+    color: #fff;
+    border-color: #457b9d;
+}
+
+.btn-primary:hover {
+    background-color: #1d3557;
+    border-color: #1d3557;
+}
+
+button:active {
+    transform: scale(0.98);
 }

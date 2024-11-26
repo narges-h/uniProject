@@ -1,43 +1,133 @@
-
-
 .container {
-    text-align: right; /* تراز متن‌های داخل کانتینر به سمت راست */
-}
-
-body {
-    background-color: #f9f9f9;
-    color: #333;
-    font-family: 'IRANSans', sans-serif;
-    direction: rtl; /* متن را راست‌چین می‌کند */
-    text-align: right; /* متن را به سمت راست تراز می‌کند */
-    font-family: 'IRANSans', sans-serif; /* فونت فارسی مناسب */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    direction: rtl;
 }
 
 h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px;
+    border-right: 5px solid #3498db;
+    padding-right: 10px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-md-4 {
+    flex: 1 1 30%;
+    text-align: center;
+}
+
+.col-md-4 img {
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.col-md-4 img:hover {
+    transform: scale(1.05);
+}
+
+.col-md-8 {
+    flex: 1 1 65%;
+}
+
+.col-md-8 p {
+    font-size: 16px;
+    margin-bottom: 10px;
     color: #555;
 }
 
-p {
-    margin-bottom: 10px;
-    color: #777;
+.text-success {
+    color: #27ae60;
+    font-weight: bold;
 }
 
-img {
-    border: 1px solid #ddd;
+.text-danger {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.description {
+    background: #fff;
+    padding: 20px;
     border-radius: 10px;
-    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
 }
 
-button {
-    background-color: #badd72;
+.container button.btn {
+    display: inline-block;
+    padding: 10px 25px;
     border: none;
-    padding: 10px 20px;
-    color: #333;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to left, #27ae60, #2ecc71);
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
 }
 
-button:hover {
-    background-color: #a9cc68;
-    color: white;
+.container button.btn:hover {
+    background: linear-gradient(to left, #2ecc71, #27ae60);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-md-4, .col-md-8 {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .container button.btn {
+        width: 100%;
+    }
+}
+
+
+
+
+
+.book-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.book-info p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.book-info strong {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .book-info {
+        grid-template-columns: 1fr;
+    }
 }

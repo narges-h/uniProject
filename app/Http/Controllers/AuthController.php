@@ -102,9 +102,9 @@ class AuthController extends Controller
         $data = ['mobile' => $request->phoneNumbers , 'password' => $request->password];
         if(Auth::attempt($data)){
             $request->session()->regenerate();
-            $userType = Auth::user()->user_type;
+
             session(['user_name' => Auth::user()->name . ' ' . Auth::user()->family]);
-            return redirect()->to('/categories')->with('userType', $userType);
+            return redirect()->to('/categories');
         } else{
             return back()->withErrors(['اطلاعات نادرست است.'])->withInput();
         }

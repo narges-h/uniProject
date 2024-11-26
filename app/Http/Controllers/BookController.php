@@ -13,8 +13,11 @@ class BookController extends Controller
 
     public function create()
     {
-        $categories = Category::all(); // تمام دسته بندی ها را دریافت می کند
-        return view('addBook', compact('categories')); // داده ها را به view ارسال می کند
+        $categories = Category::all();
+
+        $title = "افزودن کتاب";
+
+        return view('addBook', compact('categories'))->with('title', $title)->with('showHeader' , false) ;
     }
     public function insert(Request $request)
     {
