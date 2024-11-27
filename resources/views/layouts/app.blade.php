@@ -28,7 +28,7 @@
 
                     @if (isset($userType) && $userType == 'admin')
                         <form id="insert-form" action="{{ route('add-book') }}" method="GET" style="display: inline;">
-                            <button type="submit" class="btn btn-primary">افزودن پست</button>
+                            <button type="submit" class="btn btn-primary">افزودن کتاب</button>
                         </form>
                     @endif
                 </div>

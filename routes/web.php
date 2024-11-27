@@ -37,25 +37,38 @@ Route::post('/main', [AuthController::class, 'login']);
 //     })->name('landing');
 // });
 
-
+// خروج کاربر
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-
-
-
+// نمایش کتاب های یک دسته بندی
 Route::get('/books/category/{id}', [MainController::class, 'showBooksByCategory'])->name('books.byCategory');
-Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
-Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
-Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 
+// نمایش همه کتاب ها
 Route::middleware(['auth'])->group(function(){
     Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
 });
 
+// نمایش جزئیات کتاب
+Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
 
+// افزودن به سبدخرید
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+
+// افزودن کتاب
 Route::post('/insert', [BookController::class, 'insert'])->name('insert');
-Route::get('/add-book', [BookController::class, 'create'])->name('add-book'); 
+// فرم افزودن کتاب
+Route::get('/add-book', [BookController::class, 'create'])->name('add-book');
+
+// فرم ادیت کتاب
+Route::get('/update-book/{id}', [BookController::class, 'edit'])->name('update-book');
+// ادیت کتاب
+Route::put('/update/{id}', [BookController::class, 'update'])->name('books.update');
+
+// حذف کتاب
+Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete-book');
+
+
+
 
 
 

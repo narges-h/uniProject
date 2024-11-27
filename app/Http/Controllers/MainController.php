@@ -22,14 +22,15 @@ class MainController extends Controller
         $categories = Category::has('books')->with(['books'])->get();
         $userType = Auth::user()->user_type;
 
-        return view('main', compact('categories'))->with('userType' , $userType) ;;
+        return view('main', compact('categories'))->with('userType' , $userType) ;
     }
 
 
     public function showBookDetails($id)
     {
         $book = Book::findOrFail($id); // اگر کتاب وجود نداشته باشد، 404 می‌دهد.
-        return view('books', compact('book'));
+        $userType = Auth::user()->user_type;
+        return view('books', compact('book'))->with('userType' , $userType) ;
     }
 
 
