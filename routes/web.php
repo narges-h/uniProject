@@ -62,7 +62,7 @@ Route::get('/add-book', [BookController::class, 'create'])->name('add-book');
 // فرم ادیت کتاب
 Route::get('/update-book/{id}', [BookController::class, 'edit'])->name('update-book');
 // ادیت کتاب
-Route::put('/update/{id}', [BookController::class, 'update'])->name('books.update');
+Route::put('/update/{id}', [BookController::class, 'update'])->name('update');
 
 // حذف کتاب
 Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete-book');

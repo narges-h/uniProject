@@ -5,7 +5,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ $book->coveruri }}" class="img-fluid" alt="{{ $book->title }}">
+                <img src="{{ $book->coveruri }}" class="img-fluid" alt="{{ $book->title }}" width="60%" height="80%">
             </div>
 
             <div class="col-md-8">
@@ -43,9 +43,6 @@
                         @csrf
                         <button type="submit" class="btn btn-primary">ویرایش کتاب</button>
                     </form>
-                @endif
-
-                @if (isset($userType) && $userType == 'admin')
                     <form id="delete-form" action="{{ route('delete-book', ['id' => $book->id]) }}" method="POST"
                         style="display: inline;">
                         @csrf

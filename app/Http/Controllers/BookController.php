@@ -17,24 +17,28 @@ class BookController extends Controller
 
         $title = "افزودن کتاب";
 
-        return view('addBook', compact('categories'))->with('title', $title)->with('showHeader' , false) ;
+        // متغیر بوک برای ارور نبودن بوک در بلید که ولیو در اینپوت هارو نشون میده و خالیه
+        $book = new Book();
+
+        return view('addBook', compact('categories' , 'book'))->with('title', $title)->with('isUpdate', false)->with('showHeader' , false) ;
+
     }
     public function insert(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'publisher' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:categories,id',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'rating' => 'nullable|numeric|min:0|max:5',
-            'stock' => 'required|integer|min:0',
+            // 'title' => 'required|string|max:255',
+            // 'author' => 'required|string|max:255',
+            // 'publisher' => 'required|string|max:255',
+            // 'category_id' => 'required|integer|exists:categories,id',
+            // 'price' => 'required|numeric',
+            // 'description' => 'required|string',
+            // 'rating' => 'nullable|numeric|min:0|max:5',
+            // 'stock' => 'required|integer|min:0',
             'publishDate' => 'required|date',
-            'number_of_page' => 'required|integer|min:1',
+            // 'number_of_page' => 'required|integer|min:1',
             'coveruri' => 'required|file|mimes:jpeg,png,jpg|max:2048',
-            'translator_name' => 'nullable|string|max:255',
-            'lang' => 'required|string',
+            // 'translator_name' => 'nullable|string|max:255',
+            // 'lang' => 'required|string',
         ]);
 
 
@@ -42,7 +46,13 @@ class BookController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $coverImagePath = $request->file('coveruri')->store('cover_images', 'public');
+        $file = $request->file('coveruri');
+        $destinationPath = public_path('cover_images');
+        $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move($destinationPath, $fileName);
+
+        $coverImagePath = url('cover_images/' . $fileName);
+
 
         Book::create([
             'title' => $request->title,
@@ -72,7 +82,7 @@ class BookController extends Controller
         $categories = Category::all();
         $title = "ویرایش کتاب";
 
-        return view('addBook', compact('categories', 'book'))->with('title', $title)->with('showHeader', false);
+        return view('addBook', compact('categories', 'book'))->with('title', $title)->with('isUpdate', true)->with('showHeader', false);
     }
 
     public function update(Request $request, $id)
@@ -101,7 +111,14 @@ class BookController extends Controller
 
         // اگر تصویری بارگذاری شده باشد، آن را ذخیره کن
         if ($request->hasFile('coveruri')) {
-            $coverImagePath = $request->file('coveruri')->store('cover_images', 'public');
+            $file = $request->file('coveruri');
+
+        $destinationPath = public_path('cover_images');
+        $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move($destinationPath, $fileName);
+
+        $coverImagePath = url('cover_images/' . $fileName);
+
             $book->coveruri = $coverImagePath; // به‌روزرسانی مسیر تصویر
         }
 
