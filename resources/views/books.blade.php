@@ -41,21 +41,6 @@
                     @endif
 
                 @endif
-
-                {{-- @if (isset($userType) && $userType == 'admin')
-                    <form id="update-form" action="{{ route('update-book', ['id' => $book->id]) }}" method="GET"
-                        style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">ویرایش کتاب</button>
-                    </form>
-                    <form id="delete-form" action="{{ route('delete-book', ['id' => $book->id]) }}" method="POST"
-                        style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-primary">حذف کتاب</button>
-                    </form>
-                @endif --}}
-
             </div>
         </div>
 

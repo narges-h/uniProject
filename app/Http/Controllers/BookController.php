@@ -100,7 +100,7 @@ class BookController extends Controller
             'stock' => 'integer|min:0',
             'publishDate' => 'date',
             'number_of_page' => 'integer|min:1',
-            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',  // تغییر به nullable
+            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
             'translator_name' => 'nullable|string|max:255',
             'lang' => 'string',
         ]);
@@ -109,9 +109,9 @@ class BookController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $book = Book::findOrFail($id); // دریافت کتاب بر اساس ID
+        $book = Book::findOrFail($id);
 
-        // اگر تصویری بارگذاری شده باشد، آن را ذخیره کن
+
         if ($request->hasFile('coveruri')) {
             $file = $request->file('coveruri');
 
@@ -124,7 +124,6 @@ class BookController extends Controller
             $book->coveruri = $coverImagePath; // به‌روزرسانی مسیر تصویر
         }
 
-        // به‌روزرسانی سایر فیلدها
         $book->title = $request->title;
         $book->author = $request->author;
         $book->publisher = $request->publisher;
@@ -161,7 +160,7 @@ class BookController extends Controller
         if(Auth::check()){
             return view('admin/admin', compact('books'));
         }
-        return view('login');
+        return redirect()->to('/login');
 
 
     }

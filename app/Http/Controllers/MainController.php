@@ -29,7 +29,7 @@ class MainController extends Controller
 
     public function showBookDetails($id)
     {
-        $book = Book::findOrFail($id); // اگر کتاب وجود نداشته باشد، 404 می‌دهد.
+        $book = Book::findOrFail($id);
         // $userType = Auth::user()->user_type;
         return view('books', compact('book'));
         // ->with('userType' , $userType) ;

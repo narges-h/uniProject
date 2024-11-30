@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,13 @@ Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('del
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin', [BookController::class, 'index'])->name('admin.products');
 });
+
+// پروفایل کاربری
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
 
 
 

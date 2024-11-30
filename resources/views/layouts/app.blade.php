@@ -38,36 +38,18 @@
                     @endguest
 
                     @auth
-                        {{-- <div class="dropdown">
-                            <button class="btn btn-success dropdown-toggle" id="userMenu" data-bs-toggle="dropdown">
-                                {{ Auth::user()->name }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                <li><a class="dropdown-item"
-                                    {{-- href="{{ route('profile') }}" --}}
-                                    {{-- >اطلاعات کاربری</a></li>
-                                <li><a class="dropdown-item" --}}
-                                    {{-- href="{{ route('cart') }}" --}}
-                                    {{-- >سبد خرید</a></li>
-                                <li><a class="dropdown-item" --}}
-                                     {{-- href="{{ route('orders') }}" --}}
-                                     {{-- >سفارشات</a></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item text-danger">خروج از حساب</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div> --}}
                         <div class="dropdown">
                             <button class="btn btn-success dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                <li><a class="dropdown-item" href="#">اطلاعات کاربری</a></li>
-                                <li><a class="dropdown-item" href="#">سبد خرید</a></li>
-                                <li><a class="dropdown-item" href="#">سفارشات</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>
+                                <li><a class="dropdown-item"
+                                    {{-- href="{{ route('cart') }}" --}}
+                                     >سبد خرید</a></li>
+                                <li><a class="dropdown-item"
+                                      {{-- href="{{ route('orders') }}" --}}
+                                      >سفارشات</a></li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf

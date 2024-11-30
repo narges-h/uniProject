@@ -138,9 +138,6 @@ class AuthController extends Controller
             return back()->withErrors(['کاربر با این شماره ثبت نام کرده است.'])->withInput();
         }
 
-        // ارسال OTP و ذخیره اطلاعات اولیه کاربر در سشن
-        // session(['user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender'])]);
-
         session([
             'user_signup_data' => $request->only(['name', 'family', 'phoneNumbers', 'password', 'educationLevel', 'gender']),
             'user_name' => $request->name . ' ' . $request->family,
@@ -194,7 +191,6 @@ class AuthController extends Controller
             $request->session()->regenerateToken();
             Auth::login($user);
 
-            // $token = $user->createToken('API Token')->plainTextToken;
 
             return redirect()->to('/categories')->with([
                 'message' => 'تایید موفقیت‌آمیز بود.'

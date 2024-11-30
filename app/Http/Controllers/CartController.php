@@ -8,27 +8,27 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
 
-    // public function addToCart($id, Request $request)
-    // {
-    //     $book = Book::findOrFail($id);
+    public function addToCart($id, Request $request)
+    {
+        $book = Book::findOrFail($id);
 
-    //     // ذخیره اطلاعات سبد خرید در سشن
-    //     $cart = session()->get('cart', []);
+        // ذخیره اطلاعات سبد خرید در سشن
+        $cart = session()->get('cart', []);
 
-    //     if (isset($cart[$id])) {
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         $cart[$id] = [
-    //             'title' => $book->title,
-    //             'price' => $book->price,
-    //             'quantity' => 1,
-    //             'coveruri' => $book->coveruri,
-    //         ];
-    //     }
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'title' => $book->title,
+                'price' => $book->price,
+                'quantity' => 1,
+                'coveruri' => $book->coveruri,
+            ];
+        }
 
-    //     session()->put('cart', $cart);
+        session()->put('cart', $cart);
 
-    //     return redirect()->back()->with('success', 'کتاب به سبد خرید افزوده شد.');
-    // }
+        return redirect()->back()->with('success', 'کتاب به سبد خرید افزوده شد.');
+    }
 
 }
