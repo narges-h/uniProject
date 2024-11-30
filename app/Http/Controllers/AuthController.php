@@ -99,16 +99,22 @@ class AuthController extends Controller
             return back()->withErrors(['کاربر با این شماره یافت نشد.'])->withInput();
         }
 
-        $data = ['mobile' => $request->phoneNumbers , 'password' => $request->password];
-        if(Auth::attempt($data)){
+        $data = ['mobile' => $request->phoneNumbers, 'password' => $request->password];
+        if (Auth::attempt($data)) {
             $request->session()->regenerate();
 
             session(['user_name' => Auth::user()->name . ' ' . Auth::user()->family]);
+
+            // بررسی نوع کاربر
+            if (Auth::user()->user_type === 'admin') {
+                return redirect()->to('/admin');
+            }
             return redirect()->to('/categories');
-        } else{
+        } else {
             return back()->withErrors(['اطلاعات نادرست است.'])->withInput();
         }
     }
+
 
     public function userSignup(Request $request)
     {

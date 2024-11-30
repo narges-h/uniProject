@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,12 @@ Route::put('/update/{id}', [BookController::class, 'update'])->name('update');
 
 // حذف کتاب
 Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete-book');
+
+// ادمین
+Route::middleware(['auth'])->group(function(){
+    Route::get('/admin', [BookController::class, 'index'])->name('admin.products');
+});
+
 
 
 

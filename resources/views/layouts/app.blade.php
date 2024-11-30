@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <title>@yield('title', 'Default Title')</title> --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -15,25 +16,71 @@
     @endphp
     @if (isset($showHeader) && $showHeader)
         <header>
-            <div class="header-container">
-                <div class="logo">
-                <img src="{{ asset('img/logoGreen.svg') }}"class="img-fluid" />
+            <div class="header-container bg-light p-3 d-flex justify-content-between align-items-center">
+                <!-- Logo and Categories Link -->
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('img/logoGreen.svg') }}" class="img-fluid me-3" alt="Logo" style="height: 50px;">
+                    <a href="{{ route('categories.index') }}" class="text-decoration-none text-dark fw-bold">برگستان</a>
                 </div>
-                <div class="buttons">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">خروج</button>
-                    </form>
 
+                <!-- Search Box -->
+                <div class="search-box d-flex align-items-center">
+                    <input type="text" class="form-control" placeholder="جستجو">
+                    <button class="btn btn-outline-success ms-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
 
-                    @if (isset($userType) && $userType == 'admin')
-                        <form id="insert-form" action="{{ route('add-book') }}" method="GET" style="display: inline;">
-                            <button type="submit" class="btn btn-primary">افزودن کتاب</button>
-                        </form>
-                    @endif
+                <!-- User Actions -->
+                <div class="user-actions d-flex align-items-center">
+                    @guest
+                        <a href="{{ route('login') }}" class="btn btn-success ms-3">ورود / ثبت‌نام</a>
+                    @endguest
+
+                    @auth
+                        {{-- <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" id="userMenu" data-bs-toggle="dropdown">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                <li><a class="dropdown-item"
+                                    {{-- href="{{ route('profile') }}" --}}
+                                    {{-- >اطلاعات کاربری</a></li>
+                                <li><a class="dropdown-item" --}}
+                                    {{-- href="{{ route('cart') }}" --}}
+                                    {{-- >سبد خرید</a></li>
+                                <li><a class="dropdown-item" --}}
+                                     {{-- href="{{ route('orders') }}" --}}
+                                     {{-- >سفارشات</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">خروج از حساب</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div> --}}
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="userMenu">
+                                <li><a class="dropdown-item" href="#">اطلاعات کاربری</a></li>
+                                <li><a class="dropdown-item" href="#">سبد خرید</a></li>
+                                <li><a class="dropdown-item" href="#">سفارشات</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">خروج از حساب</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </header>
+
     @endif
 
     <script src="{{ asset('js/main.js') }}"></script>

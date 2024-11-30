@@ -109,6 +109,7 @@ body {
 #titrpp {
     color: black;
     font-size: large;
+    text-align: right;
 }
 
 #phone {
@@ -199,6 +200,7 @@ img {
 }
 
 .titr{
+
     text-align: center;
     /* font-family: ; */
     font-size: xx-large;

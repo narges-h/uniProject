@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class BookController extends Controller
@@ -70,7 +72,7 @@ class BookController extends Controller
             'lang' => $request->lang,
         ]);
 
-        return redirect()->to('/categories')->with([
+        return redirect()->to('/admin')->with([
             'message' => 'کتاب با موفقیت اضافه شد.'
         ]);
 
@@ -138,7 +140,7 @@ class BookController extends Controller
 
         $book->save(); // ذخیره به روزرسانی‌ها
 
-        return redirect()->route('books.details', $id)->with('message', 'کتاب با موفقیت به‌روزرسانی شد.');
+        return redirect()->to('/admin')->with('message', 'کتاب با موفقیت به‌روزرسانی شد.');
     }
 
 
@@ -148,9 +150,21 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->to('/categories')->with([
+        return redirect()->to('/admin')->with([
             'message' => 'کتاب با موفقیت حذف شد.'
         ]);
     }
+
+    public function index() {
+        $books = Book::all();
+
+        if(Auth::check()){
+            return view('admin/admin', compact('books'));
+        }
+        return view('login');
+
+
+    }
+
 }
 

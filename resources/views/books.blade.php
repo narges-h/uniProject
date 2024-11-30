@@ -31,13 +31,18 @@
                 </div>
 
                 @if ($book->stock > 0)
-                    <form action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn">افزودن به سبد خرید</button>
-                    </form>
+                    @if (auth()->check())
+                        <form action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn">افزودن به سبد خرید</button>
+                        </form>
+                    @else
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">افزودن به سبد خرید</button>
+                    @endif
+
                 @endif
 
-                @if (isset($userType) && $userType == 'admin')
+                {{-- @if (isset($userType) && $userType == 'admin')
                     <form id="update-form" action="{{ route('update-book', ['id' => $book->id]) }}" method="GET"
                         style="display: inline;">
                         @csrf
@@ -49,7 +54,7 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary">حذف کتاب</button>
                     </form>
-                @endif
+                @endif --}}
 
             </div>
         </div>
@@ -58,5 +63,25 @@
             <h2>توضیحات</h2>
             <p>{{ $book->description }}</p>
         </div>
+
     </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">ورود به سیستم</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+                </div>
+                <div class="modal-body">
+                    برای افزودن به سبد خرید لطفاً ابتدا وارد شوید.
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('login') }}" class="btn btn-primary">ورود</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

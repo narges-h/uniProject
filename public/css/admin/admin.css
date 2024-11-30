@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    font-family: "IranSans", sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background-color: #badd72;
+}
+.bg-success {
+    background-color: #badd72 !important;
+}
+
+
+
+.sidebar h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sidebar .nav-link {
+    font-size: 18px;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #a1c65d;
+    color: #fff;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-left: 250px;
+}
+
+table th,
+table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.img-thumbnail {
+    border-radius: 8px;
+}
