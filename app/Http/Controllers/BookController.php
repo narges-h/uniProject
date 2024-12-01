@@ -28,19 +28,8 @@ class BookController extends Controller
     public function insert(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'title' => 'required|string|max:255',
-            // 'author' => 'required|string|max:255',
-            // 'publisher' => 'required|string|max:255',
-            // 'category_id' => 'required|integer|exists:categories,id',
-            // 'price' => 'required|numeric',
-            // 'description' => 'required|string',
-            // 'rating' => 'nullable|numeric|min:0|max:5',
-            // 'stock' => 'required|integer|min:0',
             'publishDate' => 'required|date',
-            // 'number_of_page' => 'required|integer|min:1',
-            'coveruri' => 'required|file|mimes:jpeg,png,jpg|max:2048',
-            // 'translator_name' => 'nullable|string|max:255',
-            // 'lang' => 'required|string',
+            'coveruri' => 'required|file|mimes:jpeg,png,jpg|max:2048'
         ]);
 
 
@@ -72,9 +61,9 @@ class BookController extends Controller
             'lang' => $request->lang,
         ]);
 
-        return redirect()->to('/admin')->with([
-            'message' => 'کتاب با موفقیت اضافه شد.'
-        ]);
+        session()->flash('alertSuccess', "کتاب با موفقیت اضافه شد.");
+
+        return redirect()->to('/admin');
 
     }
 
@@ -90,19 +79,8 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'string|max:255',
-            'author' => 'string|max:255',
-            'publisher' => 'string|max:255',
-            'category_id' => 'integer|exists:categories,id',
-            'price' => 'numeric',
-            'description' => 'string',
-            'rating' => 'nullable|numeric|min:0|max:5',
-            'stock' => 'integer|min:0',
             'publishDate' => 'date',
-            'number_of_page' => 'integer|min:1',
-            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-            'translator_name' => 'nullable|string|max:255',
-            'lang' => 'string',
+            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -139,7 +117,8 @@ class BookController extends Controller
 
         $book->save(); // ذخیره به روزرسانی‌ها
 
-        return redirect()->to('/admin')->with('message', 'کتاب با موفقیت به‌روزرسانی شد.');
+        session()->flash('alert', true);
+        return redirect()->to('admin');
     }
 
 
@@ -149,9 +128,9 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->to('/admin')->with([
-            'message' => 'کتاب با موفقیت حذف شد.'
-        ]);
+
+        session()->flash('alertSuccess', "کتاب با موفقیت حذف شد.");
+        return redirect()->to('/admin');
     }
 
     public function index() {

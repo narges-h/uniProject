@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>داشبورد ادمین</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
 </head>
 <body>
+
+    <script src="{{ asset('js/admin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <div class="d-flex">
         <!-- Sidebar -->
@@ -49,10 +53,10 @@
                         <td>{{ $book->price }}</td>
                         <td>
                             <a href="{{ route('update-book', ['id' => $book->id]) }}" class="btn btn-primary btn-sm">ویرایش کتاب</a>
-                            <form action="{{ route('delete-book', ['id' => $book->id]) }}" method="POST" class="d-inline">
+                            <form id="delete-form" action="{{ route('delete-book', ['id' => $book->id]) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">حذف کتاب</button>
+                                <button id="delete" type="submit" class="btn btn-danger btn-sm">حذف کتاب</button>
                             </form>
                         </td>
                     </tr>
@@ -62,6 +66,15 @@
         </div>
     </div>
 
+    @if(session('alertSuccess'))
+    <script>
+        Swal.fire({
+            title: "موفق",
+            text: "{{ session('message') }}",
+            icon: "success"
+        });
+    </script>
+@endif
 </body>
 
 

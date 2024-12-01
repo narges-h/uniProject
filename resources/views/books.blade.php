@@ -68,5 +68,13 @@
             </div>
         </div>
     </div>
-
+    @if(session('alert'))
+    <script>
+        Swal.fire({
+            title: "موفق",
+            text: "ویرایش با موفقیت انجام شد",
+            icon: "success"
+        });
+    </script>
+    @endif
 @endsection
