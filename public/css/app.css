@@ -127,13 +127,33 @@ button:active {
 }
 
 /* Search Box */
+.search-box {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 .search-box input {
+    width: 70%;
     border-radius: 8px 0 0 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
 }
 
 .search-box button {
     border-radius: 0 8px 8px 0;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+.search-box button:hover {
+    background-color: #218838;
+}
+
 
 /* Dropdown Menu */
 .dropdown-menu {

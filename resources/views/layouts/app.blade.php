@@ -25,12 +25,21 @@
                 </div>
 
                 <!-- Search Box -->
-                <div class="search-box d-flex align-items-center">
+                {{-- <div class="search-box d-flex align-items-center">
                     <input type="text" class="form-control" placeholder="جستجو">
                     <button class="btn btn-outline-success ms-2">
                         <i class="fas fa-search"></i>
                     </button>
+                </div> --}}
+                <div class="search-box d-flex align-items-center mb-4">
+                    <form action="{{ route('searchBooksCategories') }}" method="GET" class="d-flex w-100">
+                        <input type="text" name="query" class="form-control" placeholder="جستجو..." required>
+                        <button type="submit" class="btn btn-outline-success ms-2">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
                 </div>
+
 
                 <!-- User Actions -->
                 <div class="user-actions d-flex align-items-center">

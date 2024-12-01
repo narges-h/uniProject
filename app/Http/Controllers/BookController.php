@@ -133,6 +133,21 @@ class BookController extends Controller
         return redirect()->to('/admin');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // جستجو در کتاب‌ها
+        $books = Book::where('title', 'LIKE', "%$query%")
+                    ->orWhere('author', 'LIKE', "%$query%")
+                    ->get();
+
+        // جستجو در دسته‌بندی‌ها
+        $categories = Category::where('category_name', 'LIKE', "%$query%")->get();
+
+        return view('search_results', compact('books', 'categories', 'query'));
+    }
+
     public function index() {
         $books = Book::all();
 
@@ -140,7 +155,6 @@ class BookController extends Controller
             return view('admin/admin', compact('books'));
         }
         return redirect()->to('/login');
-
 
     }
 

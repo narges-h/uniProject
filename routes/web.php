@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -69,9 +71,23 @@ Route::put('/update/{id}', [BookController::class, 'update'])->name('update');
 // حذف کتاب
 Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete-book');
 
+// جستوجوی کتاب
+Route::get('/search', [BookController::class, 'search'])->name('searchBooksCategories');
+
+
+
 // ادمین
 Route::middleware(['auth'])->group(function(){
-    Route::get('/admin', [BookController::class, 'index'])->name('admin.products');
+    Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
+    // مدیریت کاربران
+    Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('admin.users');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+
+    // مدیریت دسته‌بندی‌ها
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.addCategory');
+    Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
+
 });
 
 // پروفایل کاربری
@@ -79,6 +95,9 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+
+
 
 
 

@@ -19,9 +19,27 @@
         <div class="sidebar text-white" id="sidebar" style="background-color: #a1c65d;">
             <h2 class="text-center py-3">پنل ادمین</h2>
             <ul class="nav flex-column">
+                <!-- لینک به افزودن کتاب -->
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('add-book') }}">افزودن محصول</a>
                 </li>
+
+                <!-- لینک به مشاهده کتاب‌ها -->
+                <li class="nav-item mt-2">
+                    <a class="nav-link text-white" href="{{ route('admin.books') }}">کتاب‌ها</a>
+                </li>
+
+                <!-- لینک به مدیریت کاربران -->
+                <li class="nav-item mt-2">
+                    <a class="nav-link text-white" href="{{ route('admin.users') }}">مدیریت کاربران</a>
+                </li>
+
+                <!-- لینک به مدیریت دسته‌بندی‌ها -->
+                <li class="nav-item mt-2">
+                    <a class="nav-link text-white" href="{{ route('admin.categories') }}">مدیریت دسته‌بندی‌ها</a>
+                </li>
+
+                <!-- دکمه خروج -->
                 <li class="nav-item mt-3">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -30,6 +48,7 @@
                 </li>
             </ul>
         </div>
+
 
         <!-- Main Content -->
         <div class="content p-4" id="content">
