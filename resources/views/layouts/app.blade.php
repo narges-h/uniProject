@@ -78,6 +78,28 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <main class="container">
         @yield('content')
+
+
+        @if(session('alertSuccess'))
+            <script>
+                Swal.fire({
+                    title: "موفق",
+                    text: "{{ session('alertSuccess') }}",
+                    icon: "success"
+                });
+            </script>
+        @endif
+
+        @if(session('alertError'))
+            <script>
+                Swal.fire({
+                    title: "خطا",
+                    text: "{{ session('alertError') }}",
+                    icon: "error"
+                });
+            </script>
+        @endif
+
     </main>
 
     <footer>

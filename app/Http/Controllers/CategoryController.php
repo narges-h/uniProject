@@ -22,7 +22,8 @@ class CategoryController extends Controller
 
         Category::create(['name' => $request->name]);
 
-        return redirect()->route('admin.categories')->with('success', 'دسته‌بندی با موفقیت افزوده شد.');
+        session()->flash('alertSuccess', "دسته‌بندی با موفقیت افزوده شد.");
+        return redirect()->route('admin.categories');
     }
 
     public function delete($id)
@@ -31,9 +32,11 @@ class CategoryController extends Controller
 
         if ($category) {
             $category->delete();
-            return redirect()->route('admin.categories')->with('success', 'دسته‌بندی با موفقیت حذف شد.');
+            session()->flash('alertSuccess', "دسته‌بندی با موفقیت حذف شد.");
+            return redirect()->route('admin.categories');
         }
 
+        session()->flash('alertError', "دسته‌بندی یافت نشد.");
         return redirect()->route('admin.categories')->with('error', 'دسته‌بندی یافت نشد.');
     }
     }

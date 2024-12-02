@@ -117,7 +117,7 @@ class BookController extends Controller
 
         $book->save(); // ذخیره به روزرسانی‌ها
 
-        session()->flash('alert', true);
+        session()->flash('alertSuccess',  "کتاب با موفقیت به‌روزرسانی شد.");
         return redirect()->to('admin');
     }
 

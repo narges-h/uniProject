@@ -38,6 +38,28 @@
         <!-- Main Content -->
         <div class="content p-4" style="margin-left: 250px; width: 100%;">
             @yield('content')
+
+
+            @if(session('alertSuccess'))
+                <script>
+                    Swal.fire({
+                        title: "موفق",
+                        text: "{{ session('alertSuccess') }}",
+                        icon: "success"
+                    });
+                </script>
+            @endif
+
+            @if(session('alertError'))
+                <script>
+                    Swal.fire({
+                        title: "خطا",
+                        text: "{{ session('alertError') }}",
+                        icon: "error"
+                    });
+                </script>
+            @endif
+
         </div>
     </div>
 

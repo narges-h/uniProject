@@ -19,9 +19,12 @@ class AdminController extends Controller
 
         if ($user) {
             $user->delete();
-            return redirect()->route('admin.users')->with('success', 'کاربر با موفقیت حذف شد.');
+            session()->flash('alertSuccess', "کاربر با موفقیت حذف شد.");
+            return redirect()->route('admin.users');
         }
 
-        return redirect()->route('admin.users')->with('error', 'کاربر یافت نشد.');
+        session()->flash('alertError', "کاربر یافت نشد.");
+        return redirect()->route('admin.users');
     }
+
 }

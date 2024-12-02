@@ -12,7 +12,6 @@
 </head>
 <body>
 
-    <script src="{{ asset('js/admin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <div class="d-flex">
         <!-- Sidebar -->
@@ -43,7 +42,7 @@
                 <li class="nav-item mt-3">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">خروج</button>
+                        <button id="logout" type="submit" class="btn btn-danger">خروج</button>
                     </form>
                 </li>
             </ul>
@@ -83,18 +82,16 @@
                 </tbody>
             </table>
         </div>
+        @if(session('alertSuccess'))
+            <script>
+                Swal.fire({
+                    title: "موفق",
+                    text: "{{ session('alertSuccess') }}",
+                    icon: "success"
+                });
+            </script>
+        @endif
+        <script src="{{ asset('js/admin.js') }}"></script>
     </div>
-
-    @if(session('alertSuccess'))
-    <script>
-        Swal.fire({
-            title: "موفق",
-            text: "{{ session('message') }}",
-            icon: "success"
-        });
-    </script>
-@endif
 </body>
-
-
 </html>

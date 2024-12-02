@@ -6,9 +6,9 @@
 <div class="content p-4">
     <h1 class="mb-4">کاربران</h1>
 
-    @if(session('success'))
+    <!-- @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @endif -->
 
     <table class="table table-hover text-center" style="direction: rtl;">
         <thead>
@@ -36,10 +36,10 @@
                     @endif
                 </td>
                 <td>
-                    <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST">
+                    <form id="delete-user-form" action="{{ route('admin.deleteUser', $user->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                        <button id="delete-user" type="submit" class="btn btn-danger btn-sm">حذف</button>
                     </form>
                 </td>
             </tr>
@@ -47,4 +47,5 @@
         </tbody>
     </table>
 </div>
+<script src="{{ asset('js/users.js') }}"></script>
 @endsection

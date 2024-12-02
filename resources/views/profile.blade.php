@@ -4,11 +4,11 @@
 <div class="container mt-5">
     <h2 class="mb-4">ویرایش پروفایل</h2>
 
-    @if(session('success'))
+    <!-- @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif
+    @endif -->
 
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -66,7 +66,7 @@
 <div class="container mt-5">
     <h2 class="mb-4">تغییر رمز عبور</h2>
 
-    @if(session('password_success'))
+    <!-- @if(session('password_success'))
         <div class="alert alert-success">
             {{ session('password_success') }}
         </div>
@@ -76,7 +76,7 @@
         <div class="alert alert-danger">
             {{ session('password_error') }}
         </div>
-    @endif
+    @endif -->
 
     <form action="{{ route('profile.changePassword') }}" method="POST">
         @csrf

@@ -51,7 +51,8 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->to('/categories')->with('success', 'اطلاعات شما با موفقیت به‌روزرسانی شد.');
+        session()->flash('alertSuccess',  "اطلاعات شما با موفقیت به‌روزرسانی شد.");
+        return redirect()->to('/categories');
 
     }
 
@@ -68,14 +69,16 @@ class ProfileController extends Controller
 
         // بررسی رمز عبور فعلی
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('password_error', 'رمز عبور فعلی اشتباه است.');
+            session()->flash('alertError',  "رمز عبور فعلی اشتباه است.");
+            return redirect()->back();
         }
 
         // به‌روزرسانی رمز عبور
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->back()->with('password_success', 'رمز عبور با موفقیت تغییر کرد.');
+        session()->flash('alertSuccess',  "رمز عبور با موفقیت تغییر کرد.");
+        return redirect()->to('/categories');
     }
 
 }

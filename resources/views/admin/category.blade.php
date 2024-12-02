@@ -6,9 +6,9 @@
 <div class="content p-4">
     <h1 class="mb-4">دسته‌بندی‌ها</h1>
 
-    @if(session('success'))
+    <!-- @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @endif -->
 
     <table class="table table-hover text-center" style="direction: rtl;">
         <thead>
@@ -29,12 +29,12 @@
                     <a
                     {{-- href="{{ route('admin.editCategory', $category->id) }}" --}}
                         class="btn btn-primary btn-sm">ویرایش</a>
-                    <form
+                    <form id="delete-category-form"
                     {{-- action="{{ route('admin.deleteCategory', $category->id) }}" --}}
                         method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                        <button id="delete-category" type="submit" class="btn btn-danger btn-sm">حذف</button>
                     </form>
                 </td>
             </tr>
@@ -42,4 +42,6 @@
         </tbody>
     </table>
 </div>
+
+<script src="{{ asset('js/category.js') }}"></script>
 @endsection
