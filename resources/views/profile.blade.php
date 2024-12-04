@@ -4,15 +4,9 @@
 <div class="container mt-5">
     <h2 class="mb-4">ویرایش پروفایل</h2>
 
-    <!-- @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif -->
-
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        {{-- @method('PUT') --}}
 
         <div class="row">
             <!-- Personal Info -->
@@ -52,7 +46,7 @@
             <label for="avatar" class="form-label">تصویر پروفایل</label>
             <input type="file" id="avatar" name="avatar" class="form-control">
             @if($user->avatar)
-                <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="mt-3" width="100">
+                <img src="{{$user->avatar }}" alt="profile image" height="100">
             @endif
         </div>
 
@@ -65,22 +59,8 @@
 <!-- Change Password Form -->
 <div class="container mt-5">
     <h2 class="mb-4">تغییر رمز عبور</h2>
-
-    <!-- @if(session('password_success'))
-        <div class="alert alert-success">
-            {{ session('password_success') }}
-        </div>
-    @endif
-
-    @if(session('password_error'))
-        <div class="alert alert-danger">
-            {{ session('password_error') }}
-        </div>
-    @endif -->
-
     <form action="{{ route('profile.changePassword') }}" method="POST">
         @csrf
-        @method('PUT')
 
         <div class="mb-3">
             <label for="current_password" class="form-label">رمز عبور فعلی</label>

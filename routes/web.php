@@ -92,9 +92,9 @@ Route::middleware(['auth'])->group(function(){
 
 // پروفایل کاربری
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 
 
 

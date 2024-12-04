@@ -30,7 +30,7 @@
                     {{-- href="{{ route('admin.editCategory', $category->id) }}" --}}
                         class="btn btn-primary btn-sm">ویرایش</a>
                     <form id="delete-category-form"
-                    {{-- action="{{ route('admin.deleteCategory', $category->id) }}" --}}
+                        action="{{ route('admin.deleteCategory', $category->id) }}"
                         method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')

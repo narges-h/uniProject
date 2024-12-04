@@ -24,8 +24,8 @@ class ProfileController extends Controller
 
         // اعتبارسنجی داده‌های ورودی
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email' ,
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email' ,
             'mobile' => 'nullable|digits:11',
             'family' => 'nullable|string|max:255',
             'birthdate' => 'nullable|date',
@@ -48,11 +48,10 @@ class ProfileController extends Controller
         $user->mobile = $request->mobile;
         $user->family = $request->family;
         $user->birthdate = $request->birthdate;
-
         $user->save();
 
         session()->flash('alertSuccess',  "اطلاعات شما با موفقیت به‌روزرسانی شد.");
-        return redirect()->to('/categories');
+        return redirect()->to('/profile');
 
     }
 
@@ -78,7 +77,7 @@ class ProfileController extends Controller
         $user->save();
 
         session()->flash('alertSuccess',  "رمز عبور با موفقیت تغییر کرد.");
-        return redirect()->to('/categories');
+        return redirect()->to('/profile');
     }
 
 }
