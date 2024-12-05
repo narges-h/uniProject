@@ -28,12 +28,13 @@
             <!-- Logo and Categories Link -->
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/logoGreen.svg') }}" class="img-fluid me-3" alt="Logo" style="height: 50px;">
-                    <a href="{{ route('categories.index') }}" class="text-decoration-none text-dark fw-bold">برگستان</a>
+                    <a href="{{ route('categories.index') }}" class="text-decoration-none text-dark fw-bold siteName">برگستان</a>
                 </div>
                 <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
                 <div class="input-group">
                     <input
                         type="text"
+                        id="search-input"
                         name="query"
                         class="form-control border-0 shadow-sm"
                         placeholder="جستجو براساس عنوان یا نویسنده..."

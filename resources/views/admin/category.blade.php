@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <link href="{{ asset('css/admin/category.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/admin/admin-list.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/category.js') }}"></script>
 
     <div class="container-fluid">
         <div class="card border-0 shadow-sm rounded">
@@ -16,7 +16,7 @@
 
                 <form method="GET" action="#" class="flex-grow-1">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control border-0 shadow-sm"
+                    <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
                             placeholder="جستجو براساس دسته بندی   ..." value="{{ request()->query('query') }}">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
@@ -41,7 +41,7 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $category->category_name }}</td>
+                                <td><h6>{{ $category->category_name }}</h6></td>
                                 <td>{{ $category->books->count() }}</td>
                                 <!-- فرض کنید دسته‌بندی رابطه‌ای با کتاب‌ها دارد -->
 
@@ -52,10 +52,10 @@
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
                                         <form action="{{ route('admin.deleteCategory', $category->id) }}" method="POST"
-                                            class="d-inline" id="delete-form">
+                                            class="d-inline" id="delete-category-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button id="delete" type="submit" class="btn btn-delete btn-sm">
+                                            <button id="delete-category" type="submit" class="btn btn-delete btn-sm">
                                                 <i class="fas fa-trash-alt"></i> حذف
                                             </button>
                                         </form>
@@ -68,7 +68,4 @@
             </div>
         </div>
     </div>
-
-
-    <script src="{{ asset('js/category.js') }}"></script>
 @endsection

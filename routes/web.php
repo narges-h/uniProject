@@ -41,7 +41,6 @@ Route::post('/main', [AuthController::class, 'login']);
 //     })->name('landing');
 // });
 
-
 // خروج کاربر
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -49,9 +48,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/books/category/{id}', [MainController::class, 'showBooksByCategory'])->name('books.byCategory');
 
 // نمایش همه کتاب ها
-Route::middleware(['auth'])->group(function(){
-    Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
-});
+Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
 
 // نمایش جزئیات کتاب
 Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
@@ -75,6 +72,8 @@ Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('del
 // جستوجوی کتاب
 Route::get('/search', [BookController::class, 'search'])->name('searchBooksCategories');
 
+
+
 // ادمین
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
@@ -89,9 +88,9 @@ Route::middleware(['auth'])->group(function(){
 
 });
 
-
 // پروفایل کاربری
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');

@@ -25,3 +25,11 @@ document.addEventListener("DOMContentLoaded", function(){
             });
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                document.getElementById('search-input').value = '';
+            }
+        });
+    });

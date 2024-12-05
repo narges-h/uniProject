@@ -7,6 +7,7 @@
     <title>@yield('title', 'پنل مدیریت')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="{{ asset('css/admin/adminApp.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
@@ -54,13 +55,15 @@
                 <div class="logout-section">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger w-100">خروج</button>
+                        <button id="logout" type="submit" class="btn btn-danger w-100">خروج</button>
                     </form>
                 </div>
             </div>
 
         </div>
     </nav>
+    <script src="{{ asset('js/adminApp.js') }}"></script>
+
 
     <!-- Main Content -->
     <main class="content bg-light p-4 flex-grow-1">
@@ -70,6 +73,26 @@
                 <span class="breadcrumb-item text-dark">@yield('page-title', 'عنوان صفحه')</span>
             </nav>
             @yield('content')
+
+            @if(session('alertSuccess'))
+            <script>
+                Swal.fire({
+                    title: "موفق",
+                    text: "{{ session('alertSuccess') }}",
+                    icon: "success"
+                });
+            </script>
+        @endif
+
+        @if(session('alertError'))
+            <script>
+                Swal.fire({
+                    title: "خطا",
+                    text: "{{ session('alertError') }}",
+                    icon: "error"
+                });
+            </script>
+        @endif
         </div>
     </main>
 </body>

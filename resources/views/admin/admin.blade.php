@@ -6,7 +6,8 @@
 
 @section('content')
 
-    <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/admin-list.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/admin.js') }}"></script>
 
     <!-- Cards Section -->
     <div class="row mb-4">
@@ -22,7 +23,7 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">تعداد موجودی کتاب‌ها</h6>
-                    <h3 class="card-text">{{ $totalStock }}</h3>
+                    -- <h3 class="card-text">{{ $totalStock }}</h3>
                 </div>
             </div>
         </div>
@@ -30,7 +31,8 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">کتاب‌های ناموجود</h6>
-                    <h3 class="card-text">{{ $outOfStockBooks }}</h3>
+                     <h3 class="card-text">{{ $outOfStockBooks }}</h3>
+
                 </div>
             </div>
         </div>
@@ -47,7 +49,7 @@
                 <h5 class="mb-0">لیست کتاب‌ها</h5>
                 <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control border-0 shadow-sm"
+                        <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
                             placeholder="جستجو براساس عنوان یا نویسنده..." value="{{ request()->query('query') }}">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
@@ -79,7 +81,7 @@
                                     <img src="{{ $book->coveruri }}" alt="تصویر کتاب" class="img-thumbnail"
                                         style="width: 55px; height: 80px; object-fit: cover;">
                                 </td>
-                                <td>{{ $book->title }}</td>
+                                <td><h6>{{ $book->title }}</h6></td>
                                 <td>{{ $book->author }}</td>
                                 <td>{{ number_format($book->price) }} تومان</td>
                                 <td>
@@ -89,7 +91,7 @@
                                     <form id="delete-form" action="{{ route('delete-book', $book->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-delete btn-sm">
+                                        <button id="delete" type="submit" class="btn btn-delete btn-sm">
                                             <i class="fas fa-trash-alt"></i> حذف
                                         </button>
                                     </form>
@@ -101,4 +103,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

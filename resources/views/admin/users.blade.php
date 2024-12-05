@@ -5,7 +5,8 @@
 
 @section('content')
 
-    <link href="{{ asset('css/admin/users.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/admin-list.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/users.js') }}"></script>
 
 
     <!-- Users Table -->
@@ -16,7 +17,7 @@
                 <h5 class="mb-0">لیست کاربران</h5>
                 <form method="GET" action="#" class="flex-grow-1">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control border-0 shadow-sm"
+                    <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
                             placeholder="جستجو براساس نام یا شماره تلفن..." value="{{ request()->query('query') }}">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
@@ -42,10 +43,10 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $user->user_type }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->family }}</td>
-                                <td>{{ $user->mobile }}</td>
+                                <td><h6>{{ $user->user_type }}</h6></td>
+                                <td><h6>{{ $user->name }}</h6></td>
+                                <td><h6>{{ $user->family }}</h6></td>
+                                <td><h6>{{ $user->mobile }}</h6></td>
                                 <td>
                                     @if ($user->avatar)
                                         <img src="{{ $user->avatar }}" alt="Avatar" class="rounded-circle"
@@ -57,14 +58,14 @@
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center gap-2">
 
-                                        <a href="#" class="btn btn-edit btn-sm">
+                                        <a href="{{route('profile.edit', ['id' => $user->id])}}" class="btn btn-edit btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
-                                        <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST"
+                                        <form id="delete-user-form" action="{{ route('admin.deleteUser', $user->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-delete btn-sm">
+                                            <button id ="delete-user" type="submit" class="btn btn-delete btn-sm">
                                                 <i class="fas fa-trash-alt"></i> حذف
                                             </button>
                                         </form>
@@ -80,5 +81,4 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/users.js') }}"></script>
 @endsection

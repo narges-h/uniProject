@@ -13,14 +13,18 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        return view('profile', compact('user'))->with('showHeader' , false);
     }
 
+    public function edit($id){
+        $user = User::findOrFail($id);
+        return view('profile', compact('user'))->with('showHeader' , false);
+    }
 
     public function update(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
+
+        $user = User::find($request->id);
 
         // اعتبارسنجی داده‌های ورودی
         $request->validate([
@@ -51,7 +55,10 @@ class ProfileController extends Controller
         $user->save();
 
         session()->flash('alertSuccess',  "اطلاعات شما با موفقیت به‌روزرسانی شد.");
-        return redirect()->to('/profile');
+        if(Auth::user()->user_type == 'admin')
+            return redirect()->to('/admin/users');
+        return redirect()->to('categories');
+
 
     }
 

@@ -154,7 +154,12 @@ body {
     grid-template-columns: repeat(6, 1fr); /* شش ستون مساوی */
     gap: 15px; /* فاصله بین کارت‌ها */
 }
-
+.siteName{
+    margin-right: 16px;
+}
+/* header{
+    position: sticky;
+} */
 @media (max-width: 1200px) {
     .book-grid {
         grid-template-columns: repeat(4, 1fr);

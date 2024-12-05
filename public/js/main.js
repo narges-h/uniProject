@@ -43,3 +43,11 @@ document.getElementById('logout').addEventListener('click', function(event) {
         }
       });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            document.getElementById('search-input').value = '';
+        }
+    });
+});
