@@ -41,6 +41,7 @@ Route::post('/main', [AuthController::class, 'login']);
 //     })->name('landing');
 // });
 
+
 // خروج کاربر
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -74,8 +75,6 @@ Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('del
 // جستوجوی کتاب
 Route::get('/search', [BookController::class, 'search'])->name('searchBooksCategories');
 
-
-
 // ادمین
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
@@ -89,6 +88,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
 
 });
+
 
 // پروفایل کاربری
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

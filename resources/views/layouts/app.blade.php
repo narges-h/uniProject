@@ -9,6 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 
 </head>
 <body>
@@ -18,28 +23,28 @@
     @if (isset($showHeader) && $showHeader)
         <header>
             <div class="header-container bg-light p-3 d-flex justify-content-between align-items-center">
-                <!-- Logo and Categories Link -->
+
+
+            <!-- Logo and Categories Link -->
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/logoGreen.svg') }}" class="img-fluid me-3" alt="Logo" style="height: 50px;">
                     <a href="{{ route('categories.index') }}" class="text-decoration-none text-dark fw-bold">برگستان</a>
                 </div>
-
-                <!-- Search Box -->
-                {{-- <div class="search-box d-flex align-items-center">
-                    <input type="text" class="form-control" placeholder="جستجو">
-                    <button class="btn btn-outline-success ms-2">
-                        <i class="fas fa-search"></i>
+                <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        name="query"
+                        class="form-control border-0 shadow-sm"
+                        placeholder="جستجو براساس عنوان یا نویسنده..."
+                        value="{{ request()->query('query') }}"
+                        required>
+                    <button class="btn btn-primary">
+                        <span>جستجو</span>
                     </button>
-                </div> --}}
-                <div class="search-box d-flex align-items-center mb-4">
-                    <form action="{{ route('searchBooksCategories') }}" method="GET" class="d-flex w-100">
-                        <input type="text" name="query" class="form-control" placeholder="جستجو..." required>
-                        <button type="submit" class="btn btn-outline-success ms-2">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
 
+                </div>
+            </form>
 
                 <!-- User Actions -->
                 <div class="user-actions d-flex align-items-center">
@@ -50,7 +55,7 @@
                     @auth
                         <div class="dropdown">
                             <button class="btn btn-success dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->name . ' ' . Auth::user()->family}}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
                                 <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>

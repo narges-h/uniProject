@@ -37,9 +37,8 @@
                             <button type="submit" class="btn">افزودن به سبد خرید</button>
                         </form>
                     @else
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">افزودن به سبد خرید</button>
+                        <button type="button" class="btn" onclick="showAlert()">افزودن به سبد خرید</button>
                     @endif
-
                 @endif
             </div>
         </div>
@@ -51,30 +50,20 @@
 
     </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">ورود به سیستم</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
-                </div>
-                <div class="modal-body">
-                    برای افزودن به سبد خرید لطفاً ابتدا وارد شوید.
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ route('login') }}" class="btn btn-primary">ورود</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if(session('alert'))
     <script>
-        Swal.fire({
-            title: "موفق",
-            text: "ویرایش با موفقیت انجام شد",
-            icon: "success"
-        });
+        function showAlert() {
+            Swal.fire({
+                title: "برای افزودن به سبد خرید لطفاً ابتدا وارد شوید",
+                showCancelButton: true,
+                confirmButtonText: "ورود",
+                cancelButtonText: "لغو",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('login') }}";
+                }
+            });
+        }
     </script>
-    @endif
+
+
 @endsection

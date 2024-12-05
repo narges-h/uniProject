@@ -1,97 +1,110 @@
-<!DOCTYPE html>
-<html lang="en"  dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>داشبورد ادمین</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@extends('layouts.adminApp')
 
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+@section('title', 'لیست کتاب‌ها')
 
-</head>
-<body>
+@section('page-title', 'لیست کتاب‌ها')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <div class="sidebar text-white" id="sidebar" style="background-color: #a1c65d;">
-            <h2 class="text-center py-3">پنل ادمین</h2>
-            <ul class="nav flex-column">
-                <!-- لینک به افزودن کتاب -->
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('add-book') }}">افزودن محصول</a>
-                </li>
+@section('content')
 
-                <!-- لینک به مشاهده کتاب‌ها -->
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.books') }}">کتاب‌ها</a>
-                </li>
+    <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
 
-                <!-- لینک به مدیریت کاربران -->
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.users') }}">مدیریت کاربران</a>
-                </li>
+    <!-- Cards Section -->
+    <div class="row mb-4">
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">تعداد کل کتاب‌ها</h6>
+                    {{-- <h3 class="card-text">{{ $totalBooks }}</h3> --}}
+                    <h3 class="card-text">14343</h3>
 
-                <!-- لینک به مدیریت دسته‌بندی‌ها -->
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.categories') }}">مدیریت دسته‌بندی‌ها</a>
-                </li>
-
-                <!-- دکمه خروج -->
-                <li class="nav-item mt-3">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button id="logout" type="submit" class="btn btn-danger">خروج</button>
-                    </form>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">تعداد موجودی کتاب‌ها</h6>
+                    {{-- <h3 class="card-text">{{ $totalStock }}</h3> --}}
+                    <h3 class="card-text">34543</h3>
 
-
-        <!-- Main Content -->
-        <div class="content p-4" id="content">
-            <h1 class="mb-4">کتاب ها</h1>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>تصویر</th>
-                        <th>عنوان</th>
-                        <th>قیمت</th>
-                        <th>عملیات</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($books as $book)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><img src="{{$book->coveruri}}" alt="book Image" class="img-thumbnail" style="width: 80px;"></td>
-                        <td>{{ $book->title }}</td>
-                        <td>{{ $book->price }}</td>
-                        <td>
-                            <a href="{{ route('update-book', ['id' => $book->id]) }}" class="btn btn-primary btn-sm">ویرایش کتاب</a>
-                            <form id="delete-form" action="{{ route('delete-book', ['id' => $book->id]) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button id="delete" type="submit" class="btn btn-danger btn-sm">حذف کتاب</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
-        @if(session('alertSuccess'))
-            <script>
-                Swal.fire({
-                    title: "موفق",
-                    text: "{{ session('alertSuccess') }}",
-                    icon: "success"
-                });
-            </script>
-        @endif
-        <script src="{{ asset('js/admin.js') }}"></script>
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">کتاب‌های ناموجود</h6>
+                    {{-- <h3 class="card-text">{{ $outOfStockBooks }}</h3> --}}
+                    <h3 class="card-text">43</h3>
+
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+
+
+
+    <!-- Books Table -->
+    <div class="container-fluid">
+        <div class="card border-0 shadow-sm rounded">
+
+            <div class="card-header bg-white d-flex align-items-center gap-3">
+                <h5 class="mb-0">لیست کتاب‌ها</h5>
+                <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control border-0 shadow-sm"
+                            placeholder="جستجو براساس عنوان یا نویسنده..." value="{{ request()->query('query') }}">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+            <div class="card-body p-0">
+                <table class="table table-hover table-borderless align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>تصویر</th>
+                            <th>عنوان</th>
+                            <th>نویسنده</th>
+                            <th>قیمت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($books as $book)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ $book->coveruri }}" alt="تصویر کتاب" class="img-thumbnail"
+                                        style="width: 55px; height: 80px; object-fit: cover;">
+                                </td>
+                                <td>{{ $book->title }}</td>
+                                <td>{{ $book->author }}</td>
+                                <td>{{ number_format($book->price) }} تومان</td>
+                                <td>
+                                    <a href="{{ route('update-book', ['id' => $book->id]) }}" class="btn btn-edit btn-sm">
+                                        <i class="fas fa-edit"></i> ویرایش
+                                    </a>
+                                    <form id="delete-form" action="{{ route('delete-book', $book->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete btn-sm">
+                                            <i class="fas fa-trash-alt"></i> حذف
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -6,11 +6,11 @@ body {
 .sidebar {
     width: 250px;
     min-height: 100vh;
-    background-color: #badd72;
-    
+    background-color: #2a623e;
+
 }
 .bg-success {
-    background-color: #badd72 !important;
+    background-color: #2a623e !important;
 }
 
 

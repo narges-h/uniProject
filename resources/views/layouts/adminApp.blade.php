@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'پنل مدیریت')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="{{ asset('css/admin/adminApp.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="d-flex">
+    <nav>
         <!-- Sidebar -->
-        <div class="sidebar text-white" style="width: 250px; background-color: #a1c65d; min-height: 100vh; position: fixed;">
-            <h2 class="text-center py-3">پنل ادمین</h2>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('add-book') }}">افزودن محصول</a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.books') }}">کتاب‌ها</a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.users') }}">مدیریت کاربران</a>
-                </li>
-                <li class="nav-item mt-2">
-                    <a class="nav-link text-white" href="{{ route('admin.categories') }}">مدیریت دسته‌بندی‌ها</a>
-                </li>
-                <li class="nav-item mt-3">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{{ asset('img/logoGreen.svg') }}" alt="لوگوی سایت">
+                <div class="logo-name">برگستان</div>
+            </div>
+            <div class="sidebar-content">
+                <ul class="lists">
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('add-book') ? 'active' : '' }}"
+                            href="{{ route('add-book') }}">
+                            <i class="fa fa-plus icon"></i>
+                            افزودن محصول
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('admin.books') ? 'active' : '' }}"
+                            href="{{ route('admin.books') }}">
+                            <i class="fa fa-book icon"></i>
+                            کتاب‌ها
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('admin.users') ? 'active' : '' }}"
+                            href="{{ route('admin.users') }}">
+                            <i class="fa fa-users icon"></i>
+                            مدیریت کاربران
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('admin.categories') ? 'active' : '' }}"
+                            href="{{ route('admin.categories') }}">
+                            <i class="fa fa-list icon"></i>
+                            مدیریت دسته‌بندی‌ها
+                        </a>
+                    </li>
+                </ul>
+                <!-- بخش خروج -->
+                <div class="logout-section">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">خروج</button>
+                        <button type="submit" class="btn btn-danger w-100">خروج</button>
                     </form>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </div>
 
-        <!-- Main Content -->
-        <div class="content p-4" style="margin-left: 250px; width: 100%;">
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content bg-light p-4 flex-grow-1">
+        <div class="container">
+            <nav class="breadcrumb bg-transparent px-0 mb-4">
+                <a class="breadcrumb-item text-dark" href="{{ route('admin.books') }}">خانه</a>
+                <span class="breadcrumb-item text-dark">@yield('page-title', 'عنوان صفحه')</span>
+            </nav>
             @yield('content')
-
-
-            @if(session('alertSuccess'))
-                <script>
-                    Swal.fire({
-                        title: "موفق",
-                        text: "{{ session('alertSuccess') }}",
-                        icon: "success"
-                    });
-                </script>
-            @endif
-
-            @if(session('alertError'))
-                <script>
-                    Swal.fire({
-                        title: "خطا",
-                        text: "{{ session('alertError') }}",
-                        icon: "error"
-                    });
-                </script>
-            @endif
-
         </div>
-    </div>
-
-    <script src="{{ asset('js/admin.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
 </body>
+
 </html>

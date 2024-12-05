@@ -12,8 +12,8 @@
             format("woff"),
         url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf")
             format("ttf");
-}
-@font-face {
+  }
+  @font-face {
     font-family: IranSans;
     font-style: normal;
     font-weight: 300;
@@ -26,8 +26,8 @@
             format("woff"),
         url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf")
             format("ttf");
-}
-@font-face {
+  }
+  @font-face {
     font-family: IranSans;
     font-style: normal;
     font-weight: 400;
@@ -40,8 +40,8 @@
             format("woff"),
         url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum).ttf")
             format("ttf");
-}
-@font-face {
+  }
+  @font-face {
     font-family: IranSans;
     font-style: normal;
     font-weight: 500;
@@ -54,8 +54,8 @@
             format("woff"),
         url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf")
             format("ttf");
-}
-@font-face {
+  }
+  @font-face {
     font-family: IranSans;
     font-style: normal;
     font-weight: 700;
@@ -68,142 +68,97 @@
             format("woff"),
         url("../Assets/Font/IRANSans/WebFonts/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf")
             format("ttf");
-}
+  }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "IranSans" !important;
-}
+  .content {
+    margin-right: 20%;
+    width: 80%;
+    min-height: 100vh;
+  }
 
-body {
-    display: flex;
-    justify-content: center;
-    font-family: "IranSans";
-    background-color: #2a623e;
-}
 
-.main {
-    background-color: white;
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    padding: 3% 3% 0% 3% ;
-    border: 1px solid #2a623e;
-    border-radius: 30px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.img-fluid {
-    padding: 5%;
-}
-
-#form-sign {
+  .sidebar {
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-}
+    align-items: center; /* تنظیم عناصر به‌صورت افقی در وسط */
+  }
 
-#titrpp {
-    color: black;
-    font-size: large;
-}
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* تنظیم عناصر به‌صورت افقی در وسط */
+    justify-content: center; /* تنظیم عناصر به‌صورت عمودی در وسط */
+    height: 150px; /* ارتفاع هدر سایدبار */
+    width: 100%; /* عرض هدر */
+    background-color: #f8f9fa; /* رنگ پس‌زمینه دلخواه */
+    border-bottom: 1px solid #ddd; /* خط جداکننده */
 
-#phone {
-    margin-top: 10%;
-}
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
 
-#pass,
-#phoneNumbers {
-    border: 1px solid #2a623e;
-    border-radius: 10px;
-    background-color: rgb(245 245 245 / 83%);
+  .logo img {
+    width: 80px; /* تنظیم عرض لوگو */
+    height: 80px; /* تنظیم ارتفاع لوگو */
+    object-fit: cover; /* تنظیم محتوا داخل تصویر */
+  }
+
+  .logo-name {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    font-family: "IranSans";
+    font-weight: bold;
+    color: #000000; /* رنگ متن */
+  }
+
+  .sidebar-content {
+    flex-grow: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 0px;
     width: 100%;
-    padding: 4%;
-    margin-top: 5%;
-    text-align: right;
-}
+  }
 
-/* #pass {
-    border: 1px solid #2a623e;
-    border-radius: 20px;
-    background-color: #2a623e;
-    padding: 15px;
-    width: 470px;
-} */
+  .list {
+    list-style: none;
+  }
 
-#pass:hover,
-#phoneNumbers:hover {
-    border: 1px solid rgb(245 245 245 / 83%);
-    background-color: rgb(245 245 245 / 83%);
-}
-
-#google {
-    border: 2px solid rgb(238, 238, 238);
-    background-color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 50px;
-    color: black;
-    font-size: larger;
-    border-radius: 10px;
-}
-
-#google:hover {
-    cursor: pointer;
-    opacity: 0.7;
-}
-
-#sabt {
-    text-align: center;
-    padding: 10%;
-    margin: auto;
-}
-
-#sabtnam {
-    color: #2a623e;
+  .nav-link {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
     text-decoration: none;
-    padding: 8px;
-}
+    color: #707070;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-#open {
+  .nav-link:hover {
     background-color: #2a623e;
-    border: 1px solid #2a623e;
-    border-radius: 10px;
-    color: white;
-    height: 15%;
-    padding: 3%;
-    text-align: center;
-    margin-top: 10%;
-    font-size: larger;
-}
+    color: #fff;
+  }
 
-#open:hover {
-    cursor: pointer;
-}
+  .nav-link i {
+    margin-left: 16px; /* فاصله آیکون از متن */
+    font-size: 18px;
+  }
 
-img {
-    margin: 0% auto;
-}
+  .active {
+    background-color: #2a623e;
+    color: #fff;
+  }
 
-.invalid {
-    border: 2px solid red !important;
-}
-
-.error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* استایل برای پیام‌های خطا */
-/* .alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-} */
+  .logout-section {
+    margin: 20px; /* فاصله بین دکمه خروج و آیتم‌های دیگر */
+    padding-top: 20px; /* فضای داخلی بخش خروج */
+    border-top: 1px solid #e0e0e0; /* خط جداکننده */
+  }

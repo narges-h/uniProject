@@ -65,8 +65,6 @@ class ProfileController extends Controller
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
 
-
-        // بررسی رمز عبور فعلی
         if (!Hash::check($request->current_password, $user->password)) {
             session()->flash('alertError',  "رمز عبور فعلی اشتباه است.");
             return redirect()->back();
