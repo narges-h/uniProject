@@ -14,9 +14,7 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">تعداد کل کتاب‌ها</h6>
-                    {{-- <h3 class="card-text">{{ $totalBooks }}</h3> --}}
-                    <h3 class="card-text">14343</h3>
-
+                    <h3 class="card-text">{{ $totalBooks }}</h3>
                 </div>
             </div>
         </div>
@@ -24,9 +22,7 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">تعداد موجودی کتاب‌ها</h6>
-                    {{-- <h3 class="card-text">{{ $totalStock }}</h3> --}}
-                    <h3 class="card-text">34543</h3>
-
+                    <h3 class="card-text">{{ $totalStock }}</h3>
                 </div>
             </div>
         </div>
@@ -34,9 +30,7 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">کتاب‌های ناموجود</h6>
-                    {{-- <h3 class="card-text">{{ $outOfStockBooks }}</h3> --}}
-                    <h3 class="card-text">43</h3>
-
+                    <h3 class="card-text">{{ $outOfStockBooks }}</h3>
                 </div>
             </div>
         </div>

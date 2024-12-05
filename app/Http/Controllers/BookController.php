@@ -151,8 +151,16 @@ class BookController extends Controller
     public function index() {
         $books = Book::all();
 
+        $totalBooks = $books->count();
+        $totalStock = 0;
+        foreach($books as $book){
+            if($book->stock > 0){
+                $totalStock += $book->stock;
+            }
+        }
+        $outOfStockBooks = $books->where('stock' , 0)->count();
         if(Auth::check()){
-            return view('admin/admin', compact('books'));
+            return view('admin/admin', compact('books','outOfStockBooks','totalBooks','totalStock'));
         }
         return redirect()->to('/login');
 
