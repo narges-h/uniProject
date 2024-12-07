@@ -43,8 +43,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td><h6>{{ $category->category_name }}</h6></td>
                                 <td>{{ $category->books->count() }}</td>
-                                <!-- فرض کنید دسته‌بندی رابطه‌ای با کتاب‌ها دارد -->
-
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center gap-2">
 

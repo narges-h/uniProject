@@ -96,7 +96,8 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile.upd
 Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 
 
-
+//سورت کتاب ها
+Route::get('/admin/books/sort/{order}', [BookController::class, 'index'])->name('admin.books.sort');
 
 
 

@@ -23,7 +23,7 @@
             <div class="card text-center border-0 shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title text-muted">تعداد موجودی کتاب‌ها</h6>
-                    -- <h3 class="card-text">{{ $totalStock }}</h3>
+                    <h3 class="card-text">{{ $totalStock }}</h3>
                 </div>
             </div>
         </div>
@@ -38,6 +38,17 @@
         </div>
     </div>
 
+    {{-- <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="mb-0">لیست کتاب‌ها</h5>
+        <div>
+            <a href="{{ route('admin.books.sort', ['order' => 'desc']) }}" class="btn btn-outline-primary me-2">
+                جدیدترین
+            </a>
+            <a href="{{ route('admin.books.sort', ['order' => 'asc']) }}" class="btn btn-outline-secondary">
+                قدیمی‌ترین
+            </a>
+        </div>
+    </div> --}}
 
 
 
@@ -47,6 +58,14 @@
 
             <div class="card-header bg-white d-flex align-items-center gap-3">
                 <h5 class="mb-0">لیست کتاب‌ها</h5>
+                <div>
+                    <a href="{{ route('admin.books.sort', ['order' => 'desc']) }}" class="btn btn-outline-primary me-2">
+                        جدیدترین
+                    </a>
+                    <a href="{{ route('admin.books.sort', ['order' => 'asc']) }}" class="btn btn-outline-secondary">
+                        قدیمی‌ترین
+                    </a>
+                </div>
                 <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
                     <div class="input-group">
                         <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"

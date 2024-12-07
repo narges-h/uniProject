@@ -78,11 +78,9 @@ header {
     padding: 10px 20px;
     border-bottom: 2px solid #ccc;
     background-color: #f9f9f9;
-/*
-    position: fixed;
+    position: sticky;
     top: 0;
-    width: 100%;
-    z-index: 100; */
+    z-index: 100;
 }
 
 .header-container {
@@ -190,3 +188,31 @@ button.btn-primary {
     justify-self: center;
     overflow: hidden;
 }
+
+
+/* sort */
+
+
+.btn-outline-primary {
+    border-color: #2a623e ;
+    color: #2a623e;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2a623e;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+
+
