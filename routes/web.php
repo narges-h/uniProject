@@ -84,6 +84,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.addCategory');
     Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
+    Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders');
 
 });
 
@@ -112,6 +113,6 @@ Route::get('/orders/success', function () {
     return view('success');
 })->name('orders.success');
 
-Route::middleware('auth')->get('/orders', [OrderController::class, 'index'])->name('orders');
+Route::middleware('auth')->get('/orders', [OrderController::class, 'userOrders'])->name('userOrders');
 
 

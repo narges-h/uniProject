@@ -50,6 +50,13 @@
                             مدیریت دسته‌بندی‌ها
                         </a>
                     </li>
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('admin.orders') ? 'active' : '' }}"
+                            href="{{ route('admin.orders') }}">
+                            <i class="fa fa-shopping-cart icon"></i>
+                            سفارشات
+                        </a>
+                    </li>
                 </ul>
                 <!-- بخش خروج -->
                 <div class="logout-section">

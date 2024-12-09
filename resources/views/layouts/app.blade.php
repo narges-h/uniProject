@@ -61,7 +61,7 @@
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
                                 <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>
                                 <li><a class="dropdown-item" href="{{ route('cart.show') }}">سبد خرید</a></li>
-                                <li><a class="dropdown-item" href="{{ route('orders') }}">سفارشات</a></li>
+                                <li><a class="dropdown-item" href="{{ route('userOrders') }}">سفارشات</a></li>
                                 <form id="logout-form"action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button id="logout" type="submit" class="dropdown-item text-danger">خروج از
@@ -103,9 +103,43 @@
 
     </main>
 
-    <footer>
-        <!-- فوتر سایت -->
+    <footer class="footer bg-dark text-light py-3 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- لوگوی سایت -->
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <img src="{{ asset('img/logoGreen.svg') }}" alt="لوگوی سایت" class="footer-logo">
+                    <h5 class="mt-2">برگستان</h5>
+                </div>
+
+                <!-- لینک‌های مفید -->
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li><a href=# class="text-light text-decoration-none">صفحه اصلی</a></li>
+                        <li><a href=# class="text-light text-decoration-none">درباره ما</a></li>
+                        <li><a href=# class="text-light text-decoration-none">تماس با ما</a>
+                        </li>
+                        <li><a href=# class="text-light text-decoration-none">قوانین و مقررات</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- اطلاعات تماس -->
+                <div class="col-md-4 text-center text-md-end">
+                    <p class="mb-1">تماس: <a href="tel:+989123456789"
+                            class="text-light text-decoration-none">09123456789</a></p>
+                    <p class="mb-1">ایمیل: <a href="mailto:info@example.com"
+                            class="text-light text-decoration-none">info@example.com</a></p>
+                    <p class="mb-0">آدرس: تهران، خیابان انقلاب</p>
+                </div>
+            </div>
+            <hr class="border-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 برگستان | تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
     </footer>
+
 </body>
 
 </html>

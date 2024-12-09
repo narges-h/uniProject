@@ -49,11 +49,16 @@ class OrderController extends Controller
         return redirect()->route('orders.success')->with('success', 'سفارش شما با موفقیت ثبت شد.');
     }
 
-    public function index()
+    public function userOrders()
     {
-        // دریافت سفارشات مربوط به کاربر فعلی
         $orders = Order::where('user_id', auth()->id())->get();
 
         return view('order', compact('orders'));
+    }
+
+    public function index()
+    {
+        $orders = Order::with(['cart.cartItems.product'])->get();
+        return view('admin.orders', compact('orders'));
     }
 }
