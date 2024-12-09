@@ -32,9 +32,9 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5>خلاصه سفارش</h5>
+                            <h5>فاکتور خرید </h5>
                             <p>مجموع: {{ number_format($totalPrice) }} تومان</p>
-                            <a href="#" class="btn btn-success w-100">ادامه فرایند خرید</a>
+                            <a href="{{ route('checkout.address') }}" class="btn btn-success w-100">ادامه فرایند خرید</a>
                         </div>
                     </div>
                 </div>

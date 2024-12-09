@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -104,8 +105,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
 
+// سفارش
+Route::get('/checkout/address', [OrderController::class, 'showAddressForm'])->name('checkout.address');
+Route::post('/orders/store', [OrderController::class, 'storeOrder'])->name('orders.store');
+Route::get('/orders/success', function () {
+    return view('success');
+})->name('orders.success');
 
-
-
+Route::middleware('auth')->get('/orders', [OrderController::class, 'index'])->name('orders');
 
 

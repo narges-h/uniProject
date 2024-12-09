@@ -11,7 +11,10 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'user_id', 'cart_id', 'order_date', 'total_amount'
+        'user_id', 'cart_id', 'order_date', 'total_amount', 'address',
+        'province',
+        'city',
+        'postCode'
     ];
 
     public function cart()

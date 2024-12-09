@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 
 </head>
+
 <body>
     @php
         $showHeader = $showHeader ?? true;
@@ -25,27 +27,24 @@
             <div class="header-container bg-light p-3 d-flex justify-content-between align-items-center">
 
 
-            <!-- Logo and Categories Link -->
+                <!-- Logo and Categories Link -->
                 <div class="d-flex align-items-center">
-                    <img src="{{ asset('img/logoGreen.svg') }}" class="img-fluid me-3" alt="Logo" style="height: 50px;">
-                    <a href="{{ route('categories.index') }}" class="text-decoration-none text-dark fw-bold siteName">برگستان</a>
+                    <img src="{{ asset('img/logoGreen.svg') }}" class="img-fluid me-3" alt="Logo"
+                        style="height: 50px;">
+                    <a href="{{ route('categories.index') }}"
+                        class="text-decoration-none text-dark fw-bold siteName">برگستان</a>
                 </div>
                 <form method="GET" action="{{ route('searchBooksCategories') }}" class="flex-grow-1">
-                <div class="input-group">
-                    <input
-                        type="text"
-                        id="search-input"
-                        name="query"
-                        class="form-control border-0 shadow-sm"
-                        placeholder="جستجو براساس عنوان یا نویسنده..."
-                        value="{{ request()->query('query') }}"
-                        required>
-                    <button class="btn btn-primary">
-                        <span>جستجو</span>
-                    </button>
+                    <div class="input-group">
+                        <input type="text" id="search-input" name="query" class="form-control border-0 shadow-sm"
+                            placeholder="جستجو براساس عنوان یا نویسنده..." value="{{ request()->query('query') }}"
+                            required>
+                        <button class="btn btn-primary">
+                            <span>جستجو</span>
+                        </button>
 
-                </div>
-            </form>
+                    </div>
+                </form>
 
                 <!-- User Actions -->
                 <div class="user-actions d-flex align-items-center">
@@ -55,20 +54,19 @@
 
                     @auth
                         <div class="dropdown">
-                            <button class="btn btn-success dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name . ' ' . Auth::user()->family}}
+                            <button class="btn btn-success dropdown-toggle" type="button" id="userMenu"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name . ' ' . Auth::user()->family }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
                                 <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>
-                                <li><a class="dropdown-item" href="{{ route('cart.show') }}"  >سبد خرید</a></li>
-                                <li><a class="dropdown-item"
-                                      {{-- href="{{ route('orders') }}" --}}
-                                      >سفارشات</a></li>
-                                <li>
-                                    <form id="logout-form"action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button id="logout" type="submit" class="dropdown-item text-danger">خروج از حساب</button>
-                                    </form>
+                                <li><a class="dropdown-item" href="{{ route('cart.show') }}">سبد خرید</a></li>
+                                <li><a class="dropdown-item" href="{{ route('orders') }}">سفارشات</a></li>
+                                <form id="logout-form"action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button id="logout" type="submit" class="dropdown-item text-danger">خروج از
+                                        حساب</button>
+                                </form>
                                 </li>
                             </ul>
                         </div>
@@ -76,7 +74,6 @@
                 </div>
             </div>
         </header>
-
     @endif
 
     <script src="{{ asset('js/main.js') }}"></script>
@@ -84,7 +81,7 @@
         @yield('content')
 
 
-        @if(session('alertSuccess'))
+        @if (session('alertSuccess'))
             <script>
                 Swal.fire({
                     title: "موفق",
@@ -94,7 +91,7 @@
             </script>
         @endif
 
-        @if(session('alertError'))
+        @if (session('alertError'))
             <script>
                 Swal.fire({
                     title: "خطا",
@@ -110,6 +107,5 @@
         <!-- فوتر سایت -->
     </footer>
 </body>
+
 </html>
-
-
