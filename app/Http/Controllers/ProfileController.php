@@ -34,6 +34,7 @@ class ProfileController extends Controller
             'family' => 'nullable|string|max:255',
             'birthdate' => 'nullable|date',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'educationLevel' => 'nullable|string|max:255',
         ]);
 
 
@@ -52,6 +53,8 @@ class ProfileController extends Controller
         $user->mobile = $request->mobile;
         $user->family = $request->family;
         $user->birthdate = $request->birthdate;
+        $user->educationLevel = $request->educationLevel;
+
         $user->save();
 
         session()->flash('alertSuccess',  "اطلاعات شما با موفقیت به‌روزرسانی شد.");

@@ -34,12 +34,13 @@
                     @if (auth()->check())
                         <form action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn">افزودن به سبد خرید</button>
+                            <button type="submit" class="btn btn-primary">افزودن به سبد خرید</button>
                         </form>
                     @else
-                        <button type="button" class="btn" onclick="showAlert()">افزودن به سبد خرید</button>
+                        <button type="button" class="btn btn-primary" onclick="showAlert()">افزودن به سبد خرید</button>
                     @endif
                 @endif
+
             </div>
         </div>
 

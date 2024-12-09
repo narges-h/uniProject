@@ -3,32 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
 
-    public function addToCart($id, Request $request)
+    public function addToCart($id)
     {
         $book = Book::findOrFail($id);
+        $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
 
-        // ذخیره اطلاعات سبد خرید در سشن
-        $cart = session()->get('cart', []);
+        $cartItem = $cart->cartItems()->where('product_id', $id)->first();
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        if ($cartItem) {
+            $cartItem->update(['quantity' => $cartItem->quantity + 1]);
         } else {
-            $cart[$id] = [
-                'title' => $book->title,
-                'price' => $book->price,
+            $cart->cartItems()->create([
+                'product_id' => $id,
                 'quantity' => 1,
-                'coveruri' => $book->coveruri,
-            ];
+                'price' => $book->price,
+            ]);
         }
 
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'کتاب به سبد خرید افزوده شد.');
+        return redirect()->route('cart.show')->with('success', 'کتاب به سبد خرید اضافه شد.');
     }
 
+    public function showCart()
+    {
+        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+
+        if (!$cart || $cart->cartItems->isEmpty()) {
+            return view('cart', ['cartItems' => [], 'totalPrice' => 0]);
+        }
+        $totalPrice = $cart->cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        return view('cart', [
+            'cartItems' => $cart->cartItems,
+            'totalPrice' => $totalPrice,
+        ]);
+    }
+
+
+    public function removeFromCart($id)
+    {
+        $cart = Cart::where('user_id', auth()->id())->first();
+
+        if ($cart) {
+            $cart->cartItems()->where('id', $id)->delete();
+        }
+
+        return redirect()->route('cart.show')->with('success', 'محصول با موفقیت حذف شد.');
+    }
 }

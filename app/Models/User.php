@@ -38,7 +38,8 @@ class User extends \TCG\Voyager\Models\User
         'city',
         'user_type',
         'remember_token',
-        'avatar'
+        'avatar',
+        'educationLevel'
 
     ];
 

@@ -53,8 +53,6 @@ Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->n
 // نمایش جزئیات کتاب
 Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
 
-// افزودن به سبدخرید
-Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 
 // افزودن کتاب
 Route::post('/insert', [BookController::class, 'insert'])->name('insert');
@@ -99,9 +97,12 @@ Route::post('/profile/change-password', [ProfileController::class, 'changePasswo
 //سورت کتاب ها
 Route::get('/admin/books/sort/{order}', [BookController::class, 'index'])->name('admin.books.sort');
 
-
-
-
+//   سبدخرید
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+});
 
 
 

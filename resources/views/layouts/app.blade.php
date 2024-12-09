@@ -60,9 +60,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="userMenu">
                                 <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>
-                                <li><a class="dropdown-item"
-                                    {{-- href="{{ route('cart') }}" --}}
-                                     >سبد خرید</a></li>
+                                <li><a class="dropdown-item" href="{{ route('cart.show') }}"  >سبد خرید</a></li>
                                 <li><a class="dropdown-item"
                                       {{-- href="{{ route('orders') }}" --}}
                                       >سفارشات</a></li>
