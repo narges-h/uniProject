@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <title>@yield('title', 'Default Title')</title> --}}
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -77,7 +76,7 @@
     @endif
 
     <script src="{{ asset('js/main.js') }}"></script>
-    <main class="container">
+    <main class="container" style="min-height:35.6%">
         @yield('content')
 
 
@@ -127,10 +126,10 @@
                 <!-- اطلاعات تماس -->
                 <div class="col-md-4 text-center text-md-end">
                     <p class="mb-1">تماس: <a href="tel:+989123456789"
-                            class="text-light text-decoration-none">09123456789</a></p>
-                    <p class="mb-1">ایمیل: <a href="mailto:info@example.com"
-                            class="text-light text-decoration-none">info@example.com</a></p>
-                    <p class="mb-0">آدرس: تهران، خیابان انقلاب</p>
+                            class="text-light text-decoration-none">09012259354</a></p>
+                    <p class="mb-1">ایمیل: <a href="bargestan-man@gmail.com"
+                            class="text-light text-decoration-none">bargestan-man@gmail.com</a></p>
+                    <p class="mb-0">آدرس: گرگان، خیابان کاشانی</p>
                 </div>
             </div>
             <hr class="border-light">

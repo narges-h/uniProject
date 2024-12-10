@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/books.css') }}">
-    <div class="container mt-5">
+    <div class="main mt-5">
         <div class="row">
             <div class="col-md-4">
                 <img src="{{ $book->coveruri }}" class="img-fluid" alt="{{ $book->title }}" width="60%" height="80%">

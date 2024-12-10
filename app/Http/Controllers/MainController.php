@@ -35,13 +35,15 @@ class MainController extends Controller
 
         $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
 
-
-        $items = $cart->cartItems;
         $isInCart = false;
-        foreach ($items as $item) {
-            if ($item->product_id == $id) {
-                $isInCart = true;
-                break;
+
+        if($cart != null){
+            $items = $cart->cartItems;
+            foreach ($items as $item) {
+                if ($item->product_id == $id) {
+                    $isInCart = true;
+                    break;
+                }
             }
         }
         // $userType = Auth::user()->user_type;

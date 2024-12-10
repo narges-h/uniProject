@@ -1,4 +1,4 @@
-.container {
+.main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -70,7 +70,7 @@ h2 {
     margin-top: 30px;
 }
 
-.container button.btn {
+.main button.btn {
     display: inline-block;
     padding: 10px 25px;
     border: none;
@@ -84,7 +84,7 @@ h2 {
     margin-top: 20px;
 }
 
-.container button.btn:hover {
+.main button.btn:hover {
     background: linear-gradient(to left, #2ecc71, #27ae60);
     transform: translateY(-2px);
 }
@@ -99,7 +99,7 @@ h2 {
         text-align: center;
     }
 
-    .container button.btn {
+    .main button.btn {
         width: 100%;
     }
 }

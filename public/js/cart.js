@@ -9,6 +9,7 @@ $(document).ready(function () {
         let form = button.closest('form');
         let quantityDisplay = form.siblings('.quantity-display');
 
+        // fastClicking
         button.prop('disabled', true);
         $.ajax({
             url: form.attr('action'),
@@ -52,6 +53,7 @@ $(document).ready(function () {
                 quantityDisplay.text(response.newQuantity);
             },
             error: function () {
+                button.prop('disabled', false);
                 alert('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
             }
         });

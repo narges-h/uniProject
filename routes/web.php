@@ -110,6 +110,7 @@ Route::post('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])-
 
 // سفارش
 Route::get('/checkout/address', [OrderController::class, 'showAddressForm'])->name('checkout.address');
+Route::post('/checkout/address/cities/{province}', [OrderController::class, 'getCities']);
 Route::post('/orders/store', [OrderController::class, 'storeOrder'])->name('orders.store');
 Route::get('/orders/success', function () {
     return view('success');

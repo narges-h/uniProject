@@ -26,16 +26,24 @@ class OrderController extends Controller
         $response = $client->get('https://iran-locations-api.ir/api/v1/fa/states');
         $provinces = json_decode($response->getBody()->getContents());
 
-        // دریافت شهرهای استان انتخاب‌شده (در صورت انتخاب)
-        $cities = [];
-        if ($request->has('province_id')) {
-            $responseCities = $client->get("https://iran-locations-api.ir/api/v1/fa/cities?state_id={$request->province_id}");
-            $cities = json_decode($responseCities->getBody()->getContents());
-        }
 
+        $cities = [];
         return view('address', compact('provinces', 'cities', 'cartItems', 'totalPrice'));
     }
+    public function getCities($province)
+    {
+        $cities = [];
+        $client = new Client();
 
+        $url = "https://iran-locations-api.ir/api/v1/fa/cities?state={$province}";
+
+        $responseCities = $client->get($url);
+        $responseBody = json_decode($responseCities->getBody()->getContents(), true);
+
+        $cities = $responseBody[0]['cities'];
+
+        return response()->json(['cities' => $cities]);
+    }
 
     public function storeOrder(Request $request)
     {

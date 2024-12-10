@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
-<div class="container mt-5">
+<div class="main mt-5">
     <h2 class="text-center mb-4">نتایج جستجو برای "{{ $query }}"</h2>
 
     <!-- نتایج کتاب‌ها -->

@@ -11,7 +11,7 @@
             <h1>ویرایش پروفایل</h1>
         </div>
 
-        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="container">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="main">
             @csrf
             {{-- @method('PUT') --}}
 
@@ -67,7 +67,7 @@
             </div>
         </form>
 
-        <div class="container mt-5">
+        <div class="main mt-5">
             <h2 class="mb-4">تغییر رمز عبور</h2>
             <form action="{{ route('profile.changePassword') }}" method="POST">
                 @csrf

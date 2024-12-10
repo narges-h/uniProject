@@ -3,6 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
+    <div class="main">
     @foreach ($categories as $category)
         <div class="category-item mb-5">
             <div class="category-section">
@@ -32,4 +33,5 @@
         </div>
     @endforeach
     </div>
+</div>
 @endsection

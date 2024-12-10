@@ -90,12 +90,6 @@ input.form-control::placeholder {
     font-style: italic;
 }
 
-button.btn-primary {
-    font-size: 1rem;
-    padding: 0 20px;
-    border-radius: 0;
-}
-
 .input-group {
     border: 1px solid #dee2e6;
     border-radius: 6px;
