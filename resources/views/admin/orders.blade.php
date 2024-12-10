@@ -1,6 +1,5 @@
 @extends('layouts.adminApp')
 
-
 @section('title', 'مدیریت سفارشات')
 @section('page-title', 'سفارشات')
 
@@ -21,29 +20,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($orders as $order)
+                    @forelse($orderItems as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->user->name }}</td>
-                            <td>{{ $order->user->family }}</td>
-                            <td>
-                                @if ($order->cart && $order->cart->cartItems)
-                                    {{ $order->cart->cartItems->pluck('product.title')->join(', ') }}
-                                @else
-                                    بدون محصول
-                                @endif
-                            </td>
-
-                            <td>
-                                @if ($order->cart && $order->cart->items)
-                                    {{ $order->cart->items->pluck('quantity')->sum() }}
-                                @else
-                                    0
-                                @endif
-                            </td>
-
-                            <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y-m-d') }}</td>
-                            <td>{{ $order->city }}</td>
+                            <td>{{ $item->order->user->name }}</td>
+                            <td>{{ $item->order->user->family }}</td>
+                            <td>{{ $item->book->title }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->order->order_date)->format('Y-m-d') }}</td>
+                            <td>{{ $item->order->city }}</td>
                         </tr>
                     @empty
                         <tr>

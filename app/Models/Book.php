@@ -31,8 +31,12 @@ class Book extends Model
     }
 
     public function category()
-{
-    return $this->belongsTo(Category::class, 'category_id');
-}
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
