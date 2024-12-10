@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Cart;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -56,5 +57,38 @@ class CartController extends Controller
         }
 
         return redirect()->route('cart.show')->with('success', 'محصول با موفقیت حذف شد.');
+    }
+
+    public function increaseQuantity($id)
+    {
+        $cartItem = CartItem::findOrFail($id);
+        $book = Book::find($cartItem->product_id);
+        if ($book->stock > $cartItem->quantity) {
+            $cartItem->quantity++;
+            $cartItem->save();
+        }
+
+        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        $total = $cart->cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        return response()->json(['newQuantity' => $cartItem->quantity, 'total' => number_format($total)]);
+    }
+
+    public function decreaseQuantity( $id)
+    {
+        $cartItem = CartItem::findOrFail($id);
+        if ($cartItem->quantity > 1) {
+            $cartItem->quantity--;
+            $cartItem->save();
+        }
+
+        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+        $total = $cart->cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        return response()->json(['newQuantity' => $cartItem->quantity, 'total' => number_format($total)]);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Cart;
+use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -30,10 +32,20 @@ class MainController extends Controller
     public function showBookDetails($id)
     {
         $book = Book::findOrFail($id);
+
+        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
+
+
+        $items = $cart->cartItems;
+        $isInCart = false;
+        foreach ($items as $item) {
+            if ($item->product_id == $id) {
+                $isInCart = true;
+                break;
+            }
+        }
         // $userType = Auth::user()->user_type;
-        return view('books', compact('book'));
+        return view('books', compact('book', 'isInCart'));
         // ->with('userType' , $userType) ;
     }
-
-
 }

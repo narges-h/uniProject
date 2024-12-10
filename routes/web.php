@@ -105,6 +105,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
     Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
+Route::post('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+Route::post('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
 
 // سفارش
 Route::get('/checkout/address', [OrderController::class, 'showAddressForm'])->name('checkout.address');

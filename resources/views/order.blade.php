@@ -15,6 +15,7 @@
                             <th>شهر</th>
                             <th>آدرس</th>
                             <th>کد پستی</th>
+                            <th>جزئیات کالا</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,20 @@
                                 <td>{{ $order->city }}</td>
                                 <td>{{ $order->address }}</td>
                                 <td>{{ $order->postCode }}</td>
+                                <td>
+                                    @if ($order->orderItems->isNotEmpty())
+                                        <ul>
+                                            @foreach ($order->orderItems as $item)
+                                                <li>
+                                                    {{ $item->book->title }} - تعداد: {{ $item->quantity }} - قیمت:
+                                                    {{ number_format($item->price) }} تومان
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        بدون کالا
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

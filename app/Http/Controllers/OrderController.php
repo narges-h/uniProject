@@ -91,7 +91,9 @@ class OrderController extends Controller
 
     public function userOrders()
     {
-        $orders = Order::where('user_id', auth()->id())->get();
+        $orders = Order::with(['orderItems.book'])
+            ->where('user_id', auth()->id())
+            ->get();
 
         return view('order', compact('orders'));
     }

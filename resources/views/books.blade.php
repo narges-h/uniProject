@@ -32,10 +32,17 @@
 
                 @if ($book->stock > 0)
                     @if (auth()->check())
-                        <form action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn">افزودن به سبد خرید</button>
-                        </form>
+                        @if($isInCart)
+                            <form id="form" action="{{ route('cart.show') }}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn">نمایش سبد خرید</button>
+                            </form>
+                        @else
+                            <form id="form" action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn" onclick="showSuccess()">افزودن به سبد خرید</button>
+                            </form>
+                        @endif
                     @else
                         <button type="button" class="btn" onclick="showAlert()">افزودن به سبد خرید</button>
                     @endif
@@ -60,6 +67,20 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = "{{ route('login') }}";
+                }
+            });
+        }
+        function showSuccess() {
+            event.preventDefault();
+
+            Swal.fire({
+                    title: "موفق",
+                    text: "محصول به سبد خرید شما اضافه شد",
+                    icon: "success",
+                    confirmButtonText: "نمایش سبد خرید",
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('form').submit();
                 }
             });
         }
