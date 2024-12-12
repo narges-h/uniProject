@@ -79,12 +79,20 @@ class OrderController extends Controller
                 'quantity' => $cartItem->quantity,
                 'price' => $cartItem->price,
             ]);
-        }
 
+            $book = $cartItem->product;
+            if ($book->stock >= $cartItem->quantity) {
+                $book->stock -= $cartItem->quantity;
+                $book->save();
+            } else {
+                return redirect()->back()->with('error', 'موجودی کافی برای برخی کتاب‌ها وجود ندارد.');
+            }
+        }
         $cart->cartItems()->delete();
 
         return redirect()->route('orders.success')->with('success', 'سفارش شما با موفقیت ثبت شد.');
     }
+
 
 
     public function userOrders()
