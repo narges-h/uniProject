@@ -127,7 +127,7 @@
                 <div class="col-md-4 text-center text-md-end">
                     <p class="mb-1">تماس: <a href="tel:+989123456789"
                             class="text-light text-decoration-none">09012259354</a></p>
-                    <p class="mb-1">ایمیل: <a href="bargestan-man@gmail.com"
+                    <p class="mb-1">ایمیل: <a href="mailto:bargestan-man@gmail.com"
                             class="text-light text-decoration-none">bargestan-man@gmail.com</a></p>
                     <p class="mb-0">آدرس: گرگان، خیابان کاشانی</p>
                 </div>

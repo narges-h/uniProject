@@ -85,6 +85,8 @@
                     <input type="password" class="form-control" id="new_password_confirmation"
                         name="new_password_confirmation" required>
                 </div>
+                {{-- ارسال ایدی کاربر --}}
+                <input type="hidden" id="id" name="id" value="{{ $user->id }}" hidden>
 
                 <div class="save">
                     <button type="submit" class="btn btn-primary mt-3">ذخیره رمز عبور جدید</button>

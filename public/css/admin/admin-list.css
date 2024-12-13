@@ -77,7 +77,15 @@
     background-color: #dc3545;
     color: #ffffff;
 }
+.btn-outline-primary {
+    border-color:  #2a623e;
+    color: #2a623e;
+}
 
+.btn-outline-primary:hover {
+    background-color:  #1c3e28;
+    border-color: #1c3e28;
+}
 
 input.form-control {
     height: 100%;

@@ -72,7 +72,7 @@ class ProfileController extends Controller
             'new_password' => 'required|min:8|confirmed',
         ]);
 
-        $user_id = Auth::user()->id;
+        $user_id = $request->id;
         $user = User::find($user_id);
 
         if (!Hash::check($request->current_password, $user->password)) {

@@ -4,12 +4,12 @@
 
 <link href="{{ asset('css/admin/admin-list.css') }}" rel="stylesheet">
 
-<div class="container-fluid" dir="rtl">
+<div class="container mt-5" dir="rtl">
     <div class="">
         <div class="card-header bg-white d-flex align-items-center gap-3">
-            <h3 class="mt-5">لیست سفارشات</h3>
+            <h3>لیست سفارشات</h3>
         </div>
-        <div class="card shadow-sm rounded">
+        <div class="card shadow-sm rounded mt-5">
         @if ($orders->isNotEmpty())
             <table class="table table-hover table-borderless align-middle mb-0">
                 <thead class="table-light">
