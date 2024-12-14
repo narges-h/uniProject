@@ -57,7 +57,15 @@
                             سفارشات
                         </a>
                     </li>
+                    <li class="list">
+                        <a class="nav-link {{ request()->routeIs('admin.order.status') ? 'active' : '' }}"
+                            href="{{ route('admin.order.status') }}">
+                            <i class="fa fa-shopping-cart icon"></i>
+                            وضعیت سفارشات
+                        </a>
+                    </li>
                 </ul>
+
                 <!-- بخش خروج -->
                 <div class="logout-section">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">

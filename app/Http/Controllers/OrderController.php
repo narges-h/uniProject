@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -44,7 +43,6 @@ class OrderController extends Controller
 
         return response()->json(['cities' => $cities]);
     }
-
     public function storeOrder(Request $request)
     {
         $request->validate([
@@ -92,9 +90,6 @@ class OrderController extends Controller
 
         return redirect()->route('orders.success')->with('success', 'سفارش شما با موفقیت ثبت شد.');
     }
-
-
-
     public function userOrders()
     {
         $orders = Order::with(['orderItems.book'])
@@ -104,15 +99,4 @@ class OrderController extends Controller
         return view('order', compact('orders'));
     }
 
-    public function index()
-    {
-        $orderItems = OrderItem::with([
-            'book:id,title',
-            'order:id,user_id,order_date,city',
-            'order.user:id,name,family',
-        ])->get();
-
-        // dd($orderItems->first()->order->user);
-        return view('admin.orders', compact('orderItems'));
-    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
@@ -84,7 +85,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.addCategory');
     Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
-    Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/admin/orderStatus', [AdminOrderController::class, 'orderStatus'])->name('admin.order.status');
+    Route::put('/admin/updateStatus', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+
 
 });
 
