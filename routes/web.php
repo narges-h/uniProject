@@ -37,12 +37,6 @@ Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
 Route::get('/login', [AuthController::class, 'sendOtpPage'])->name('login');
 Route::post('/main', [AuthController::class, 'login']);
 
-// Route::middleware(['auth'])->group(function(){
-//     Route::get('/landing', function () {
-//         return view('main');
-//     })->name('landing');
-// });
-
 // خروج کاربر
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -54,7 +48,6 @@ Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->n
 
 // نمایش جزئیات کتاب
 Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
-
 
 // افزودن کتاب
 Route::post('/insert', [BookController::class, 'insert'])->name('insert');
@@ -86,11 +79,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.addCategory');
     Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
     Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
-    Route::get('/admin/orderStatus', [AdminOrderController::class, 'orderStatus'])->name('admin.order.status');
-    Route::put('/admin/updateStatus', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
-
-
-
+    Route::put('/admin/updateStatus/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+    Route::get('/admin/order/{id}/items', [AdminOrderController::class, 'getOrderItems']);
 });
 
 // پروفایل کاربری
