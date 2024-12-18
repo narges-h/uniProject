@@ -35,15 +35,20 @@ class CartController extends Controller
         $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
 
         if (!$cart || $cart->cartItems->isEmpty()) {
-            return view('cart', ['cartItems' => [], 'totalPrice' => 0]);
+            return view('user/cart', ['cartItems' => [], 'totalPrice' => 0]);
         }
         $totalPrice = $cart->cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
 
-        return view('cart', [
+        $shippingCost = 45000;
+        $finalPrice = $totalPrice + $shippingCost;
+
+        return view('user/cart', [
             'cartItems' => $cart->cartItems,
             'totalPrice' => $totalPrice,
+            'shippingCost' => $shippingCost,
+            'finalPrice' => $finalPrice,
         ]);
     }
 

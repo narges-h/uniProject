@@ -27,7 +27,7 @@ class OrderController extends Controller
 
 
         $cities = [];
-        return view('address', compact('provinces', 'cities', 'cartItems', 'totalPrice'));
+        return view('user/address', compact('provinces', 'cities', 'cartItems', 'totalPrice'));
     }
     public function getCities($province)
     {
@@ -96,7 +96,7 @@ class OrderController extends Controller
             ->where('user_id', auth()->id())
             ->get();
 
-        return view('order', compact('orders'));
+        return view('user/order', compact('orders'));
     }
 
 }

@@ -17,7 +17,7 @@ class AdminOrderController extends Controller
             'user:id,name,family',
         ])->get();
 
-        return view('admin.orders', compact('orderItems'));
+        return view('admin.orders.orders', compact('orderItems'));
     }
 
 
@@ -42,6 +42,6 @@ class AdminOrderController extends Controller
         $order = Order::find($id);
         $order->update(['status' => $request->status]);
 
-        return redirect()->to('/admin/orderStatus')->with('success', 'وضعیت سفارش با موفقیت به‌روزرسانی شد.');
+        return redirect()->to('/admin/orders')->with('success', 'وضعیت سفارش با موفقیت به‌روزرسانی شد.');
     }
 }

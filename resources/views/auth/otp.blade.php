@@ -18,7 +18,7 @@
                 width="40%"
                 class="img-fluid"
             />
-            
+
             <div id="titr">
                 <h1 id="titrpp">ورود کد تأیید</h1>
             </div>
@@ -41,13 +41,11 @@
                     </ul>
                 </div>
             @endif
-
             <button type="submit" id="verify-otp">تایید کد</button>
         </form>
     </div>
     <script src="{{ asset('js/otp.js') }}"></script>
 </body>
-
 </html>
 
 

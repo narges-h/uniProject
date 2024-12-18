@@ -25,7 +25,7 @@ class AuthController extends Controller
         if(Auth::check()){
             return redirect()->to('/categories');
         }
-        return view('login');
+        return view('auth/login');
     }
 
     public function signup()
@@ -33,7 +33,7 @@ class AuthController extends Controller
         if(Auth::check()){
             return redirect()->to('/categories');
         }
-        return view('signup');
+        return view('auth/signup');
 
     }
 
@@ -80,7 +80,7 @@ class AuthController extends Controller
             'otp' => $otp,
         ]);
         Log::info($otp);
-        return redirect()->to('/otp')->with('phoneNumbers', $phoneNumbers);
+        return redirect()->to('auth/otp')->with('phoneNumbers', $phoneNumbers);
     }
 
     public function login(Request $request)
@@ -208,7 +208,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->to('/login')->with([
+        return redirect()->to('login')->with([
             'message' => 'کاربر با موفقیت خارج شد.'
         ]);
 

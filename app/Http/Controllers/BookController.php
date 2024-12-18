@@ -22,7 +22,7 @@ class BookController extends Controller
         // متغیر بوک برای ارور نبودن بوک در بلید که ولیو در اینپوت هارو نشون میده و خالیه
         $book = new Book();
 
-        return view('addBook', compact('categories' , 'book'))->with('title', $title)->with('isUpdate', false)->with('showHeader' , false) ;
+        return view('admin/addBook', compact('categories' , 'book'))->with('title', $title)->with('isUpdate', false)->with('showHeader' , false) ;
 
     }
     public function insert(Request $request)
@@ -73,7 +73,7 @@ class BookController extends Controller
         $categories = Category::all();
         $title = "ویرایش کتاب";
 
-        return view('addBook', compact('categories', 'book'))->with('title', $title)->with('isUpdate', true)->with('showHeader', false);
+        return view('admin/addBook', compact('categories', 'book'))->with('title', $title)->with('isUpdate', true)->with('showHeader', false);
     }
 
     public function update(Request $request, $id)
@@ -167,7 +167,7 @@ class BookController extends Controller
         if(Auth::check()){
             return view('admin/admin', compact('books','outOfStockBooks','totalBooks','totalStock'));
         }
-        return redirect()->to('/login');
+        return redirect()->to('auth/login');
 
     }
 

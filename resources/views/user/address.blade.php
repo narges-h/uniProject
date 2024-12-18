@@ -25,7 +25,7 @@
 </style>
 
 <div class="container mt-5" dir="rtl">
-    <h2>تکمیل فرایند</h2>
+    <h2>تکمیل فرایند خرید</h2>
     <div class="row">
         @if (!empty($cartItems))
             <div class="col-md-8">

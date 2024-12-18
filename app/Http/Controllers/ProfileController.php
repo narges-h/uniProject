@@ -13,12 +13,12 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile', compact('user'))->with('showHeader' , false);
+        return view('user/profile', compact('user'))->with('showHeader' , false);
     }
 
     public function edit($id){
         $user = User::findOrFail($id);
-        return view('profile', compact('user'))->with('showHeader' , false);
+        return view('user/profile', compact('user'))->with('showHeader' , false);
     }
 
     public function update(Request $request)
@@ -85,7 +85,7 @@ class ProfileController extends Controller
         $user->save();
 
         session()->flash('alertSuccess',  "رمز عبور با موفقیت تغییر کرد.");
-        return redirect()->to('/profile');
+        return redirect()->to('/user/profile');
     }
 
 }

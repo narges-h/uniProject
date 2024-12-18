@@ -27,90 +27,95 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/signup', [AuthController::class, 'signup']);
 Route::get('/otp', function () {
     return view('otp');
 })->name('otp');
 
-Route::post('/userSignup', [AuthController::class, 'userSignup']);
-Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
-Route::get('/login', [AuthController::class, 'sendOtpPage'])->name('login');
-Route::post('/main', [AuthController::class, 'login']);
 
-// خروج کاربر
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/signup', 'signup');
+    Route::post('/userSignup', 'userSignup');
+    Route::post('/verifyOtp', 'verifyOtp');
+    Route::get('/login', 'sendOtpPage')->name('login');
+    Route::post('/main', 'login');
+    // خروج کاربر
+    Route::post('/logout', 'logout')->name('logout');
+});
 
-// نمایش کتاب های یک دسته بندی
-Route::get('/books/category/{id}', [MainController::class, 'showBooksByCategory'])->name('books.byCategory');
+Route::controller(MainController::class)->group(function () {
+    // نمایش کتاب های یک دسته بندی
+    Route::get('/books/category/{id}', 'showBooksByCategory')->name('books.byCategory');
+    // نمایش همه کتاب ها
+    Route::get('/categories', 'showCategoriesWithBooks')->name('categories.index');
+    // نمایش جزئیات کتاب
+    Route::get('/books/{id}', 'showBookDetails')->name('books.details');
+});
 
-// نمایش همه کتاب ها
-Route::get('/categories', [MainController::class, 'showCategoriesWithBooks'])->name('categories.index');
+Route::controller(BookController::class)->group(function () {
+    // افزودن کتاب
+    Route::post('/insert', 'insert')->name('insert');
+    // فرم افزودن کتاب
+    Route::get('/add-book', 'create')->name('add-book');
+    // فرم ادیت کتاب
+    Route::get('/update-book/{id}', 'edit')->name('update-book');
+    // ادیت کتاب
+    Route::put('/update/{id}', 'update')->name('update');
+    // حذف کتاب
+    Route::delete('/delete-book/{id}', 'delete')->name('delete-book');
+    // جستوجوی کتاب
+    Route::get('/search', 'search')->name('searchBooksCategories');
+    //سورت کتاب ها
+    Route::get('/admin/books/sort/{order}', 'index')->name('admin.books.sort');
+});
 
-// نمایش جزئیات کتاب
-Route::get('/books/{id}', [MainController::class, 'showBookDetails'])->name('books.details');
-
-// افزودن کتاب
-Route::post('/insert', [BookController::class, 'insert'])->name('insert');
-// فرم افزودن کتاب
-Route::get('/add-book', [BookController::class, 'create'])->name('add-book');
-
-// فرم ادیت کتاب
-Route::get('/update-book/{id}', [BookController::class, 'edit'])->name('update-book');
-// ادیت کتاب
-Route::put('/update/{id}', [BookController::class, 'update'])->name('update');
-
-// حذف کتاب
-Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete-book');
-
-// جستوجوی کتاب
-Route::get('/search', [BookController::class, 'search'])->name('searchBooksCategories');
-
+Route::controller(ProfileController::class)->group(function () {
+    // پروفایل کاربری
+    Route::get('/profile', 'index')->name('profile.index');
+    Route::get('/profile/{id}', 'edit')->name('profile.edit');
+    Route::post('/profile', 'update')->name('profile.update');
+    Route::post('/profile/change-password', 'changePassword')->name('profile.changePassword');
+});
 
 
 // ادمین
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
+
     // مدیریت کاربران
-    Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('admin.users');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin/users','showUsers')->name('admin.users');
+        Route::delete('/admin/users/{id}','deleteUser')->name('admin.deleteUser');
+    });
 
     // مدیریت دسته‌بندی‌ها
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
-    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('admin.addCategory');
-    Route::delete('/admin/categories/{id}', [CategoryController::class, 'delete'])->name('admin.deleteCategory');
-    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
-    Route::put('/admin/updateStatus/{id}', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
-    Route::get('/admin/order/{id}/items', [AdminOrderController::class, 'getOrderItems']);
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/admin/categories', 'index')->name('admin.categories');
+        Route::post('/admin/categories', 'store')->name('admin.addCategory');
+        Route::delete('/admin/categories/{id}', 'delete')->name('admin.deleteCategory');
+    });
+    Route::controller(AdminOrderController::class)->group(function () {
+        Route::get('/admin/orders', 'index')->name('admin.orders');
+        Route::put('/admin/updateStatus/{id}', 'updateStatus')->name('admin.orders.updateStatus');
+        Route::get('/admin/order/{id}/items', 'getOrderItems');
+    });
+
+    //   سبدخرید
+    Route::controller(CartController::class)->group(function () {
+        Route::post('/cart/add/{id}', 'addToCart')->name('cart.add');
+        Route::get('/cart', 'showCart')->name('cart.show');
+        Route::post('/cart/remove/{id}', 'removeFromCart')->name('cart.remove');
+        Route::post('/cart/increase/{id}', 'increaseQuantity')->name('increaseQuantity');
+        Route::post('/cart/decrease/{id}', 'decreaseQuantity')->name('decreaseQuantity');
+    });
+
+    // سفارش
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/checkout/address', 'showAddressForm')->name('checkout.address');
+        Route::post('/checkout/address/cities/{province}', 'getCities');
+        Route::post('/orders/store', 'storeOrder')->name('orders.store');
+        Route::middleware('auth')->get('/orders', 'userOrders')->name('userOrders');
+    });
+    Route::get('/orders/success', function () {
+        return view('success');
+    })->name('orders.success');
 });
-
-// پروفایل کاربری
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-
-
-//سورت کتاب ها
-Route::get('/admin/books/sort/{order}', [BookController::class, 'index'])->name('admin.books.sort');
-
-//   سبدخرید
-Route::middleware(['auth'])->group(function () {
-    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-    Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-});
-Route::post('/cart/increase/{id}', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
-Route::post('/cart/decrease/{id}', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
-
-// سفارش
-Route::get('/checkout/address', [OrderController::class, 'showAddressForm'])->name('checkout.address');
-Route::post('/checkout/address/cities/{province}', [OrderController::class, 'getCities']);
-Route::post('/orders/store', [OrderController::class, 'storeOrder'])->name('orders.store');
-Route::get('/orders/success', function () {
-    return view('success');
-})->name('orders.success');
-
-Route::middleware('auth')->get('/orders', [OrderController::class, 'userOrders'])->name('userOrders');
-
-

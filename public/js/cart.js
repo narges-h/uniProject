@@ -17,7 +17,7 @@ $(document).ready(function () {
             data: form.serialize(),
             success: function (response) {
 
-                total.innerText = "مجموع: " + response.total + " تومان";
+                total.innerText = "مجموع قیمت کالا: " + response.total + " تومان";
 
                 button.prop('disabled', false);
                 quantityDisplay.text(response.newQuantity);
@@ -47,7 +47,7 @@ $(document).ready(function () {
             data: form.serialize(),
             success: function (response) {
 
-                total.innerText = "مجموع: " + response.total + " تومان";
+                total.innerText = "مجموع قیمت کالا: " + response.total + " تومان";
 
                 button.prop('disabled', false);
                 quantityDisplay.text(response.newQuantity);
