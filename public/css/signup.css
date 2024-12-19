@@ -217,12 +217,22 @@ option {
     cursor: pointer;
     color: #2a623e;
 }
-
+#sabt {
+    text-align: center;
+    padding: 10%;
+    margin: auto;
+}
 
 
 #vorodhesab {
     color: #2a623e;
     text-decoration: none;
+}
+
+#login {
+    color: #2a623e;
+    text-decoration: none;
+    padding: 8px;
 }
 
 #sabtnam {
