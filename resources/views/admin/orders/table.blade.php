@@ -141,6 +141,13 @@
                     });
                     content += `</ul>`;
 
+
+                    content += `
+    <div class="mt-3 text-center text-dark">
+        <strong>هزینه پست:</strong>
+        <span>${Number(45).toLocaleString()} تومان</span>
+    </div>`;
+
                     content += `
     <div class="mt-3 text-center text-dark">
         <strong>هزینه کل:</strong>

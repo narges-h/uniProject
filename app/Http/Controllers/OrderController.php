@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -19,6 +20,10 @@ class OrderController extends Controller
             return $item->price * $item->quantity;
         });
 
+
+        $shippingCost = 45000;
+        $finalPrice = $totalPrice + $shippingCost;
+
         $client = new Client();
 
         // دریافت استان‌ها
@@ -27,7 +32,7 @@ class OrderController extends Controller
 
 
         $cities = [];
-        return view('user/address', compact('provinces', 'cities', 'cartItems', 'totalPrice'));
+        return view('user/address', compact('provinces', 'cities', 'cartItems', 'totalPrice', 'shippingCost', 'finalPrice'));
     }
     public function getCities($province)
     {
@@ -59,11 +64,13 @@ class OrderController extends Controller
             return $item->price * $item->quantity;
         });
 
+        $shippingCost = 45000;
+        $finalPrice = $totalAmount + $shippingCost;
         $order = Order::create([
             'user_id' => auth()->id(),
             'cart_id' => $cart->id,
             'order_date' => now(),
-            'total_amount' => $totalAmount,
+            'total_amount' => $finalPrice,
             'province' => $request->province,
             'city' => $request->city,
             'address' => $request->address,
@@ -98,5 +105,4 @@ class OrderController extends Controller
 
         return view('user/order', compact('orders'));
     }
-
 }
