@@ -26,3 +26,46 @@
 input[type="number"] {
     width: 60px;
 }
+
+
+/* /// */
+#delete-cart {
+    margin-top: 16px;
+}
+
+/* تنظیمات عمومی دکمه‌ها */
+.custom-btn-decrease,
+.custom-btn-increase {
+    width: 50px;
+    height: 35px;
+    border: 1px solid #ccc;
+    /* بردر خاکستری */
+    background-color: #f8f9fa;
+    /* رنگ پس‌زمینه پیش‌فرض */
+    color: #000;
+    /* رنگ متن مشکی */
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    /* گوشه‌های کمی گرد برای ظاهر بهتر */
+}
+
+/* افکت هاور */
+.custom-btn-decrease:hover,
+.custom-btn-increase:hover {
+    background-color: #e2e6ea;
+    /* تغییر پس‌زمینه به خاکستری روشن‌تر هنگام هاور */
+}
+
+/* استایل عدد تعداد */
+.quantity-display {
+    margin: 0 16px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    /* خاکستری تیره */
+    text-align: center;
+}
