@@ -19,6 +19,8 @@ $(document).ready(function() {
         }
     });
 });
+
+//کلیک نمایش کتاب
 $(document).on('click', '#book-card', function() {
     var bookId = $(this).data('book-id');
     window.location.href = '/books/' + bookId;

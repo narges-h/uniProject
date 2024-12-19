@@ -22,10 +22,7 @@ class MainController extends Controller
     public function showCategoriesWithBooks()
     {
         $categories = Category::has('books')->with(['books'])->get();
-        // $userType = Auth::user()->user_type;
-
         return view('main', compact('categories'));
-        // ->with('userType' , $userType) ;
     }
 
 

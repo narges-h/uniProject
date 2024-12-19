@@ -30,7 +30,14 @@ Route::get('/', function () {
 Route::get('/otp', function () {
     return view('otp');
 })->name('otp');
-
+Route::controller(MainController::class)->group(function () {
+    // نمایش کتاب های یک دسته بندی
+    Route::get('/books/category/{id}', 'showBooksByCategory')->name('books.byCategory');
+    // نمایش همه کتاب ها
+    Route::get('/categories', 'showCategoriesWithBooks')->name('categories.index');
+    // نمایش جزئیات کتاب
+    Route::get('/books/{id}', 'showBookDetails')->name('books.details');
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/signup', 'signup');
@@ -42,14 +49,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::controller(MainController::class)->group(function () {
-    // نمایش کتاب های یک دسته بندی
-    Route::get('/books/category/{id}', 'showBooksByCategory')->name('books.byCategory');
-    // نمایش همه کتاب ها
-    Route::get('/categories', 'showCategoriesWithBooks')->name('categories.index');
-    // نمایش جزئیات کتاب
-    Route::get('/books/{id}', 'showBookDetails')->name('books.details');
-});
+
 
 Route::controller(BookController::class)->group(function () {
     // افزودن کتاب
@@ -76,8 +76,6 @@ Route::controller(ProfileController::class)->group(function () {
     Route::post('/profile/change-password', 'changePassword')->name('profile.changePassword');
 });
 
-
-// ادمین
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
 
