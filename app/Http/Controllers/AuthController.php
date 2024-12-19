@@ -80,7 +80,7 @@ class AuthController extends Controller
             'otp' => $otp,
         ]);
         Log::info($otp);
-        return redirect()->to('auth/otp')->with('phoneNumbers', $phoneNumbers);
+        return redirect()->to('otp')->with('phoneNumbers', $phoneNumbers);
     }
 
     public function login(Request $request)
@@ -162,13 +162,10 @@ class AuthController extends Controller
         $otpRecord = Otp::where('phone', $request->phoneNumbers)
             ->where('otp', $request->otp)
             ->first();
-
-
         if (!$otpRecord) {
 
             return back()->withErrors(['کد تایید وارد شده نادرست است.'])->withInput();
         }
-
         $userData = session('user_signup_data');
 
         if ($userData && $userData['phoneNumbers'] === $request->phoneNumbers) {
