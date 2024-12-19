@@ -74,22 +74,20 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header" width="100%" dir="rtl">
+                <div class="modal-header">
                     <h5 class="modal-title" id="orderProductsModalLabel">محصولات سفارش</h5>
-                    <button type="button" class="" style="align-items:center" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body" id="orderProductsContent">
                     <div class="text-center">در حال بارگذاری...</div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 
