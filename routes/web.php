@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/otp', function () {
-    return view('otp');
+    return view('auth/otp');
 })->name('otp');
 Route::controller(MainController::class)->group(function () {
     // نمایش کتاب های یک دسته بندی

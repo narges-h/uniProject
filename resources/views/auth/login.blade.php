@@ -20,7 +20,7 @@
 
 
             <img src="{{ asset('img/logoGreen.svg') }}" width="40%" class="img-fluid" />
-            <p class="titr">برگستان</p>
+            {{-- <p class="titr">برگستان</p> --}}
 
             <div id="titr">
                 <h1 id="titrpp">ورود</h1>

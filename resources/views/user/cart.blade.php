@@ -107,10 +107,9 @@
                             <h5>فاکتور خرید</h5>
                             <p id="totalPrice">مجموع قیمت کالاها: <strong>{{ number_format($totalPrice) }} تومان</strong>
                             </p>
-
                             <p>هزینه پست: <strong>{{ number_format($shippingCost) }} تومان</strong></p>
                             <hr>
-                            <p>مجموع کل: <strong>{{ number_format($finalPrice) }} تومان</strong></p>
+                            <p id="finalPrice">مجموع کل: <strong>{{ number_format($finalPrice) }} تومان</strong></p>
                             <a href="{{ route('checkout.address') }}" class="btn btn-success w-100">ادامه فرایند خرید</a>
                         </div>
                     </div>

@@ -84,6 +84,7 @@
                 <input type="checkbox" id="rememberMe" name="rememberMe" value="remembered">
             </div>
             <button name="button" id="sabtnam" type="submit">ثبت نام</button>
+            <p id="sabt">قبلا ثبت نام کرده اید؟<a href="{{ url('login') }}" id="login">ورود</a></p>
 
         </form>
     </div>
