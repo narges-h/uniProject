@@ -64,36 +64,49 @@ class CartController extends Controller
         return redirect()->route('cart.show')->with('success', 'محصول با موفقیت حذف شد.');
     }
 
-    public function increaseQuantity($id)
-    {
-        $cartItem = CartItem::findOrFail($id);
-        $book = Book::find($cartItem->product_id);
-        if ($book->stock > $cartItem->quantity) {
-            $cartItem->quantity++;
-            $cartItem->save();
-        }
 
-        $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
-        $total = $cart->cartItems->sum(function ($item) {
+
+    public function increaseQuantity(Request $request, $cartItemId)
+    {
+        $cartItem = CartItem::findOrFail($cartItemId);
+        $cartItem->quantity += 1;
+        $cartItem->save();
+
+        $cart = Cart::where('user_id', auth()->id())->with('cartItems')->first();
+        $totalPrice = $cart->cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
+        $shippingCost = 45000;
+        $finalPrice = $totalPrice + $shippingCost;
 
-        return response()->json(['newQuantity' => $cartItem->quantity, 'total' => number_format($total)]);
+        return response()->json([
+            'newQuantity' => $cartItem->quantity,
+            'totalPrice' => $totalPrice,
+            'finalPrice' => $finalPrice,
+        ]);
     }
 
-    public function decreaseQuantity( $id)
+
+    public function decreaseQuantity($id)
     {
         $cartItem = CartItem::findOrFail($id);
+
         if ($cartItem->quantity > 1) {
             $cartItem->quantity--;
             $cartItem->save();
         }
 
         $cart = Cart::where('user_id', auth()->id())->with('cartItems.product')->first();
-        $total = $cart->cartItems->sum(function ($item) {
+        $totalPrice = $cart->cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
 
-        return response()->json(['newQuantity' => $cartItem->quantity, 'total' => number_format($total)]);
+        $shippingCost = 45000;
+        $finalPrice = $totalPrice + $shippingCost;
+        return response()->json([
+            'newQuantity' => $cartItem->quantity,
+            'totalPrice' => $totalPrice,
+            'finalPrice' => $finalPrice,
+        ]);
     }
 }
