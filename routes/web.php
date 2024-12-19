@@ -81,8 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
     // مدیریت کاربران
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/admin/users','showUsers')->name('admin.users');
-        Route::delete('/admin/users/{id}','deleteUser')->name('admin.deleteUser');
+        Route::get('/admin/users', 'showUsers')->name('admin.users');
+        Route::delete('/admin/users/{id}', 'deleteUser')->name('admin.deleteUser');
     });
 
     // مدیریت دسته‌بندی‌ها
@@ -90,6 +90,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/categories', 'index')->name('admin.categories');
         Route::post('/admin/categories', 'store')->name('admin.addCategory');
         Route::delete('/admin/categories/{id}', 'delete')->name('admin.deleteCategory');
+        // نمایش فرم افزودن دسته‌بندی
+        Route::get('/admin/category/create','create')->name('admin.createCategory');
+        // ذخیره دسته‌بندی جدید
+        Route::post('/admin/category','store')->name('admin.storeCategory');
+        // نمایش فرم ویرایش دسته‌بندی
+        Route::get('/admin/category/{id}/edit','edit')->name('admin.editCategory');
+        // به‌روزرسانی دسته‌بندی
+        Route::put('/admin/category/{id}','update')->name('admin.updateCategory');
     });
     Route::controller(AdminOrderController::class)->group(function () {
         Route::get('/admin/orders', 'index')->name('admin.orders');

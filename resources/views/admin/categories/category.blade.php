@@ -45,7 +45,6 @@
                                 <td>{{ $category->books->count() }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-
                                         <a href=" route('admin.editCategory', $category->id) " class="btn btn-edit btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>

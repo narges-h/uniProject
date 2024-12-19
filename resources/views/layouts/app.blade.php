@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body style="direction: rtl">
     @php
         $showHeader = $showHeader ?? true;
     @endphp

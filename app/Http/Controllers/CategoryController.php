@@ -10,21 +10,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin/category', compact('categories'));
-
+        return view('admin/categories/category', compact('categories'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        Category::create(['name' => $request->name]);
-
-        session()->flash('alertSuccess', "دسته‌بندی با موفقیت افزوده شد.");
-        return redirect()->route('admin.categories');
-    }
 
     public function delete($id)
     {
@@ -39,4 +27,42 @@ class CategoryController extends Controller
         session()->flash('alertError', "دسته‌بندی یافت نشد.");
         return redirect()->route('admin.categories')->with('error', 'دسته‌بندی یافت نشد.');
     }
+
+    public function create()
+    {
+        return view('admin.category-form'); // افزودن
     }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.category-form', compact('category')); // ویرایش
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+
+        Category::create([
+            'category_name' => $request->category_name,
+        ]);
+
+        return redirect()->route('admin.categories')->with('success', 'دسته‌بندی با موفقیت افزوده شد.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update([
+            'category_name' => $request->category_name,
+        ]);
+
+        return redirect()->route('admin.categories')->with('success', 'دسته‌بندی با موفقیت ویرایش شد.');
+    }
+}
