@@ -4,41 +4,39 @@ $(document).ready(function () {
         e.preventDefault();
 
         let button = $(this);
-        let total = document.getElementById('totalPrice');
-
         let form = button.closest('form');
         let quantityDisplay = form.siblings('.quantity-display');
+        let totalPriceElement = document.getElementById('totalPrice');
+        let finalPriceElement = document.getElementById('finalPrice');
 
-        // fastClicking
         button.prop('disabled', true);
         $.ajax({
             url: form.attr('action'),
             method: 'POST',
             data: form.serialize(),
             success: function (response) {
-
-                total.innerText = "مجموع قیمت کالا: " + response.total + " تومان";
+                quantityDisplay.text(response.newQuantity);
+                totalPriceElement.innerText = "مجموع قیمت کالاها: " + response.totalPrice.toLocaleString() + " تومان";
+                finalPriceElement.innerText = "مجموع کل: " + response.finalPrice.toLocaleString() + " تومان";
 
                 button.prop('disabled', false);
-                quantityDisplay.text(response.newQuantity);
             },
             error: function () {
-
                 button.prop('disabled', false);
                 alert('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
             }
         });
     });
 
-    // دکمه کاهش
+    // دکمه کاهش (مشابه افزایش)
     $('.custom-btn-decrease').on('click', function (e) {
         e.preventDefault();
 
         let button = $(this);
-        let total = document.getElementById('totalPrice');
         let form = button.closest('form');
-
         let quantityDisplay = form.siblings('.quantity-display');
+        let totalPriceElement = document.getElementById('totalPrice');
+        let finalPriceElement = document.getElementById('finalPrice');
 
         button.prop('disabled', true);
         $.ajax({
@@ -46,11 +44,11 @@ $(document).ready(function () {
             method: 'POST',
             data: form.serialize(),
             success: function (response) {
-
-                total.innerText = "مجموع قیمت کالا: " + response.total + " تومان";
+                quantityDisplay.text(response.newQuantity);
+                totalPriceElement.innerText = "مجموع قیمت کالاها: " + response.totalPrice.toLocaleString() + " تومان";
+                finalPriceElement.innerText = "مجموع کل: " + response.finalPrice.toLocaleString() + " تومان";
 
                 button.prop('disabled', false);
-                quantityDisplay.text(response.newQuantity);
             },
             error: function () {
                 button.prop('disabled', false);
@@ -59,6 +57,7 @@ $(document).ready(function () {
         });
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function(){
