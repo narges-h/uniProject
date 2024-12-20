@@ -30,13 +30,14 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('admin.category-form'); // افزودن
+       
+        return view('admin.categories.category-form'); // فرم افزودن
     }
 
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.category-form', compact('category')); // ویرایش
+        return view('admin.categories.category-form', compact('category')); // ویرایش
     }
 
     public function store(Request $request)

@@ -45,7 +45,7 @@
                                 <td>{{ $category->books->count() }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href=" route('admin.editCategory', $category->id) " class="btn btn-edit btn-sm">
+                                        <a href="{{ route('admin.editCategory', ['id' => $category->id]) }}" class="btn btn-edit btn-sm">
                                             <i class="fas fa-edit"></i> ویرایش
                                         </a>
                                         <form action="{{ route('admin.deleteCategory', $category->id) }}" method="POST"

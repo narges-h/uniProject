@@ -51,6 +51,7 @@ Route::controller(AuthController::class)->group(function () {
 
 
 
+
 Route::controller(BookController::class)->group(function () {
     // افزودن کتاب
     Route::post('/insert', 'insert')->name('insert');
@@ -91,8 +92,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/categories', 'store')->name('admin.addCategory');
         Route::delete('/admin/categories/{id}', 'delete')->name('admin.deleteCategory');
         // نمایش فرم افزودن دسته‌بندی
-        Route::get('/admin/category/create','create')->name('admin.createCategory');
+        Route::get('/admin/category/create','create')->name('products.create');
         // ذخیره دسته‌بندی جدید
+
         Route::post('/admin/category','store')->name('admin.storeCategory');
         // نمایش فرم ویرایش دسته‌بندی
         Route::get('/admin/category/{id}/edit','edit')->name('admin.editCategory');

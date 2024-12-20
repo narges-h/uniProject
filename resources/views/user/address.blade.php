@@ -79,7 +79,7 @@
                             <p>هزینه پست: <strong>{{ number_format($shippingCost) }} تومان</strong></p>
                             <hr>
                             <p>مجموع کل: <strong>{{ number_format($finalPrice) }} تومان</strong></p>
-                            <a href="{{ route('checkout.address') }}" class="btn btn-success w-100">ادامه فرایند خرید</a>
+            
                         </div>
                     </div>
                 </div>

@@ -51,6 +51,15 @@
                         </a>
                     </li>
                     <li class="list">
+                        <a class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}"
+                           href="{{ route('products.create') }}">
+                            <i class="fa fa-plus icon"></i>
+                            افزودن دسته‌بندی
+                        </a>
+                    </li>
+
+
+                    <li class="list">
                         <a class="nav-link {{ request()->routeIs('admin.orders') ? 'active' : '' }}"
                             href="{{ route('admin.orders') }}">
                             <i class="fa fa-shopping-cart icon"></i>
