@@ -21,13 +21,13 @@
         <div class="card-header bg-white d-flex align-items-center gap-3">
             <h5 class="mb-0">وضعیت سفارشات</h5>
             <form method="GET" action="#" class="flex-grow-1">
-                <div class="input-group">
+                {{-- <div class="input-group">
                     <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
                         placeholder="جستجو براساس شماره سفارش..." value="{{ request()->query('query') }}">
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
-                </div>
+                </div> --}}
             </form>
         </div>
 
