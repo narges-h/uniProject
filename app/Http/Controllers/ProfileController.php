@@ -7,6 +7,7 @@ use App\Models\User;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -66,10 +67,15 @@ class ProfileController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'current_password' => 'required',
             'new_password' => 'required|min:8|confirmed',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
 
         $user_id = $request->id;
         $user = User::find($user_id);
@@ -83,8 +89,15 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
+
+        $type = Auth::user()->user_type;
         session()->flash('alertSuccess',  "رمز عبور با موفقیت تغییر کرد.");
-        return redirect()->to('/user/profile');
+        if($type == "admin"){
+            return redirect()->to('/admin/users');
+        }else{
+            Auth::logout();
+            return redirect()->to('login');
+        }
     }
 
 }
