@@ -77,7 +77,8 @@ Route::controller(ProfileController::class)->group(function () {
     Route::post('/profile/change-password', 'changePassword')->name('profile.changePassword');
 });
 
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
 
     // مدیریت کاربران
@@ -85,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/users', 'showUsers')->name('admin.users');
         Route::delete('/admin/users/{id}', 'deleteUser')->name('admin.deleteUser');
     });
+
 
     // مدیریت دسته‌بندی‌ها
     Route::controller(CategoryController::class)->group(function () {
@@ -106,7 +108,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/admin/updateStatus/{id}', 'updateStatus')->name('admin.orders.updateStatus');
         Route::get('/admin/order/{id}/items', 'getOrderItems');
     });
+});
 
+Route::middleware(['auth'])->group(function () {
     //   سبدخرید
     Route::controller(CartController::class)->group(function () {
         Route::post('/cart/add/{id}', 'addToCart')->name('cart.add');
