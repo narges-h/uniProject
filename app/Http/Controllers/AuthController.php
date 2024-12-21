@@ -22,9 +22,7 @@ class AuthController extends Controller
 
     public function sendOtpPage()
     {
-        if(Auth::check()){
-            return redirect()->to('/categories');
-        }
+
         return view('auth/login');
     }
 

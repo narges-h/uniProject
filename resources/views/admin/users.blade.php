@@ -15,19 +15,19 @@
 
             <div class="card-header bg-white d-flex align-items-center gap-3">
                 <h5 class="mb-0">لیست کاربران</h5>
-                <form method="GET" action="#" class="flex-grow-1">
-                    <div class="input-group">
-                    <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
-                            placeholder="جستجو براساس نام یا شماره تلفن..." value="{{ request()->query('query') }}">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <div class="flex-grow-1">
+                        <div class="input-group">
+                            <input id="search-input" type="text" name="query" class="form-control border-0 shadow-sm"
+                                placeholder="جستجو براساس نام یا شماره تلفن...">
+                            <button onclick="searchData()" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </form>
             </div>
 
             <div class="card-body p-0">
-                <table class="table table-hover table-borderless align-middle mb-0">
+                <table id="table" class="table table-hover table-borderless align-middle mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>#</th>
@@ -44,9 +44,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><h6>{{ $user->user_type }}</h6></td>
-                                <td><h6>{{ $user->name }}</h6></td>
-                                <td><h6>{{ $user->family }}</h6></td>
-                                <td><h6>{{ $user->mobile }}</h6></td>
+                                <td class="user-name"><h6>{{ $user->name }}</h6></td>
+                                <td class="user-family"><h6>{{ $user->family }}</h6></td>
+                                <td class="user-phone"><h6>{{ $user->mobile }}</h6></td>
                                 <td>
                                     @if ($user->avatar)
                                         <img src="{{ $user->avatar }}" alt="Avatar" class="rounded-circle"
@@ -79,6 +79,24 @@
                 </table>
             </div>
         </div>
+        <script>
+            function searchData(){
+                const query = document.getElementById('search-input').value;
+                const rows = document.querySelectorAll('#table tbody tr'); // سطرهای جدول
+
+                rows.forEach(row => {
+                    const name = row.querySelector('.user-name').textContent.toLowerCase();
+                    const family = row.querySelector('.user-family').textContent.toLowerCase();
+                    const phone = row.querySelector('.user-phone').textContent.toLowerCase();
+
+                    if (name.includes(query) || family.includes(query) || phone.includes(query)) {
+                        row.style.display = ''; // نمایش سطر
+                    } else {
+                        row.style.display = 'none'; // مخفی کردن سطر
+                    }
+            });
+        }
+        </script>
     </div>
 
 @endsection

@@ -88,6 +88,17 @@
                 {{-- ارسال ایدی کاربر --}}
                 <input type="hidden" id="id" name="id" value="{{ $user->id }}" hidden>
 
+
+                @if ($errors->any())
+                <div class="alert alert-danger error-message" style="margin-bottom: 15px;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
                 <div class="save">
                     <button type="submit" class="btn btn-primary mt-3">ذخیره رمز عبور جدید</button>
                 </div>

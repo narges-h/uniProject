@@ -148,6 +148,8 @@ class BookController extends Controller
         return view('search_results', compact('books', 'categories', 'query'));
     }
 
+    
+
     public function index(Request $request, $order = 'desc') {
 
         // $totalBooks = Book::count();
