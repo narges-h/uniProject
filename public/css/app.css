@@ -135,8 +135,8 @@ button:active {
 }
 
 .btn-primary:hover {
-    background-color: #1d3557;
-    border-color: #1d3557;
+    background-color: #093218;
+    border-color: #093218;
 }
 
 .btn-success {
@@ -147,27 +147,6 @@ button:active {
 .btn-success:hover {
     background-color: #053615;
     border-color: #053615;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    border-radius: 8px;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    background-color: #fff;
-}
-
-.dropdown-item {
-    transition: background-color 0.2s ease;
-}
-
-.dropdown-item:hover {
-    background-color: #f1f1f1;
 }
 
 input.form-control::placeholder {
@@ -245,3 +224,86 @@ button.btn-primary {
 }
 
 
+/* Avatar Styles */
+.user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #2a623e;
+    border-radius: 50%;
+    overflow: hidden; /* برای تصویر */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* برش تصویر */
+}
+
+/* Dropdown Button */
+.user-menu-btn {
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #2a623e;
+    border: 1px solid #093218;
+    padding: 5px 10px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.user-menu-btn:hover , .user-menu-btn:focus {
+    background-color: #093218;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Dropdown Menu */
+.dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 576px) {
+    .user-menu-btn {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item i {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f9f9f9;
+    color: #2a623e;
+}
+
+.bi{
+    padding-left: 0.5vw;
+    color:#2a623e !important;
+}

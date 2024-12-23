@@ -1,4 +1,21 @@
 $(document).ready(function () {
+    $('form').on('submit', function (e) {
+        const postCode = $('#postCode').val();
+
+        // بررسی اینکه کد پستی ۱۰ رقمی باشد
+        const postCodePattern = /^[0-9]{10}$/;
+        if (!postCodePattern.test(postCode)) {
+            e.preventDefault();
+            Swal.fire({
+                title: "خطا",
+                text: "کد پستی نامعتبر است",
+                icon: "error",
+                confirmButtonText: "تایید"
+              });
+            return false;
+        }
+    });
+
     $('.province-select').on('change', function (e) {
         const provinceSelect = document.getElementById("province-select");
         const citySelect = document.getElementById("city-select");

@@ -50,8 +50,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-
-
 Route::controller(BookController::class)->group(function () {
     // افزودن کتاب
     Route::post('/insert', 'insert')->name('insert');
@@ -67,6 +65,8 @@ Route::controller(BookController::class)->group(function () {
     Route::get('/search', 'search')->name('searchBooksCategories');
     //سورت کتاب ها
     Route::get('/admin/books/sort/{order}', 'index')->name('admin.books.sort');
+     // پنل مدیریت (با میان‌افزار admin)
+     Route::get('/admin', 'index')->middleware('admin')->name('admin.books');
 });
 
 Route::controller(ProfileController::class)->group(function () {
@@ -79,7 +79,7 @@ Route::controller(ProfileController::class)->group(function () {
 
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
+    // Route::get('/admin', [BookController::class, 'index'])->name('admin.books');
 
     // مدیریت کاربران
     Route::controller(AdminController::class)->group(function () {

@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+.btn-primary {
+    background-color: #2a623e !important;
+    color: #fff;
+    border-color: #2a623e !important;
+}
+
+.btn-primary:hover {
+    background-color: #093218 !important;
+    border-color: #093218 !important;
+}
+</style>
+
+
     <link rel="stylesheet" href="{{ asset('css/add-book.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -57,7 +72,9 @@
                     <label for="avatar" class="form-label">تصویر پروفایل:</label>
                     <input type="file" class="form-control" id="avatar" name="avatar">
                     @if ($user->avatar)
-                        <img src="{{ $user->avatar }}" alt="profile image" height="100" class="mt-2">
+                        <img src="{{ asset($user->avatar) }}" alt="profile image" height="100" class="mt-2">
+                    @else
+                        <img src="{{ asset('avatars/default.jpg') }}" alt="Profile Picture" height="100" class="mt-2">
                     @endif
                 </div>
             </div>
@@ -89,8 +106,15 @@
                 <input type="hidden" id="id" name="id" value="{{ $user->id }}" hidden>
 
 
-                @if ($errors->any())
-                <div class="alert alert-danger error-message" style="margin-bottom: 15px;">
+
+                <div class="save">
+                    <button type="submit" class="btn btn-primary mt-3">ذخیره رمز عبور جدید</button>
+                </div>
+            </form>
+
+
+            @if ($errors->any())
+                <div class="alert alert-danger error-message mb-3" style="margin-top: 15px;">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -98,11 +122,6 @@
                     </ul>
                 </div>
                 @endif
-
-                <div class="save">
-                    <button type="submit" class="btn btn-primary mt-3">ذخیره رمز عبور جدید</button>
-                </div>
-            </form>
         </div>
     </div>
 

@@ -5,16 +5,37 @@
 
 @section('content')
 
-<link href="{{ asset('css/admin/admin-list.css') }}" rel="stylesheet">
+
+<style>
+.card-header{
+    background-color:  #2a623e;
+}
+.textHeading{
+    color : #2a623e !important;
+}
+.btn-primary {
+    background-color: #2a623e;
+    color: #fff;
+    border-color: #2a623e;
+}
+
+.btn-primary:hover {
+    background-color: #093218;
+    border-color: #093218;
+}
+</style>
+
 
 <div class="container-fluid">
-    <div class="card border-0 shadow-sm rounded">
-        <div class="card-header bg-white d-flex align-items-center gap-3">
+    <div class="card border-0 shadow-lg rounded-lg overflow-hidden">
+        <!-- هدر کارت -->
+        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">{{ isset($book) ? 'ویرایش کتاب' : 'افزودن کتاب' }}</h5>
+            <i class="fas fa-book fa-lg"></i>
         </div>
 
-        <div class="card-body">
-            <form action="{{ isset($book) ? route('update', ['id' => $book->id]) : route('insert') }}" method="POST" class="form" enctype="multipart/form-data">
+        <div class="card-body p-4">
+            <form action="{{ $isUpdate ? route('update', ['id' => $book->id]) : route('insert') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($book))
                     @method('PUT')
@@ -98,23 +119,26 @@
                     </div>
                 </div>
 
+                <!-- خطاها -->
                 @if ($errors->any())
-                    <div class="alert alert-danger mt-3">
-                        <ul>
+                    <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                        <strong>خطاها:</strong>
+                        <ul class="mb-0">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                <div class="d-flex justify-content-end gap-2 mt-4">
-                    <a href="{{ route('admin.categories') }}" class="btn btn-secondary">لغو</a>
-                    <button type="submit" class="btn btn-primary">{{ isset($book) ? 'ویرایش' : 'افزودن' }}</button>
+                <!-- دکمه‌ها -->
+                <div class="d-flex justify-content-end gap-3">
+                    <a href="{{ route('admin.categories') }}" class="btn btn-outline-secondary shadow-sm px-4">لغو</a>
+                    <button type="submit" class="btn btn-primary shadow-sm px-4">{{ $isUpdate ? 'ویرایش' : 'افزودن' }}</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 @endsection

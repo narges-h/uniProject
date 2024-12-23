@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -45,32 +46,65 @@
                     </div>
                 </form>
 
-                <!-- User Actions -->
-                <div class="user-actions d-flex align-items-center">
-                    @guest
-                        <a href="{{ route('login') }}" class="btn btn-success ms-3">ورود / ثبت‌نام</a>
-                    @endguest
 
-                    @auth
-                        <div class="dropdown">
-                            <button class="btn btn-success dropdown-toggle" type="button" id="userMenu"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name . ' ' . Auth::user()->family }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                <li><a class="dropdown-item" href="{{ route('profile.index') }}">اطلاعات کاربری</a></li>
-                                <li><a class="dropdown-item" href="{{ route('cart.show') }}">سبد خرید</a></li>
-                                <li><a class="dropdown-item" href="{{ route('userOrders') }}">سفارشات</a></li>
-                                <form id="logout-form"action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button id="logout" type="submit" class="dropdown-item text-danger">خروج از
-                                        حساب</button>
-                                </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endauth
-                </div>
+
+<!-- User Actions -->
+<div class="user-actions d-flex align-items-center">
+    @guest
+        <a href="{{ route('login') }}" class="btn btn-primary shadow-sm ms-3">ورود / ثبت‌نام</a>
+    @endguest
+
+    @auth
+        <div class="dropdown">
+            <button class="btn btn-light user-menu-btn d-flex align-items-center gap-2 shadow-sm" type="button"
+                id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="user-avatar">
+                    @if(Auth::user()->avatar)
+                        <img src="{{ asset(Auth::user()->avatar) }}" alt="Profile Picture">
+                    @else
+                        <img src="{{ asset('avatars/default.jpg') }}" alt="Profile Picture">
+                    @endif
+                </span>
+                <span class="text-white">{{ Auth::user()->name . ' ' . Auth::user()->family }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+            <li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
+        <i class="bi bi-person-circle text-primary"></i>
+        <span>اطلاعات کاربری</span>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('cart.show') }}">
+        <i class="bi bi-cart text-warning"></i>
+        <span>سبد خرید</span>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('userOrders') }}">
+        <i class="bi bi-bag text-success"></i>
+        <span>سفارشات</span>
+    </a>
+</li>
+<li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="m-0">
+        @csrf
+        <button id="logout" type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
+            <i class="bi bi-box-arrow-right" style="color:#ff0000 !important"></i>
+            <span>خروج از حساب</span>
+        </button>
+    </form>
+</li>
+
+            </ul>
+        </div>
+    @endauth
+</div>
+
+
+
+
+
             </div>
         </header>
     @endif

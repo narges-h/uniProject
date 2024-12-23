@@ -48,12 +48,13 @@
                                 <td class="user-family"><h6>{{ $user->family }}</h6></td>
                                 <td class="user-phone"><h6>{{ $user->mobile }}</h6></td>
                                 <td>
-                                    @if ($user->avatar)
-                                        <img src="{{ $user->avatar }}" alt="Avatar" class="rounded-circle"
-                                            style="width: 50px; height: 50px; object-fit: cover;">
-                                    @else
-                                        <span class="text-muted">ندارد</span>
-                                    @endif
+
+
+                                @if($user->avatar)
+                                    <img src="{{ asset($user->avatar) }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('avatars/default.jpg') }}" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                @endif
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center gap-2">
