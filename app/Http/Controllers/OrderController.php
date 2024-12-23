@@ -50,12 +50,6 @@ class OrderController extends Controller
     }
     public function storeOrder(Request $request)
     {
-        $request->validate([
-            'province' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'address' => 'required|string',
-            'postCode' => 'required|string|max:10',
-        ]);
 
         $cart = Cart::where('user_id', auth()->id())->firstOrFail();
         $cartItems = $cart->cartItems()->with('product')->get();
