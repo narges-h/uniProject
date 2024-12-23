@@ -68,8 +68,7 @@ class ProfileController extends Controller
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
+            'new_password' => 'min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
