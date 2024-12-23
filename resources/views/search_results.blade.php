@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' برگستان | خرید کتاب')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">

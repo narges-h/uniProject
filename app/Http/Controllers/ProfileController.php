@@ -33,7 +33,7 @@ class ProfileController extends Controller
             'mobile' => 'nullable|digits:11',
             'family' => 'nullable|string|max:255',
             'birthdate' => 'nullable|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5000',
             'educationLevel' => 'nullable|string|max:255',
         ]);
 

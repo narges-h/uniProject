@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' نمایش کتاب')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/books.css') }}">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
+@section('title', 'تکمیل سفارشات')
 
 @section('content')
-
     <script src="{{ asset('js/address.js') }}"></script>
 
     <style>
@@ -79,7 +79,7 @@
                             <p>هزینه پست: <strong>{{ number_format($shippingCost) }} تومان</strong></p>
                             <hr>
                             <p>مجموع کل: <strong>{{ number_format($finalPrice) }} تومان</strong></p>
-            
+
                         </div>
                     </div>
                 </div>

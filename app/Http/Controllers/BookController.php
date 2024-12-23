@@ -29,7 +29,7 @@ class BookController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'publishDate' => 'required|date',
-            'coveruri' => 'required|file|mimes:jpeg,png,jpg|max:2048'
+            'coveruri' => 'required|file|mimes:jpeg,png,jpg|max:5000'
         ]);
 
 
@@ -80,7 +80,7 @@ class BookController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'publishDate' => 'date',
-            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
+            'coveruri' => 'nullable|file|mimes:jpeg,png,jpg|max:5000'
         ]);
 
         if ($validator->fails()) {
@@ -148,7 +148,7 @@ class BookController extends Controller
         return view('search_results', compact('books', 'categories', 'query'));
     }
 
-    
+
 
     public function index(Request $request, $order = 'desc') {
 

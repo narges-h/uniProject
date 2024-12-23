@@ -18,7 +18,11 @@
         <div class="sidebar">
             <div class="logo">
                 <img src="{{ asset('img/logoGreen.svg') }}" alt="لوگوی سایت">
-                <div class="logo-name">برگستان</div>
+                <div class="logo-name">
+                    <a href="{{ route('categories.index') }}"
+                    class="text-decoration-none text-dark fw-bold siteName">برگستان</a>
+                </div>
+
             </div>
             <div class="sidebar-content">
                 <ul class="lists">

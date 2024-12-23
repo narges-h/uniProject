@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' برگستان | خرید کتاب')
 
 @section('content')
     <div class="container mt-5" dir="rtl">

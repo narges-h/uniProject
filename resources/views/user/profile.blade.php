@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'حساب کاربری ')
 
 @section('content')
 

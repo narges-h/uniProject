@@ -1,7 +1,7 @@
 @extends('layouts.adminApp')
 
-@section('title', isset($book) ? 'ویرایش کتاب' : 'افزودن کتاب')
-@section('page-title', isset($book) ? 'ویرایش کتاب' : 'افزودن کتاب')
+@section('title',$isUpdate ? 'ویرایش کتاب' : 'افزودن کتاب')
+@section('page-title', $isUpdate ? 'ویرایش کتاب' : 'افزودن کتاب')
 
 @section('content')
 
@@ -30,14 +30,14 @@
     <div class="card border-0 shadow-lg rounded-lg overflow-hidden">
         <!-- هدر کارت -->
         <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">{{ isset($book) ? 'ویرایش کتاب' : 'افزودن کتاب' }}</h5>
+            <h5 class="mb-0">{{ $isUpdate ? 'ویرایش کتاب' : 'افزودن کتاب' }}</h5>
             <i class="fas fa-book fa-lg"></i>
         </div>
 
         <div class="card-body p-4">
             <form action="{{ $isUpdate ? route('update', ['id' => $book->id]) : route('insert') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @if(isset($book))
+                @if($isUpdate)
                     @method('PUT')
                 @endif
 
@@ -134,11 +134,13 @@
 
                 <!-- دکمه‌ها -->
                 <div class="d-flex justify-content-end gap-3">
-                    <a href="{{ route('admin.categories') }}" class="btn btn-outline-secondary shadow-sm px-4">لغو</a>
+                    <a href="{{ route('admin.books') }}" class="btn btn-outline-secondary shadow-sm px-4">لغو</a>
                     <button type="submit" class="btn btn-primary shadow-sm px-4">{{ $isUpdate ? 'ویرایش' : 'افزودن' }}</button>
                 </div>
             </form>
         </div>
     </div>
+<script src="{{ asset('js/addBook.js') }}"></script>
+
 </div>
 @endsection
