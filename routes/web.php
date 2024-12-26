@@ -40,6 +40,8 @@ Route::controller(MainController::class)->group(function () {
     Route::get('/books/{id}', 'showBookDetails')->name('books.details');
 });
 
+Route::get('/admin/order/{id}/items',[AdminOrderController::class,'getOrderItems'] );
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/signup', 'signup');
     Route::post('/userSignup', 'userSignup');
@@ -107,7 +109,7 @@ Route::middleware(['admin'])->group(function () {
     Route::controller(AdminOrderController::class)->group(function () {
         Route::get('/admin/orders', 'index')->name('admin.orders');
         Route::put('/admin/updateStatus/{id}', 'updateStatus')->name('admin.orders.updateStatus');
-        Route::get('/admin/order/{id}/items', 'getOrderItems');
+
     });
 });
 
