@@ -33,15 +33,15 @@
 
                 @if ($book->stock > 0)
                     @if (auth()->check())
-                        @if($isInCart)
+                        @if ($isInCart)
                             <form id="form" action="{{ route('cart.show') }}" method="GET">
-                                    @csrf
-                                    <button type="submit" class="btn">نمایش سبد خرید</button>
+                                @csrf
+                                <button type="submit" class="btn">نمایش سبد خرید</button>
                             </form>
                         @else
-                            <form id="form" action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
+                            <form id="addToCartForm" action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn" onclick="showSuccess()">افزودن به سبد خرید</button>
+                                <button type="button" class="btn" onclick="addToCart()">افزودن به سبد خرید</button>
                             </form>
                         @endif
                     @else
@@ -71,19 +71,49 @@
                 }
             });
         }
-        function showSuccess() {
-            event.preventDefault();
 
-            Swal.fire({
-                    title: "موفق",
-                    text: "محصول به سبد خرید شما اضافه شد",
-                    icon: "success",
-                    confirmButtonText: "نمایش سبد خرید",
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('form').submit();
-                }
-            });
+        function addToCart() {
+            const form = document.getElementById('addToCartForm');
+            const url = form.action;
+
+            // ارسال درخواست AJAX
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('خطایی در افزودن به سبد خرید رخ داده است.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // نمایش مدال موفقیت
+                    Swal.fire({
+                        title: "موفق",
+                        text: "محصول به سبد خرید شما اضافه شد",
+                        icon: "success",
+                        confirmButtonText: "نمایش سبد خرید",
+                        showCloseButton: true, // نمایش آیکون ضربدر
+                        closeButtonHtml: '<span style="font-size:20px;cursor:pointer;">&times;</span>' // تنظیم آیکون ضربدر
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // انتقال به صفحه سبد خرید در صورت کلیک روی "نمایش سبد خرید"
+                            window.location.href = "{{ route('cart.show') }}";
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        title: "خطا",
+                        text: "افزودن به سبد خرید با مشکل مواجه شد.",
+                        icon: "error",
+                    });
+                });
         }
     </script>
 

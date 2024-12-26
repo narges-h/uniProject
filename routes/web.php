@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::get('/otp', function () {
     return view('auth/otp');
 })->name('otp');
+
 Route::controller(MainController::class)->group(function () {
     // نمایش کتاب های یک دسته بندی
     Route::get('/books/category/{id}', 'showBooksByCategory')->name('books.byCategory');

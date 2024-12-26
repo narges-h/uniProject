@@ -27,8 +27,9 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->route('cart.show')->with('success', 'کتاب به سبد خرید اضافه شد.');
+        return response()->json(['message' => 'کتاب به سبد خرید اضافه شد.'], 200);
     }
+
 
     public function showCart()
     {
