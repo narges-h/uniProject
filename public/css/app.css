@@ -72,7 +72,16 @@
 * {
     font-family: "IranSans" !important;
 }
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
 
+main{
+    flex: 1;
+}
 /* Header Styles */
 header {
     padding: 10px 20px;
@@ -200,6 +209,7 @@ button.btn-primary {
 .footer {
     font-size: 0.9rem;
     line-height: 1.6;
+    flex-shrink: 0;
 }
 
 .footer-logo {

@@ -34,14 +34,14 @@
                 @if ($book->stock > 0)
                     @if (auth()->check())
                         @if ($isInCart)
-                            <form id="form" action="{{ route('cart.show') }}" method="GET">
+                            <form id="cartForm" action="{{ route('cart.show') }}" method="GET">
                                 @csrf
-                                <button type="submit" class="btn">نمایش سبد خرید</button>
+                                <button type="submit" id="cartButton" class="btn">نمایش سبد خرید</button>
                             </form>
                         @else
                             <form id="addToCartForm" action="{{ route('cart.add', ['id' => $book->id]) }}" method="POST">
                                 @csrf
-                                <button type="button" class="btn" onclick="addToCart()">افزودن به سبد خرید</button>
+                                <button type="button" id="addToCartButton" class="btn" onclick="addToCart()">افزودن به سبد خرید</button>
                             </form>
                         @endif
                     @else
@@ -75,45 +75,52 @@
         function addToCart() {
             const form = document.getElementById('addToCartForm');
             const url = form.action;
+            const addToCartButton = document.getElementById('addToCartButton');
 
             // ارسال درخواست AJAX
             fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('خطایی در افزودن به سبد خرید رخ داده است.');
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('خطایی در افزودن به سبد خرید رخ داده است.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // تغییر متن دکمه و رفتار آن
+                addToCartButton.textContent = "نمایش سبد خرید";
+                addToCartButton.onclick = function() {
+                    window.location.href = "{{ route('cart.show') }}";
+                };
+
+                // نمایش مدال موفقیت
+                Swal.fire({
+                    title: "موفق",
+                    text: "محصول به سبد خرید شما اضافه شد",
+                    icon: "success",
+                    confirmButtonText: "نمایش سبد خرید",
+                    showCloseButton: true,
+                    closeButtonHtml: '<span style="font-size:20px;cursor:pointer;">&times;</span>',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // انتقال به صفحه سبد خرید در صورت کلیک روی "نمایش سبد خرید"
+                        window.location.href = "{{ route('cart.show') }}";
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    // نمایش مدال موفقیت
-                    Swal.fire({
-                        title: "موفق",
-                        text: "محصول به سبد خرید شما اضافه شد",
-                        icon: "success",
-                        confirmButtonText: "نمایش سبد خرید",
-                        showCloseButton: true, // نمایش آیکون ضربدر
-                        closeButtonHtml: '<span style="font-size:20px;cursor:pointer;">&times;</span>' // تنظیم آیکون ضربدر
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // انتقال به صفحه سبد خرید در صورت کلیک روی "نمایش سبد خرید"
-                            window.location.href = "{{ route('cart.show') }}";
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
-                    Swal.fire({
-                        title: "خطا",
-                        text: "افزودن به سبد خرید با مشکل مواجه شد.",
-                        icon: "error",
-                    });
                 });
+            })
+            .catch(error => {
+                console.error(error);
+                Swal.fire({
+                    title: "خطا",
+                    text: "افزودن به سبد خرید با مشکل مواجه شد.",
+                    icon: "error",
+                });
+            });
         }
     </script>
 
