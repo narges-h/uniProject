@@ -23,9 +23,9 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/otp', function () {
     return view('auth/otp');
@@ -35,7 +35,7 @@ Route::controller(MainController::class)->group(function () {
     // نمایش کتاب های یک دسته بندی
     Route::get('/books/category/{id}', 'showBooksByCategory')->name('books.byCategory');
     // نمایش همه کتاب ها
-    Route::get('/categories', 'showCategoriesWithBooks')->name('categories.index');
+    Route::get('/', 'showCategoriesWithBooks')->name('categories.index');
     // نمایش جزئیات کتاب
     Route::get('/books/{id}', 'showBookDetails')->name('books.details');
 });
